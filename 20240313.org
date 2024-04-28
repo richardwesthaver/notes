@@ -1,0 +1,6 @@
+* RESEARCH [[https://github.com/guicho271828/sbcl-wiki/wiki/][sbcl-wiki]]
+:LOGBOOK:
+- State "RESEARCH"   from              [2024-03-13 Wed 21:49]
+:END:
+** IR1
+** IR2

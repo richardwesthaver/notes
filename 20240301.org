@@ -1,0 +1,6 @@
+* TODO collect more data
+:LOGBOOK:
+- State "TODO"       from              [2024-03-01 Fri 15:27]
+:END:
+https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/
+weather - music - etc

@@ -1,0 +1,49 @@
+* NOTE DB Benchmarking
+:LOGBOOK:
+- State "NOTE"       from              [2024-02-04 Sun 20:40]
+:END:
+[[https://github.com/facebook/rocksdb/wiki/Benchmarking-tools][RocksDB benchmarking tools]]
+
+* NOTE packy design
+:PROPERTIES:
+:ID:       76ae24f5-46e8-4b91-8991-41245383d337
+:END:
+:LOGBOOK:
+- State "NOTE"       from              [2024-01-25 Thu 22:39]
+:END:
+- API root: https://packy.compiler.company
+- source packs: https://vc.compiler.company/packy
+** Lib
+*** Types
+**** Pack
+Primary data type of the library - typically represents a compressed
+archive, metadata, and ops.
+**** Bundle
+Collection data type, usually contains a set of packs with metadata.
+**** PackyEndpoint
+Represents a Packy instance bound to a UDP socket
+**** PackyEndpointConfig
+Global endpoint configuration object
+**** PackyClientConfig
+Configuration for outgoing packy connections on an endpoint
+**** PackyServerConfig
+Configuration for incoming packy connection son an endpoint
+**** PackyConnection
+Packy connection object
+*** Traits
+**** PackyClient
+***** query
+***** install
+***** update
+***** login
+***** logout
+***** pull
+***** push
+**** PackyServer
+***** start_packy_server
+***** stop_packy_server
+***** start_packy_registry
+**** PackyRegistry
+***** register_pack
+***** register_user
+***** register_bundle

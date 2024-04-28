@@ -1,0 +1,36 @@
+* TODO taobench demo
+:LOGBOOK:
+- State "TODO"       from              [2024-01-21 Sun 00:32]
+:END:
+https://github.com/audreyccheng/taobench - shouldn't have missed this :)
+obviously we need to implement this using core -- in demo/bench/tao?
+* TODO clap completion for nushell
+:LOGBOOK:
+- State "TODO"       from              [2024-01-20 Sat 23:23]
+:END:
+https://github.com/clap-rs/clap/tree/master/clap_complete_nushell
+* Dataframe scripting
+https://studioterabyte.nl/en/blog/polars-vs-pandas
+nushell supports DFs, polars underneath?
+https://www.nushell.sh/book/cheat_sheet.html
+
+#+begin_src nushell
+
+#+end_src
+* Cloud Squatting
+** Google
+- [[https://cloud.google.com/free/docs/free-cloud-features][Free Cloud Features]]
+  + 90-day $300 credits
+  + e2-micro - free hours worth 1 instance/month
+  + 
+** Amazon
+- AWS Free Tier
+** Akamai
+- Linode Free Trial
+** Oracle
+- [[https://www.oracle.com/cloud/free/?intcmp=ohp052322ocift][OCI Free Tier]]
+  + always free: 2 x oracle autonomous DB
+  + 2 x AMD Compute VMs
+  + up to 4 x ARM Ampere A1 with 3k/cpu/hr and 18k/gb/h per month
+  + block/object/archive storage
+  + 30-day $300 credits
