@@ -1,0 +1,14 @@
+This file is for notes on different query languages.
+
+Queries are extremely important in software development and having a
+robust query engine is a must for CC.
+
+Our goal is to develop a query-language compiler (Q) which can be
+tuned at compile-time to meet the needs of any database backend.
+
+The query languages that interest us most are derived from Prolog
+(/datalog) and SQL, but we won't be supporting all of their features -
+only the ones that can be reasonably coerced to all supported frontends.
+
+Q will require an Intermediate Representation (IR) - the encoding will
+be based on S-expressions with a specialized reader.

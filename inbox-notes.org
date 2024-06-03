@@ -1,0 +1,59 @@
+#+title: notes on a shared inbox workflow
+#+author: Richard Westhaver <ellis@rwest.io>
+#+date: [2024-05-05 Sun]
+
+I think roadmap should be product/management oriented. Agile
+terminology applies and things are grouped into
+sprints/trains/PIs/etc. There's really no need for that currently at
+least not until there's at least 10 or so contributors. The
+=inbox.org= workflow is much more 'agile' in fact, e.g. hackable.
+
+I would like to make use of the core/inbox.el and ORGAN, perhaps move
+inbox.el to a new repository, where it will live as a package, which
+we can contribute to MELPA.
+
+#+begin_src org
+  ,* 
+#+end_src
+
+* Inbox Architecture
+
+* Inbox Metadata
+** Tags
+Pandora's box. I guess we should make use of decorators/capitalization
+for significant tags, and the rest are user-defined.
+** IDs
+Not entirely commited to uuid, but maybe it makes the most sense to
+use the timestamp one.
+** Status
+A Status should be applied to tasks only.
+
+We need a significant number of 'in progress' types, but each
+completed task will start as TODO and end up at DONE.
+** Dates
+Deadline,Scheduled,DATE property,LOGBOOK
+** Log
+The logbook should be used to record progress throughout the lifetime
+of an item.
+** Description
+Descriptions can be blank, but tasks in need of review require a
+description.
+** Properties
+- Effort
+- Category
+** Links
+I don't think we need org-roam for this? TBD. The thing is that I want
+link data to end up in a set of rocksdb instances instead of sqlite.
+
+For the time being we should limit the scope to a set of properties:
+- PREVIOUS
+- REQUIRES
+- RELATED
+- PARENT
+
+Note there's no forward references.
+
+* Notifications
+discord bot?
+prob use rust, parse json or something
+
