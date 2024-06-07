@@ -1,3 +1,4 @@
+#+setupfile: ../clean.theme
 * On Computers
 If you've met me in the past decade, you probably know that I am
 extremely passionate about computers. Let me first explain why.

@@ -1,3 +1,4 @@
+#+setupfile: ../clean.theme
 * VC infrastructure
 In heptapod we have a root group named =comp=, containg a variety of
 subgroups. Some of these groups should be public, while others are

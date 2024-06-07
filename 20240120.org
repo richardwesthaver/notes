@@ -1,3 +1,4 @@
+#+setupfile: ../clean.theme
 * TODO taobench demo
 :LOGBOOK:
 - State "TODO"       from              [2024-01-21 Sun 00:32]

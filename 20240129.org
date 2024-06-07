@@ -1,3 +1,4 @@
+#+setupfile: ../clean.theme
 * NOTE trash as block device
 :LOGBOOK:
 - State "NOTE"       from              [2024-01-29 Mon 20:53]

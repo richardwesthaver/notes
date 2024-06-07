@@ -1,3 +1,4 @@
+#+setupfile: ../clean.theme
 * TODO collect more data
 :LOGBOOK:
 - State "TODO"       from              [2024-03-01 Fri 15:27]

@@ -1,3 +1,4 @@
+#+setupfile: ../clean.theme
 * virt
 ** QEMU
 ** KVM

@@ -1,3 +1,4 @@
+#+setupfile: ../clean.theme
 goals:
 make problems smaller.
 

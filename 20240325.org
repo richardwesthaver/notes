@@ -1,3 +1,4 @@
+#+setupfile: ../clean.theme
 * TBD investigate alieneval for phash opps
 :LOGBOOK:
 - State "TBD"        from              [2024-03-25 Mon 18:56]

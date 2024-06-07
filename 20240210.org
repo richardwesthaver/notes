@@ -1,3 +1,4 @@
+#+setupfile: ../clean.theme
 * BigBenches
 #+name: 1trc-nu
 #+begin_src nushell

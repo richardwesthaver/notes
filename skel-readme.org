@@ -1,6 +1,8 @@
+#+setupfile: ../clean.theme
 #+title: skel
 #+author: Richard Westhaver
 #+description: Project Skeletons
+
 * Overview 
 + status :: WIP
 + forge :: [[https://lab.rwest.io/ellis/skel][Heptapod]]
@@ -21,7 +23,7 @@ system/. It is specifically for my software stack.
 - [[https://docs.factorcode.org/content/article-vocabularies.html][Factor (forth) definitions]]
 * Quickstart
 Make sure you have sbcl installed:
-#+begin_src shell :results pp :exports both
+#+begin_src shell :results pp :eval never
 sbcl --version
 #+end_src
 
@@ -37,7 +39,7 @@ sbcl --noinform  --non-interactive --eval '(ql:quickload :app/cli/skel)' --eval 
 Run the binary without any args, which will print a skeleton of the
 current project directory (=*skel-project*=).
 
-#+begin_src shell :results output replace :exports both
+#+begin_src shell :results output replace :eval never
   skel -h
 #+end_src
 
@@ -128,7 +130,7 @@ omit them in a skelfile.
 The =describe= command can be used to check the currently active
 skelfile, printing any errors and the parsed object.
 
-#+begin_src shell :results output replace :exports both
+#+begin_src shell :results output replace :eval never
   skel show
 #+end_src
 
@@ -176,7 +178,7 @@ for example, to compile the rules into a makefile:
   skel compile --rules
 #+end_src
 
-#+begin_src shell :results output :wrap src makefile :exports both
+#+begin_src shell :results output :wrap src makefile :eval never
 cat makefile
 #+end_src
 
@@ -210,7 +212,7 @@ looks like this:
 * Tests
 The unit tests may also be a useful reference:
 
-#+begin_src lisp :results output replace :wrap src lisp :exports both :package :skel.tests
+#+begin_src lisp :results output replace :wrap src lisp :eval never :package :skel.tests
   (ql:quickload :skel/tests)
   (in-package :skel.tests)
   (setq *log-level* nil)

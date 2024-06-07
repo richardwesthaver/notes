@@ -1,3 +1,4 @@
+#+setupfile: ../clean.theme
 * IDEAS
 ** TODO shed
 :PROPERTIES:

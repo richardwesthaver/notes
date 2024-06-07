@@ -1,3 +1,4 @@
+#+setupfile: ../clean.theme
 This file is for notes on different query languages.
 
 Queries are extremely important in software development and having a

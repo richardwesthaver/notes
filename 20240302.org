@@ -1,3 +1,4 @@
+#+setupfile: ../clean.theme
 * NOTE On blocks and devices
 :LOGBOOK:
 - State "NOTE"       from              [2024-03-02 Sat 21:30]
