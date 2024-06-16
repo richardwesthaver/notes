@@ -1,4 +1,3 @@
-#+setupfile: ../clean.theme
 * AWS usage
 We're leveraging AWS for some of our public web servers for now. It's
 really not realistic to expect that my home desktop and spotty Comcast

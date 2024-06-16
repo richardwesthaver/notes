@@ -4,124 +4,35 @@
 #+email:richard.westhaver@gmail.com
 #+setupfile: ../clean.theme
 #+export_file_name: index
-#+options: num:nil
-* [[file:20230730.org][20230730]]
-:PROPERTIES:
-:ID:       c54e79cb-fb77-4ea2-ad2d-849f8b048699
-:END:
-* [[file:20231024.org][20231024]]
-:PROPERTIES:
-:ID:       9a5e2d5c-9599-4ef5-a3e7-5b00ecda3793
-:END:
-* [[file:20231101.org][20231101]]
-:PROPERTIES:
-:ID:       e96c9306-dd94-4611-a5cb-99e1547d5fa9
-:END:
-* [[file:20231102.org][20231102]]
-:PROPERTIES:
-:ID:       7d382ff0-46ab-4925-9d03-33ae33c08eda
-:END:
-* [[file:20231105.org][20231105]]
-:PROPERTIES:
-:ID:       47d6a211-c51d-4e59-b5b7-7a788ecb0c68
-:END:
-* [[file:20231124.org][20231124]]
-:PROPERTIES:
-:ID:       b2e44604-dddd-409a-9a04-927d40702e6f
-:END:
-* [[file:20231205.org][20231205]]
-:PROPERTIES:
-:ID:       ac73b1ec-4e20-4758-a73d-187ced4b0ea6
-:END:
-* [[file:20231209.org][20231209]]
-:PROPERTIES:
-:ID:       db59495f-2ba7-4852-a5db-abf567c4ac95
-:END:
-* [[file:20231212.org][20231212]]
-:PROPERTIES:
-:ID:       58d78b43-39ea-44a0-a592-38ef4f2c5d5b
-:END:
-* [[file:20231223.org][20231223]]
-:PROPERTIES:
-:ID:       94309d20-3509-420c-9d88-4add00fd393b
-:END:
-* [[file:20231224.org][20231224]]
-:PROPERTIES:
-:ID:       6033543c-80e2-4696-a4ac-c75358f70165
-:END:
-* [[file:20231228.org][20231228]]
-:PROPERTIES:
-:ID:       30397366-81af-4147-91ac-6c54ea05ef46
-:END:
-* [[file:20240103.org][20240103]]
-:PROPERTIES:
-:ID:       686d56a4-f918-40a7-bad1-23752a56c456
-:END:
-* [[file:20240104.org][20240104]]
-:PROPERTIES:
-:ID:       d9c700cd-19c4-4ac8-9b8f-7e455e5c45e5
-:END:
-* [[file:20240120.org][20240120]]
-:PROPERTIES:
-:ID:       ebfac755-f340-41c8-ab45-4df6017bd51e
-:END:
-* [[file:20240129.org][20240129]]
-:PROPERTIES:
-:ID:       d27a5d40-1908-45f6-9187-cf2bfec4ec53
-:END:
-* [[file:20240210.org][20240210]]
-:PROPERTIES:
-:ID:       9a63f611-c9c0-4dc5-ac40-ff686fdd0521
-:END:
-* [[file:20240218.org][20240218]]
-:PROPERTIES:
-:ID:       b5b06d34-95b5-4747-9d54-6b384d6d5f1b
-:END:
-* [[file:20240301.org][20240301]]
-:PROPERTIES:
-:ID:       ec3e2dac-10c7-4c1c-b8c2-2ee37aab2782
-:END:
-* [[file:20240302.org][20240302]]
-:PROPERTIES:
-:ID:       ebf048dc-d31f-4464-8128-d6b1c1f6a8f6
-:END:
-* [[file:20240313.org][20240313]]
-:PROPERTIES:
-:ID:       5395f1ee-2fb3-41a8-9076-346c9f27c68e
-:END:
-* [[file:20240317.org][20240317]]
-:PROPERTIES:
-:ID:       0236d9f0-181f-48c2-b6e9-f6785818f768
-:END:
-* [[file:20240325.org][20240325]]
-:PROPERTIES:
-:ID:       5bd05656-be7c-4a5f-9864-82abcc397945
-:END:
-* [[file:20240419.org][20240419]]
-:PROPERTIES:
-:ID:       8f7240e5-1ae1-4df2-a894-8f14f372f827
-:END:
-* [[file:20240425.org][20240425]]
-:PROPERTIES:
-:ID:       d122cbb0-2d6d-41d8-81f2-6b9573e7d952
-:END:
-* [[file:inbox-notes.org][inbox-notes]]
-:PROPERTIES:
-:ID:       73ee22e1-b779-46ff-8ac0-f33a9f9b8623
-:END:
-* [[file:query-lang.org][query-lang]]
-:PROPERTIES:
-:ID:       fba72d5a-4193-4318-ac48-8f908446f54d
-:END:
-* [[file:refs.bib][refs]]
-:PROPERTIES:
-:ID:       5062acab-415d-43f6-864b-69e007ade526
-:END:
-* [[file:skel-readme.org][skel-readme]]
-:PROPERTIES:
-:ID:       62d7b3e6-d453-47af-b52f-7129a262a0f9
-:END:
-* [[file:vocab][vocab]]
-:PROPERTIES:
-:ID:       9b8f61cd-14fa-40fe-9593-86f869dc5def
-:END:
+#+options: num:t prop:t timestamp:t toc:t d:t compact-itemx:t
+#+INFOJS_OPT: toc:nil view:info
+
+#+INCLUDE: 20230730.org :only-contents t
+#+INCLUDE: 20231024.org :only-contents t
+#+INCLUDE: 20231101.org :only-contents t
+#+INCLUDE: 20231102.org :only-contents t
+#+INCLUDE: 20231105.org :only-contents t
+#+INCLUDE: 20231124.org :only-contents t
+#+INCLUDE: 20231205.org :only-contents t
+#+INCLUDE: 20231209.org :only-contents t
+#+INCLUDE: 20231212.org :only-contents t
+#+INCLUDE: 20231223.org :only-contents t
+#+INCLUDE: 20231224.org :only-contents t
+#+INCLUDE: 20231228.org :only-contents t
+#+INCLUDE: 20240103.org :only-contents t
+#+INCLUDE: 20240104.org :only-contents t
+#+INCLUDE: 20240120.org :only-contents t
+#+INCLUDE: 20240129.org :only-contents t
+#+INCLUDE: 20240210.org :only-contents t
+#+INCLUDE: 20240218.org :only-contents t
+#+INCLUDE: 20240301.org :only-contents t
+#+INCLUDE: 20240302.org :only-contents t
+#+INCLUDE: 20240313.org :only-contents t
+#+INCLUDE: 20240317.org :only-contents t
+#+INCLUDE: 20240325.org :only-contents t
+#+INCLUDE: 20240419.org :only-contents t
+#+INCLUDE: 20240425.org :only-contents t
+#+INCLUDE: demo-notes.org :only-contents t
+#+INCLUDE: inbox-notes.org :only-contents t
+#+INCLUDE: query-lang.org :only-contents t
+#+INCLUDE: skel-readme.org :only-contents t

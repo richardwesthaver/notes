@@ -1,4 +1,3 @@
-#+setupfile: ../clean.theme
 * cl-dot examples
 #+begin_src lisp
 (defmethod cl-dot:graph-object-node ((graph (eql 'example)) (object cons))

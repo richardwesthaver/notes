@@ -1,2 +1,1 @@
-#+setupfile: ../clean.theme
 * https://docs.gitlab.com/ee/administration/backup_restore/migrate_to_new_server.html

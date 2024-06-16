@@ -1,4 +1,3 @@
-#+setupfile: ../clean.theme
 * useful internals
 #+begin_src lisp
   sb-sys:*runtime-dlhandle*

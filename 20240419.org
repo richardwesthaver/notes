@@ -1,5 +1,3 @@
-#+setupfile: ../clean.theme
-#+title: demo-old-readme
 * How it works
 The backend services are written in Rust and controlled by a simple
 messaging protocol. Services provide common runtime capabilities known

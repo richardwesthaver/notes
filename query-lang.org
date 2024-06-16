@@ -1,6 +1,4 @@
-#+setupfile: ../clean.theme
-This file is for notes on different query languages.
-
+* query langs
 Queries are extremely important in software development and having a
 robust query engine is a must for CC.
 

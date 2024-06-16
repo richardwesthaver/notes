@@ -1,8 +1,4 @@
-#+title: notes on a shared inbox workflow
-#+author: Richard Westhaver <ellis@rwest.io>
-#+date: [2024-05-05 Sun]
-#+setupfile: ../clean.theme
-
+* roadmap
 I think roadmap should be product/management oriented. Agile
 terminology applies and things are grouped into
 sprints/trains/PIs/etc. There's really no need for that currently at

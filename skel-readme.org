@@ -1,9 +1,5 @@
-#+setupfile: ../clean.theme
-#+title: skel
-#+author: Richard Westhaver
-#+description: Project Skeletons
-
-* Overview 
+* Mock Skel Readme
+** Overview 
 + status :: WIP
 + forge :: [[https://lab.rwest.io/ellis/skel][Heptapod]]
 + mirror :: [[https://github.com/richardwesthaver/skel][Github]]
@@ -12,16 +8,16 @@ This system provides functions and macros for building and deploying
 project skeletons. /This is not a general purpose templating
 system/. It is specifically for my software stack.
 
-** Goals
+*** Goals
 - vaporize boilerplate code and docs
 - integrate reasonably well with my tools (Emacs/etc)
 - object-oriented project management
-** Resources
+*** Resources
 - [[https://www.gnu.org/software/emacs/manual/html_node/autotype/Skeleton-Language.html][skeleton-lanaguage (emacs)]]
 - [[https://github.com/emacs-mirror/emacs/tree/master/lisp/cedet/ede][cedet/ede (emacs)]]
 - [[https://www.gnu.org/software/make/manual/make.html][GNU make]]
 - [[https://docs.factorcode.org/content/article-vocabularies.html][Factor (forth) definitions]]
-* Quickstart
+** Quickstart
 Make sure you have sbcl installed:
 #+begin_src shell :results pp :eval never
 sbcl --version
@@ -126,7 +122,7 @@ cat skel.sk
 This is just a form without the top-level parentheses - you're free to
 omit them in a skelfile.
 
-** describe
+*** describe
 The =describe= command can be used to check the currently active
 skelfile, printing any errors and the parsed object.
 
@@ -161,7 +157,7 @@ Slots with :INSTANCE allocation:
   IMPORTS                        = NIL
 #+end_example
 
-** TODO compile
+*** TODO compile
 Skelfiles can be compiled to produce a new project skeleton or update
 an existing one.
 
@@ -193,8 +189,8 @@ clean:;rm -rf *.fasl
 debug:compile;$(LISP) --eval "(start-repl)"
 #+end_src
 
-* Examples
-** Default
+** Examples
+*** Default
 When you run =skel init= this is the basic skelfile that will be
 generated in the current directory, depending on the following
 contexts:
@@ -207,9 +203,9 @@ looks like this:
 ;;; examples @ 2023-10-09.23:38:23 -*- mode: skel; -*-
 :name "examples"
 #+end_src
-** Imports
-** Multi
-* Tests
+*** Imports
+*** Multi
+** Tests
 The unit tests may also be a useful reference:
 
 #+begin_src lisp :results output replace :wrap src lisp :eval never :package :skel.tests
@@ -244,7 +240,7 @@ in suite SKEL with 6/6 tests:
 No tests failed.
 #+end_src
 
-* API
+** API
 - TODO :: CLOS-based core classes
 - TODO :: EIEIO-based wrapper classes
 

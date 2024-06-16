@@ -1,5 +1,3 @@
-#+setupfile: ../clean.theme
-
 * doc best practices
 https://rust-lang.github.io/api-guidelines/documentation.html
 

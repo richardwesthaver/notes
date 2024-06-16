@@ -1,4 +1,3 @@
-#+setupfile: ../clean.theme
 * NOTE DB Benchmarking
 :LOGBOOK:
 - State "NOTE"       from              [2024-02-04 Sun 20:40]

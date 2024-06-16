@@ -1,4 +1,3 @@
-#+setupfile: ../clean.theme
 * public datasets
 https://github.com/awesomedata/awesome-public-datasets
 https://docs.openml.org/Datasets/

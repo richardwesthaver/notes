@@ -1,4 +1,3 @@
-#+setupfile: ../clean.theme
 * [[https://github.com/sigmf/SigMF][SigMF]]
 #+begin_quote
 Sharing sets of recorded signal data is an important part of science
