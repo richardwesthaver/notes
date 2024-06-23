@@ -7,32 +7,35 @@
 #+options: num:t prop:t timestamp:t toc:t d:t compact-itemx:t
 #+INFOJS_OPT: toc:nil view:info
 
-#+INCLUDE: 20230730.org :only-contents t
-#+INCLUDE: 20231024.org :only-contents t
-#+INCLUDE: 20231101.org :only-contents t
-#+INCLUDE: 20231102.org :only-contents t
-#+INCLUDE: 20231105.org :only-contents t
-#+INCLUDE: 20231124.org :only-contents t
-#+INCLUDE: 20231205.org :only-contents t
-#+INCLUDE: 20231209.org :only-contents t
-#+INCLUDE: 20231212.org :only-contents t
-#+INCLUDE: 20231223.org :only-contents t
-#+INCLUDE: 20231224.org :only-contents t
-#+INCLUDE: 20231228.org :only-contents t
-#+INCLUDE: 20240103.org :only-contents t
-#+INCLUDE: 20240104.org :only-contents t
-#+INCLUDE: 20240120.org :only-contents t
-#+INCLUDE: 20240129.org :only-contents t
-#+INCLUDE: 20240210.org :only-contents t
-#+INCLUDE: 20240218.org :only-contents t
-#+INCLUDE: 20240301.org :only-contents t
-#+INCLUDE: 20240302.org :only-contents t
-#+INCLUDE: 20240313.org :only-contents t
-#+INCLUDE: 20240317.org :only-contents t
-#+INCLUDE: 20240325.org :only-contents t
-#+INCLUDE: 20240419.org :only-contents t
-#+INCLUDE: 20240425.org :only-contents t
-#+INCLUDE: demo-notes.org :only-contents t
-#+INCLUDE: inbox-notes.org :only-contents t
-#+INCLUDE: query-lang.org :only-contents t
-#+INCLUDE: skel-readme.org :only-contents t
+#+INCLUDE: 20230730.org
+#+INCLUDE: 20231024.org
+#+INCLUDE: 20231101.org
+#+INCLUDE: 20231102.org
+#+INCLUDE: 20231105.org
+#+INCLUDE: 20231124.org
+#+INCLUDE: 20231205.org
+#+INCLUDE: 20231209.org
+#+INCLUDE: 20231212.org
+#+INCLUDE: 20231223.org
+#+INCLUDE: 20231224.org
+#+INCLUDE: 20231228.org
+#+INCLUDE: 20240103.org
+#+INCLUDE: 20240104.org
+#+INCLUDE: 20240120.org
+#+INCLUDE: 20240129.org
+#+INCLUDE: 20240210.org
+#+INCLUDE: 20240218.org
+#+INCLUDE: 20240301.org
+#+INCLUDE: 20240302.org
+#+INCLUDE: 20240313.org
+#+INCLUDE: 20240317.org
+#+INCLUDE: 20240325.org
+#+INCLUDE: 20240419.org
+#+INCLUDE: 20240425.org
+#+INCLUDE: demo-notes.org
+#+INCLUDE: inbox-notes.org
+#+INCLUDE: nas-t.org
+#+INCLUDE: query-lang.org
+#+INCLUDE: refs.bib
+#+INCLUDE: skel-readme.org
+#+INCLUDE: vocab
