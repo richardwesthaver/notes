@@ -1,0 +1,33 @@
+* Queries
+Q --- Query languages
+
+EQL = Event Query Language
+SQL = Structured Query Language
+LQL = Logical Query Language
+GQL = Graph Query Language
+
+refs:
+https://tdop.github.io/
+https://howqueryengineswork.com/01-what-is-a-query-engine.html
+https://paperhub.s3.amazonaws.com/dace52a42c07f7f8348b08dc2b186061.pdf
+https://en.wikipedia.org/wiki/Graph_Query_Language
+https://code.kx.com/q
+https://docs.xtdb.com/reference/main/xtql/queries.html
+https://neo4j.com/docs/cypher-manual
+https://eql.readthedocs.io/en/latest/
+https://clojure.github.io/clojure-contrib/doc/datalog.html
+https://www.researchgate.net/publication/2850953_Soft_Stratification_for_Magic_Set_Based_Query_Evaluation_in_Deductive_Databases
+http://sieve.info/
+https://www.researchgate.net/publication/221542994_SARI-SQL_Event_query_language_for_event_analysis
+https://www.elastic.co/guide/en/elasticsearch/reference/current/eql.html
+https://www.youtube.com/watch?v=8XUutFBbUrg
+https://www.scryer.pl/
+https://github.com/inconvergent/cl-grph
+https://jakewheat.github.io/sql-overview/
+https://github.com/ronsavage/SQL
+https://web.csulb.edu/colleges/coe/cecs/dbdesign/dbdesign.php
+https://github.com/nikodemus/screamer
+https://github.com/defunkydrummer/cl-gambol
+https://www.lispworks.com/products/knowledgeworks.html
+https://namin.seas.harvard.edu/files/namin/files/sql2c_jfp.pdf
+https://scala-lms.github.io/tutorials/query.html

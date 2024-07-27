@@ -1,0 +1,38 @@
+* DAT/PARQUET
+https://github.com/apache/parquet-format
+https://github.com/apache/parquet-format/blob/master/src/main/thrift/parquet.thrift
+https://github.com/apache/parquet-testing
+https://github.com/apache/parquet-java
+** glossary
+- block :: same as HDFS block
+- file :: file metadata is required, data is not
+- row-group :: a logical horizontal partitioning of the data into
+  rows. no physical rep is guaranteed for row-group
+- column-chunk :: a chunk of the data for a particular column
+- page :: column chunks are divided into pages. a page is conceptually
+  indivisible in terms of compression/encoding. multiple page types
+  can be interleaved in a column chunk.
+
+Files consists of 1+ row-groups. A row-group contains exactly one
+column chunk per column. Column chunks contain one or more pages.
+
+** format summary
+#+begin_example
+  4-byte magic number "PAR1"
+  <Column 1 Chunk 1>
+  <Column 2 Chunk 1>
+  ...
+  <Column N Chunk 1>
+  <Column 1 Chunk 2>
+  <Column 2 Chunk 2>
+  ...
+  <Column N Chunk 2>
+  ...
+  <Column 1 Chunk M>
+  <Column 2 Chunk M>
+  ...
+  <Column N Chunk M>
+  File Metadata
+  4-byte length in bytes of file metadata (little endian)
+  4-byte magic number "PAR1"
+#+end_example
