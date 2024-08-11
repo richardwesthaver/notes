@@ -1,6 +1,12 @@
 #+BIBLIOGRAPHY: refs.bib
 * File Systems
+:PROPERTIES:
+:ID:       29f7085e-53a3-4d70-90a7-e3437ee99775
+:END:
 ** BTRFS
+:PROPERTIES:
+:ID:       3e7bb82e-7dae-476a-8ed0-18c361c9bd1b
+:END:
 #+begin_quote
 BTRFS is a Linux filesystem based on copy-on-write, allowing for
 efficient snapshots and clones.
@@ -28,6 +34,9 @@ servers. This entails challenges on many different fronts.
 #+end_quote
 -- [cite/t/f:@btrfs]
 *** [2023-08-08 Tue] btrfs performance speculation ::
+:PROPERTIES:
+:ID:       2b662144-97b2-4736-a8fc-bc8f861b9829
+:END:
   - [[https://www.percona.com/blog/taking-a-look-at-btrfs-for-mysql/]]
     - zfs outperforms immensely, but potential misconfiguration on btrfs side (virt+cow
       still enabled?)
@@ -69,9 +78,15 @@ servers. This entails challenges on many different fronts.
     - btrfs continues to show improvements in the linux kernel, ironing out the kinks
     - makes it hard to compare benchmarks tho :/
 *** MacOS support
+:PROPERTIES:
+:ID:       9ddb1caf-014a-4d0f-972e-82028e8be286
+:END:
 - see this WIP k-ext for macos: [[https://github.com/relalis/macos-btrfs][macos-btrfs]]
   - maybe we can help out with the VFS/mount support
 *** on-disk format
+:PROPERTIES:
+:ID:       7535f844-330b-4f9c-b2a1-4578d64acbf7
+:END:
 - [[https://btrfs.readthedocs.io/en/latest/dev/On-disk-format.html][on-disk-format]]
 - 'btrfs consists entirely of several trees. the trees use copy-on-write.'
 - trees are stored in nodes which belong to a level in the b-tree structure.
@@ -113,6 +128,9 @@ servers. This entails challenges on many different fronts.
     - free ids: BTRFS_FIRST_FREE_OBJECTID=256ULL:BTRFS_LAST_FREE_OBJECTID=-256ULL
     - otherwise used for internal use
 *** send-stream format
+:PROPERTIES:
+:ID:       1d1a6211-c91f-48ae-8113-0ddada286cee
+:END:
 - [[https://btrfs.readthedocs.io/en/latest/dev/dev-send-stream.html][send stream format]]
 - Send stream format represents a linear sequence of commands describing actions to be
   performed on the target filesystem (receive side), created on the source filesystem
@@ -132,35 +150,68 @@ servers. This entails challenges on many different fronts.
 - the v2 protocol supports the encoded commands
 - the commands are kinda clunky - need to MKFIL/MKDIR then RENAM to create
 *** [2023-08-09 Wed] ioctls
+:PROPERTIES:
+:ID:       be04dc90-86a6-46c5-9dcf-25519ebed34d
+:END:
 - magic#: 0x94 
   - https://docs.kernel.org/userspace-api/ioctl/ioctl-number.html
   - Btrfs filesystem some lifted to vfs/generic
   - fs/btrfs/ioctl.h and linux/fs.h
 ** ZFS
+:PROPERTIES:
+:ID:       219cb1b5-7dff-4800-8ad0-2a19309a9e9f
+:END:
 -- [cite/t/f:@zfs]
 
 - core component of TrueNAS software
 ** TMPFS
+:PROPERTIES:
+:ID:       f2167ca1-f751-4ee3-a398-4cf7fff6b57c
+:END:
 -- [cite/t/f:@tmpfs]
 - in-mem FS
 ** EXT4
+:PROPERTIES:
+:ID:       698fb02f-dc73-40be-8bac-0af3a03c39c6
+:END:
 -- [cite/t/f:@ext4]
 ** XFS
+:PROPERTIES:
+:ID:       8c6cf1e4-1555-4270-a101-40b6fbb0a1f9
+:END:
 -- [cite/t/f:@xfs]
 -- [cite/t/f:@xfs-scalability]
 * Storage Mediums
+:PROPERTIES:
+:ID:       e3701458-b333-44e3-b6f2-12861d6287ed
+:END:
 ** HDD
+:PROPERTIES:
+:ID:       dfe51b59-5f9d-4e7d-86f1-27e51453ae1f
+:END:
 -- [cite/t/f:@hd-failure-ml]
 ** SSD
+:PROPERTIES:
+:ID:       9c9a5470-d0c2-49f1-9dc9-d0d62c841a19
+:END:
 -- [cite/t/f:@smart-ssd-qp]
 -- [cite/t/f:@ssd-perf-opt]
 
 ** Flash
+:PROPERTIES:
+:ID:       1414bda3-7fae-4fe0-ae65-8a5ed05ad822
+:END:
 -- [cite/t/f:@flash-openssd-systems]
 ** NVMe
+:PROPERTIES:
+:ID:       95e44402-9235-4b4b-a772-b91d78e38a6b
+:END:
 -- [cite/t/f:@nvme-ssd-ux]
 -- [[https://nvmexpress.org/specifications/][specifications]]
 *** ZNS
+:PROPERTIES:
+:ID:       5639429c-1c9d-4cf0-b69c-cc45528cac50
+:END:
 -- [cite/t/f:@zns-usenix]
 #+begin_quote
 Zoned Storage is an open source, standards-based initiative to enable data centers to
@@ -171,64 +222,163 @@ Namespaces (ZNS) in NVMe SSDs.
 -- [[https://zonedstorage.io/][zonedstorage.io]]
 -- $465 8tb 2.5"? [[https://www.serversupply.com/SSD/PCI-E/7.68TB/WESTERN%20DIGITAL/WUS4BB076D7P3E3_332270.htm][retail]]
 ** eMMC
+:PROPERTIES:
+:ID:       b8539369-0e0f-4f23-be8f-cd38be031bac
+:END:
 -- [cite/t/f:@emmc-mobile-io]
 * Linux
+:PROPERTIES:
+:ID:       b244015e-f3e2-4837-8186-a2f5edef1f14
+:END:
 ** syscalls
+:PROPERTIES:
+:ID:       935f67e0-eef6-4913-9dcc-8530129be37c
+:END:
 *** ioctl
+:PROPERTIES:
+:ID:       134d256a-f7b3-4603-846c-b6c9bad2d708
+:END:
 - [[https://elixir.bootlin.com/linux/latest/source/Documentation/userspace-api/ioctl/ioctl-number.rst][ioctl-numbers]]
 * Rust
+:PROPERTIES:
+:ID:       a3b9e17a-75a6-4aca-bf96-b713bc2ded43
+:END:
 ** crates
+:PROPERTIES:
+:ID:       4e7e4fb5-55f7-4036-b568-b84cefa45de8
+:END:
 *** nix
+:PROPERTIES:
+:ID:       861e5180-14b4-47c9-a779-fe25c0428d7e
+:END:
 - [[https://crates.io/crates/nix][crates.io]]
 *** memmap2
+:PROPERTIES:
+:ID:       320428ab-2d0f-4390-978f-c89907f8d0f4
+:END:
 - [[https://crates.io/crates/memmap2][crates.io]]
 *** zstd
+:PROPERTIES:
+:ID:       1cf1597d-2f42-4b92-b8fc-a88c649f7cbf
+:END:
 - [[https://crates.io/crates/zstd][crates.io]]
 *** rocksdb
+:PROPERTIES:
+:ID:       1f8fae07-2fbb-4a35-8269-ea436f846193
+:END:
 - [[https://crates.io/crates/rocksdb][crates.io]]
 *** tokio                                                           :tokio:
+:PROPERTIES:
+:ID:       ec55c0e1-7862-4f05-a6ee-b59ffc68a8ff
+:END:
 - [[https://crates.io/crates/tokio][crates.io]]
 *** tracing                                                         :tokio:
+:PROPERTIES:
+:ID:       bcf1904b-184e-4cae-86e7-5fcf57762944
+:END:
 - [[https://crates.io/crates/tracing][crates.io]]
 **** tracing-subscriber
+:PROPERTIES:
+:ID:       85f6ed51-f3f3-489c-911a-e90c4974048e
+:END:
 - [[https://crates.io/crates/tracing-subscriber][crates.io]]
 *** axum                                                            :tokio:
+:PROPERTIES:
+:ID:       29e0fb8d-e35a-4e47-9b11-45cc4019e2db
+:END:
 - [[https://crates.io/crates/axum][crates.io]]
 *** tower                                                           :tokio:
+:PROPERTIES:
+:ID:       8e5a71ed-85d6-4562-be3a-9261ab376a0e
+:END:
 - [[https://crates.io/crates/tower][crates.io]]
 *** uuid
+:PROPERTIES:
+:ID:       f6f24187-53b1-408e-b3ac-a101c9ba3040
+:END:
 - [[https://crates.io/crates/uuid][crates.io]]
 ** unstable
+:PROPERTIES:
+:ID:       c09c812a-e884-4a28-ac4b-4f997ad2e932
+:END:
 *** lazy_cell
+:PROPERTIES:
+:ID:       990d862d-80b1-4620-aa6a-d5e1a2c23517
+:END:
 - [[https://github.com/rust-lang/rust/issues/109736][tracking-issue]]
 *** {BTreeMap,BTreeSet}::extract_if
+:PROPERTIES:
+:ID:       15bcf475-336a-4ed0-9b1d-921414c4ff9a
+:END:
 - [[https://github.com/rust-lang/rust/issues/70530][tracking-issue]]
 * Lisp
+:PROPERTIES:
+:ID:       5aac7727-f53a-4414-9d6b-2cb50fb45c87
+:END:
 ** ASDF
+:PROPERTIES:
+:ID:       043ab5da-6f3f-47ee-b9cf-ba8f0c7bb87c
+:END:
 - [[https://gitlab.common-lisp.net/asdf/asdf][gitlab.common-lisp.net]]
 - [[https://asdf.common-lisp.dev/][common-lisp.dev]]
 - [[https://github.com/fare/asdf/blob/master/doc/best_practices.md][best-practices]]
 - includes UIOP
 ** Reference Projects
+:PROPERTIES:
+:ID:       f25d3c51-7338-484c-9068-31c1a4c7a565
+:END:
 *** StumpWM
+:PROPERTIES:
+:ID:       23dcbfef-b703-4dc5-a60a-9f2be66e32f2
+:END:
 - [[https://github.com/stumpwm/stumpwm][github]]
 *** Nyxt
+:PROPERTIES:
+:ID:       bfbb355d-2b09-4450-b39a-368a5f685d77
+:END:
 - [[https://github.com/atlas-engineer/nyxt][github]]
 *** Kons-9
+:PROPERTIES:
+:ID:       19929b73-2a4c-43f1-b04c-ec88dfa209bd
+:END:
 - [[https://github.com/kaveh808/kons-9][github]]
 *** cl-torrents
+:PROPERTIES:
+:ID:       935dbb0f-2f04-46c1-b250-48dea359398d
+:END:
 - [[https://github.com/vindarel/cl-torrents][github]]
 *** Mezzano
+:PROPERTIES:
+:ID:       2da96a46-f71c-436a-ab60-8f2a30469b15
+:END:
 - [[https://github.com/froggey/Mezzano][github]]
 *** yalo
+:PROPERTIES:
+:ID:       38459f44-90e3-4fcc-a829-27c60e28b2cd
+:END:
 - [[https://github.com/whily/yalo][github]]
 *** cl-ledger
+:PROPERTIES:
+:ID:       d2835614-461c-4bdd-8f25-a055b51797f4
+:END:
 - [[https://github.com/ledger/cl-ledger][github]]
 *** Lem
+:PROPERTIES:
+:ID:       8aa32222-31a9-4dc5-999c-7f10a9649d9f
+:END:
 - [[https://github.com/lem-project/lem][github]]
 *** kindista
+:PROPERTIES:
+:ID:       977ccbf4-ca2f-466b-9420-105df90cfcdc
+:END:
 - [[https://github.com/kindista/kindista][github]]
 *** lisp-chat
+:PROPERTIES:
+:ID:       c745e1c8-a675-4cfe-bb7f-30916b9198dd
+:END:
 - [[https://github.com/ryukinix/lisp-chat][github]]
 * Refs
+:PROPERTIES:
+:ID:       9a03c3b2-e9b6-4ab8-a1c5-3517374afbf0
+:END:
 #+print_bibliography:

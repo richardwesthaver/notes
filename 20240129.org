@@ -1,4 +1,7 @@
 * NOTE trash as block device
+:PROPERTIES:
+:ID:       4452b84f-f3a5-44f1-b60a-4efa6413cbb9
+:END:
 :LOGBOOK:
 - State "NOTE"       from              [2024-01-29 Mon 20:53]
 - State "NOTE"       from              [2024-01-29 Mon 20:53]
@@ -12,6 +15,9 @@ An interesting experiment would be to designate a block device as
 may be an opportunity for ublk driver to shine - instead of /dev/null
 piping we need a driver for streaming a file to /dev/trash
 * NOTE compute power
+:PROPERTIES:
+:ID:       aa10a1d7-f1e7-4b92-b91a-56c234d52204
+:END:
 :LOGBOOK:
 - State "NOTE"       from              [2024-01-29 Mon 16:28]
 :END:

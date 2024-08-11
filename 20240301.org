@@ -1,4 +1,7 @@
 * TODO collect more data
+:PROPERTIES:
+:ID:       69ce5703-d3fe-4df7-abf4-dc93a08ebc12
+:END:
 :LOGBOOK:
 - State "TODO"       from              [2024-03-01 Fri 15:27]
 :END:

@@ -1,4 +1,7 @@
 * useful internals
+:PROPERTIES:
+:ID:       28581a8e-ae05-45de-9744-24f447668418
+:END:
 #+begin_src lisp
   sb-sys:*runtime-dlhandle*
   sb-fasl:+fasl-file-version+

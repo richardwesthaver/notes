@@ -1,4 +1,7 @@
 * cl-dot examples
+:PROPERTIES:
+:ID:       c5f4f25c-071b-4a2d-85bc-08676eacce5d
+:END:
 #+begin_src lisp
 (defmethod cl-dot:graph-object-node ((graph (eql 'example)) (object cons))
   (make-instance 'cl-dot:node

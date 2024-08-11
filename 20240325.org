@@ -1,8 +1,7 @@
 * TBD investigate alieneval for phash opps
+:PROPERTIES:
+:ID:       21ab0a6e-cb66-4c5e-9b10-4ac2340ce75d
+:END:
 :LOGBOOK:
 - State "TBD"        from              [2024-03-25 Mon 18:56]
-:END:
-* TBD 
-:LOGBOOK:
-- State "TBD"        from              [2024-03-25 Mon 18:57]
 :END:

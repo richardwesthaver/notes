@@ -1,4 +1,7 @@
 * VC infrastructure
+:PROPERTIES:
+:ID:       2d40eec1-62f4-4f3d-9be7-110400808e06
+:END:
 In heptapod we have a root group named =comp=, containg a variety of
 subgroups. Some of these groups should be public, while others are
 internal to comp members exclusively. Within each subgroup, we should
@@ -17,6 +20,9 @@ Bookmarks/tags should be used for milestones in the root group and are
 infrequent. They are more frequent in projects with a regular release
 life-cycle.
 * Approaching Webapps
+:PROPERTIES:
+:ID:       0a52be58-990a-47da-ba5a-a7da7192361c
+:END:
 I started poking around in the webapp space again so that I can launch
 a landing page for NAS-T quickly. The Rust situation has improved
 somewhat on the frontend side, and the axum backend stack is nice.

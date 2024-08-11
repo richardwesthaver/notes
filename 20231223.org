@@ -1,3 +1,6 @@
 * https://cal-coop.gitlab.io/utena/utena-specification/main.pdf
+:PROPERTIES:
+:ID:       5c3aac3a-67e1-4867-9ac4-b58a3247f9e0
+:END:
 from the author of cl-decentralise2. draft specification of a
 /Maximalist/ Computing System.

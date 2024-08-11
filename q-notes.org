@@ -1,4 +1,7 @@
 * Queries
+:PROPERTIES:
+:ID:       dc72ef46-a048-4e55-a9bd-3da2c93f84a8
+:END:
 Q --- Query languages
 
 EQL = Event Query Language

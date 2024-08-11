@@ -1,4 +1,7 @@
 * public datasets
+:PROPERTIES:
+:ID:       28738250-c34e-45e2-8793-f8245472d3a3
+:END:
 https://github.com/awesomedata/awesome-public-datasets
 https://docs.openml.org/Datasets/
 https://wiki.pathmind.com/open-datasets

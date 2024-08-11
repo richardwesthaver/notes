@@ -1,4 +1,7 @@
 * doc best practices
+:PROPERTIES:
+:ID:       ba4a3074-f29d-4f81-b4ba-d6a523b3f291
+:END:
 https://rust-lang.github.io/api-guidelines/documentation.html
 
 also: https://lisp-lang.org/style-guide/

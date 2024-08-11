@@ -1,0 +1,11 @@
+* alpine builders
+:PROPERTIES:
+:ID:       635925f6-e1d8-47bc-a32f-28bca0f19d2d
+:END:
+- make sure to apk add:
+  - git, hg
+  - clang
+  - make
+  - linux-headers
+  - zstd-dev
+  - libc-dev?

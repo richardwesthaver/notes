@@ -1,9 +1,15 @@
 * DAT/PARQUET
+:PROPERTIES:
+:ID:       657a645b-0fad-4f95-a022-cd837ce188d6
+:END:
 https://github.com/apache/parquet-format
 https://github.com/apache/parquet-format/blob/master/src/main/thrift/parquet.thrift
 https://github.com/apache/parquet-testing
 https://github.com/apache/parquet-java
 ** glossary
+:PROPERTIES:
+:ID:       e71f388c-9ed1-4862-8890-7f74271e8df0
+:END:
 - block :: same as HDFS block
 - file :: file metadata is required, data is not
 - row-group :: a logical horizontal partitioning of the data into
@@ -17,6 +23,9 @@ Files consists of 1+ row-groups. A row-group contains exactly one
 column chunk per column. Column chunks contain one or more pages.
 
 ** format summary
+:PROPERTIES:
+:ID:       ae54516c-c8a8-49f8-aac6-a95c18f5de8e
+:END:
 #+begin_example
   4-byte magic number "PAR1"
   <Column 1 Chunk 1>

@@ -1,4 +1,7 @@
 * query langs
+:PROPERTIES:
+:ID:       44a015b3-9f25-4909-a61f-daa21a6baa6c
+:END:
 Queries are extremely important in software development and having a
 robust query engine is a must for CC.
 

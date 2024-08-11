@@ -1,11 +1,23 @@
 * ideas
+:PROPERTIES:
+:ID:       9b5624bb-f007-435d-86bb-bef449cdd088
+:END:
 ** use branches for separate levels of expansion
+:PROPERTIES:
+:ID:       f806f14c-bd32-4e40-8577-4a85b459d9fd
+:END:
 - or perhaps some other VC feature.. although I don't want any
   parallel to time, as if expansions occur in sequence. Thus things
   like tags don't feel quite right.
 * research
+:PROPERTIES:
+:ID:       ea7be421-5cf6-410c-a9db-780e6a4404ac
+:END:
 for libraries, always prefer [[https://common-lisp-libraries.readthedocs.io/][defacto libs]]
 ** [[https://github.com/screenshotbot/screenshotbot-oss][screenshotbot-oss]]
+:PROPERTIES:
+:ID:       72fedd7c-45a0-4739-873a-9cf666eecd85
+:END:
 - monolithic repo, includes third-party dependencies
   - full quicklisp source
   - asdf, etc
@@ -13,29 +25,71 @@ for libraries, always prefer [[https://common-lisp-libraries.readthedocs.io/][de
 - the repo is too heavy for my liking though
 - I do like the idea of having many systems though
 ** DB
+:PROPERTIES:
+:ID:       a1aacfb1-6a12-4520-951f-b287f1117923
+:END:
 *** CLIENT
+:PROPERTIES:
+:ID:       64210280-8c8d-4cf3-867f-616083a76e18
+:END:
 **** [[https://github.com/fukamachi/mito][mito]]
+:PROPERTIES:
+:ID:       fb0b87e2-ff06-4eb7-b7c4-f43dc6d6a538
+:END:
 ORM, sqlite, postgres, mysql support
 **** [[https://github.com/fukamachi/cl-dbi][cl-dbi]]
+:PROPERTIES:
+:ID:       e387a864-12d7-4691-a4d2-b0e4a6db027f
+:END:
 database independent interface
 **** [[https://github.com/fukamachi/sxql][sxql]]
+:PROPERTIES:
+:ID:       276f0663-15d2-4331-9432-dec95ee57a4c
+:END:
 SQL generator
 *** SERVICE
+:PROPERTIES:
+:ID:       66e6bcb1-fba3-418b-bc17-8f888a3f4f4a
+:END:
 **** [[https://github.com/launchbadge/sqlx][sqlx]]
+:PROPERTIES:
+:ID:       839a78e1-873b-4fe7-991e-0c1780d0840e
+:END:
 - supports rustls, tokio
 - we should write the service queries using a common-lisp DSL!
   #+begin_src toml
     sqlx = { version = "0.7", features = [ "runtime-tokio", "tls-rustls", "any", "chrono" ] }
   #+end_src
 ** LOGGING
+:PROPERTIES:
+:ID:       e87feb9d-67d8-409f-afc1-35e39edae80f
+:END:
 *** CLIENT
+:PROPERTIES:
+:ID:       762cb089-4f9f-4b5c-9e98-f2d57042da9b
+:END:
 **** [[https://github.com/sharplispers/log4cl/][log4cl]]
+:PROPERTIES:
+:ID:       97e2c6ce-155c-492b-8f8f-590147f85250
+:END:
 supports slime well
 *** SERVICE
+:PROPERTIES:
+:ID:       57c4e64a-b661-4a53-b779-c5f1624eed1a
+:END:
 **** [[https://crates.io/crates/tracing][tracing]]
+:PROPERTIES:
+:ID:       f9fd8886-8285-4264-916b-8a7e03a24e5e
+:END:
 **** [[https://crates.io/crates/tokio-console][tokio-console]] - monitoring tool
+:PROPERTIES:
+:ID:       45a5a757-cd3e-4fe2-ad66-bb0a3e5fdd05
+:END:
 works with tracing using the [[https://crates.io/crates/console-subscriber][console-subscriber]] crate
 ** UI
+:PROPERTIES:
+:ID:       9789c081-93d1-4eab-b7b6-9089cf6de3ca
+:END:
 [[https://mcclim.common-lisp.dev/][mcclim]]
 [[https://slint-ui.com/][slint-ui]]
 [[https://github.com/rabbibotton/clog][clog]]

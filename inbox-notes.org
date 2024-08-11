@@ -1,4 +1,7 @@
 * roadmap
+:PROPERTIES:
+:ID:       01634e21-2d66-4e47-a060-c774b354b17d
+:END:
 I think roadmap should be product/management oriented. Agile
 terminology applies and things are grouped into
 sprints/trains/PIs/etc. There's really no need for that currently at
@@ -14,31 +17,61 @@ we can contribute to MELPA.
 #+end_src
 
 * Inbox Architecture
+:PROPERTIES:
+:ID:       5da80539-43a4-4977-a4a2-f51b142d74e3
+:END:
 
 * Inbox Metadata
+:PROPERTIES:
+:ID:       70c8688f-9941-4c3c-a486-60cf0333a263
+:END:
 ** Tags
+:PROPERTIES:
+:ID:       febf20bf-7626-4730-9ecb-5b2086e05ba4
+:END:
 Pandora's box. I guess we should make use of decorators/capitalization
 for significant tags, and the rest are user-defined.
 ** IDs
+:PROPERTIES:
+:ID:       16265000-164a-41cb-8aa0-dcc61bf16b9c
+:END:
 Not entirely commited to uuid, but maybe it makes the most sense to
 use the timestamp one.
 ** Status
+:PROPERTIES:
+:ID:       0e24d4ec-294d-4cca-b640-119c7fd1175e
+:END:
 A Status should be applied to tasks only.
 
 We need a significant number of 'in progress' types, but each
 completed task will start as TODO and end up at DONE.
 ** Dates
+:PROPERTIES:
+:ID:       f134a4b4-64b5-4492-a5e0-18673f7b0c52
+:END:
 Deadline,Scheduled,DATE property,LOGBOOK
 ** Log
+:PROPERTIES:
+:ID:       f3a4440c-a186-40e1-80be-b311100ffe63
+:END:
 The logbook should be used to record progress throughout the lifetime
 of an item.
 ** Description
+:PROPERTIES:
+:ID:       82b15096-474a-4913-93ab-eeb28ff998d9
+:END:
 Descriptions can be blank, but tasks in need of review require a
 description.
 ** Properties
+:PROPERTIES:
+:ID:       c2f6ac27-4f7b-4839-b6be-c3f96adf0b6a
+:END:
 - Effort
 - Category
 ** Links
+:PROPERTIES:
+:ID:       1c39c531-d4ba-407e-a54a-5ee4ad22ea42
+:END:
 I don't think we need org-roam for this? TBD. The thing is that I want
 link data to end up in a set of rocksdb instances instead of sqlite.
 
@@ -51,6 +84,9 @@ For the time being we should limit the scope to a set of properties:
 Note there's no forward references.
 
 * Notifications
+:PROPERTIES:
+:ID:       8c101baa-e3ee-4982-986b-b6b9854eb25e
+:END:
 discord bot?
 prob use rust, parse json or something
 

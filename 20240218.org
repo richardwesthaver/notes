@@ -1,4 +1,7 @@
 * NOTE WL vs X
+:PROPERTIES:
+:ID:       b4b29989-28f2-48db-ad84-cd8d08eeefdf
+:END:
 :LOGBOOK:
 - State "NOTE"       from              [2024-02-18 Sun 11:55]
 :END:

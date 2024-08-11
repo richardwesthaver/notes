@@ -1,5 +1,11 @@
 * Mock Skel Readme
+:PROPERTIES:
+:ID:       a072a011-0808-490b-b4ee-c665f68e4033
+:END:
 ** Overview 
+:PROPERTIES:
+:ID:       2ab70bb9-4f1e-4ba2-ad72-b2a32dacbd5b
+:END:
 + status :: WIP
 + forge :: [[https://lab.rwest.io/ellis/skel][Heptapod]]
 + mirror :: [[https://github.com/richardwesthaver/skel][Github]]
@@ -9,15 +15,24 @@ project skeletons. /This is not a general purpose templating
 system/. It is specifically for my software stack.
 
 *** Goals
+:PROPERTIES:
+:ID:       7881a92f-7406-4862-bf89-39970731f37d
+:END:
 - vaporize boilerplate code and docs
 - integrate reasonably well with my tools (Emacs/etc)
 - object-oriented project management
 *** Resources
+:PROPERTIES:
+:ID:       d0dd3e94-8c9e-4eac-847e-33a039beadbe
+:END:
 - [[https://www.gnu.org/software/emacs/manual/html_node/autotype/Skeleton-Language.html][skeleton-lanaguage (emacs)]]
 - [[https://github.com/emacs-mirror/emacs/tree/master/lisp/cedet/ede][cedet/ede (emacs)]]
 - [[https://www.gnu.org/software/make/manual/make.html][GNU make]]
 - [[https://docs.factorcode.org/content/article-vocabularies.html][Factor (forth) definitions]]
 ** Quickstart
+:PROPERTIES:
+:ID:       183bbf4c-bb3c-44f6-a4c1-49c548e0eab2
+:END:
 Make sure you have sbcl installed:
 #+begin_src shell :results pp :eval never
 sbcl --version
@@ -123,6 +138,9 @@ This is just a form without the top-level parentheses - you're free to
 omit them in a skelfile.
 
 *** describe
+:PROPERTIES:
+:ID:       9ae1fe7b-c373-4101-88d3-439793eb38f3
+:END:
 The =describe= command can be used to check the currently active
 skelfile, printing any errors and the parsed object.
 
@@ -158,6 +176,9 @@ Slots with :INSTANCE allocation:
 #+end_example
 
 *** TODO compile
+:PROPERTIES:
+:ID:       e43b7a81-c2f9-4dc9-8a09-66259602f91b
+:END:
 Skelfiles can be compiled to produce a new project skeleton or update
 an existing one.
 
@@ -190,7 +211,13 @@ debug:compile;$(LISP) --eval "(start-repl)"
 #+end_src
 
 ** Examples
+:PROPERTIES:
+:ID:       61959899-98ec-4ee2-a862-7544674ffc7a
+:END:
 *** Default
+:PROPERTIES:
+:ID:       b9e5324c-059d-4416-a19a-3e5ffbac554e
+:END:
 When you run =skel init= this is the basic skelfile that will be
 generated in the current directory, depending on the following
 contexts:
@@ -204,8 +231,17 @@ looks like this:
 :name "examples"
 #+end_src
 *** Imports
+:PROPERTIES:
+:ID:       c7e2d0d9-8b0e-428d-aeb5-1b1447e2a1ed
+:END:
 *** Multi
+:PROPERTIES:
+:ID:       d6b6bbff-7713-4f2c-9dc8-b8331497b5b4
+:END:
 ** Tests
+:PROPERTIES:
+:ID:       37821915-2584-4303-a929-3cf25727fa1b
+:END:
 The unit tests may also be a useful reference:
 
 #+begin_src lisp :results output replace :wrap src lisp :eval never :package :skel.tests
@@ -241,6 +277,9 @@ No tests failed.
 #+end_src
 
 ** API
+:PROPERTIES:
+:ID:       ae46b723-6d1e-4855-9ec1-ad0eb7093960
+:END:
 - TODO :: CLOS-based core classes
 - TODO :: EIEIO-based wrapper classes
 

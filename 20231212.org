@@ -1,4 +1,7 @@
 * On Computers
+:PROPERTIES:
+:ID:       7845b0fb-b5d3-4488-bdba-4876d9c8816e
+:END:
 If you've met me in the past decade, you probably know that I am
 extremely passionate about computers. Let me first explain why.
 
@@ -19,6 +22,9 @@ which follow the same basic rules and can be used to solve /real/
 problems.
 
 ** The Programmer
+:PROPERTIES:
+:ID:       b17c853e-1728-4bd3-94c5-82e5b33d7398
+:END:
 Now, let us consider the /programmer/. They have power. /real/
 power. They understand the language of computers, can whisper to them
 in various dialects. It can be intimidating to witness until you
@@ -50,6 +56,9 @@ experience, you start to understand the different behaviors of the
 machines you work with. I like to call this /Machine Empathy/.
 
 ** Programs
+:PROPERTIES:
+:ID:       a297e5f9-a875-4512-b126-9a2b3e75c1d8
+:END:
 I already mentioned bugs - I write plenty of those, but usually I try
 to write /programs/. Programs to me are like poetry. I like to think
 they are for the computer too.
@@ -67,6 +76,9 @@ music itself.
 
 
 * On Infra
+:PROPERTIES:
+:ID:       80d800de-d305-4b95-a28c-a6f19d6f7a11
+:END:
 Something that is missing from many organizations big or large, is an
 effective way to store and access information, even about their own
 org.

@@ -1,4 +1,7 @@
 * [[https://github.com/sigmf/SigMF][SigMF]]
+:PROPERTIES:
+:ID:       f21a6477-6a3f-48f7-8a9e-43f5cf65286c
+:END:
 #+begin_quote
 Sharing sets of recorded signal data is an important part of science
 and engineering. It enables multiple parties to collaborate, is often
@@ -20,8 +23,17 @@ enabling data portability between tools and workflows.
 
 the-spec: https://github.com/sigmf/SigMF/blob/sigmf-v1.x/sigmf-spec.md
 * [[https://www.libvolk.org/][LibVOLK]]
+:PROPERTIES:
+:ID:       ae34135c-488e-4aff-b795-a4d0d558f22b
+:END:
 Vector-Optimized Library of Kernels (simd)
 * [[https://docs.kernel.org/fb/framebuffer.html][/dev/fb*]]
+:PROPERTIES:
+:ID:       7819a970-1f37-40a6-985f-905b25a08a4a
+:END:
 framebuffers, used by fbgrab/fbcat program
 * [[https://docs.kernel.org/block/ublk.html][ublk]]
+:PROPERTIES:
+:ID:       5ccaed39-7055-4a51-ab62-769a73425270
+:END:
 https://github.com/ming1/ubdsrv

@@ -1,4 +1,7 @@
 * How it works
+:PROPERTIES:
+:ID:       439a4945-de2f-4985-ba6c-fe6421aa9ad9
+:END:
 The backend services are written in Rust and controlled by a simple
 messaging protocol. Services provide common runtime capabilities known
 as the /service protocol/ but are specialized on a unique /service
@@ -14,7 +17,13 @@ come in many shapes and sizes. There is a cli-client, web-client
 which also compiles to WASM (slint-rs).
 
 * Guide
+:PROPERTIES:
+:ID:       65140d2c-5d59-48cd-946c-01c380a37f08
+:END:
 ** Build
+:PROPERTIES:
+:ID:       ad0652ca-4abf-4d27-8897-a61a13a6e61d
+:END:
 - *install dependencies*
   #+begin_src bash
     ./tools/deps.sh
@@ -26,27 +35,51 @@ which also compiles to WASM (slint-rs).
 - LISP :: Lisp (sbcl, cmucl, ccl)
 - CFG :: Config (default.cfg)
 ** Run
+:PROPERTIES:
+:ID:       b2295442-ccb7-4a5c-8a9e-ea8502aad636
+:END:
 #+begin_src shell
   ./demo -i
 #+end_src
 ** Config
+:PROPERTIES:
+:ID:       600be170-d032-4280-a7b5-c46e3c157206
+:END:
 Configs can be specified in JSON, TOML, RON, or of course SEXP. See
 =default.cfg= for an example.
 ** Play
+:PROPERTIES:
+:ID:       56a69ed7-2eb3-4490-95a1-072cee985df5
+:END:
 The high-level user interface is presented as a multi-modal GUI
 application which adapts to the specific application /instances/
 below.
 *** Weather
+:PROPERTIES:
+:ID:       804a174b-534c-4a04-966a-b44c0a86fbd4
+:END:
 This backend retrieves weather data using the NWS API.
 *** Stocks
+:PROPERTIES:
+:ID:       4e7339bb-aaf3-4fab-90e4-05e13f24f881
+:END:
 The 'Stocks' backend features a stock ticker with real-time analysis
 capabilities.
 *** Bench
+:PROPERTIES:
+:ID:       e3cf0add-6ded-4c05-a05d-7ef463b85b08
+:END:
 This is a benchmark backend for testing the capabilities of our
 demo. It spins up some mock services and allows fine-grained control
 of input/throughput.
 * tasks
+:PROPERTIES:
+:ID:       a16a3807-0e06-4c8d-baf6-5dfa8f8f5585
+:END:
 ** TODO DSLs
+:PROPERTIES:
+:ID:       3ae4754e-0c0f-4923-9e53-ae962b8638a1
+:END:
 - consider tree-sitter parsing layout, use as a guide for developing a
   single syntax which expands to Rust or C.
 - with-rs
@@ -55,31 +88,55 @@ of input/throughput.
 - with-cargo
 - compile-rs/c
 *** TODO rs-macroexpand
+:PROPERTIES:
+:ID:       f612975f-6bcc-4aab-b0d8-65b8ff0a0d0f
+:END:
 - rs-gen-file
 - rs-defmacro
 - rs-macros
 - rs-macroexpand
 - rs-macroexpand-1
 *** TODO c-macroexpand
+:PROPERTIES:
+:ID:       49f5c224-026d-4cdc-a326-1742e64c4279
+:END:
 - c-gen-file h/c
 - c-defmacro
 - c-macros
 - c-macroexpand
 - c-macroexpand-1
 *** TODO slint-macroexpand
+:PROPERTIES:
+:ID:       486beb12-179b-4acc-8507-cdc498edb628
+:END:
 - slint-gen-file
 - slint-defmacro
 - slint-macros
 - slint-macroexpand
 - slint-macroexpand-1
 *** TODO html (using who)
+:PROPERTIES:
+:ID:       2e81a19c-874c-4fd7-be0f-f6cd62c660db
+:END:
 ** TODO web templates
+:PROPERTIES:
+:ID:       95f7d6ac-c010-4d1d-a47d-1693bb7d6eab
+:END:
 create a basic static page in CL which will be used to host Slint UIs
 and other WASM doo-dads in a browser.
 ** TODO CLI
+:PROPERTIES:
+:ID:       fc1d5364-279c-4d5f-baea-ed2c110b63f0
+:END:
 using clingon, decide on generic options and write it up
 ** TODO docs
+:PROPERTIES:
+:ID:       467e84e3-e72f-4764-8858-cc15fdc17e8a
+:END:
 work on doc generation -- Rust and CL should be accounted for.
 ** TODO tests
+:PROPERTIES:
+:ID:       70aea01c-d01e-4ddf-aaf5-c86183a7e250
+:END:
 We have none! need to make it more comfy - set up testing in all Rust
 crates and for the lisp systems.

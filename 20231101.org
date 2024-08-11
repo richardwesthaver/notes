@@ -1,4 +1,7 @@
 * AWS usage
+:PROPERTIES:
+:ID:       b2f8d58f-a486-4fe9-895b-504987c0f63d
+:END:
 We're leveraging AWS for some of our public web servers for now. It's
 really not realistic to expect that my home desktop and spotty Comcast
 internet can serve any production workflow. What it /is/ capable of is

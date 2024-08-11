@@ -1,4 +1,7 @@
 * NOTE On blocks and devices
+:PROPERTIES:
+:ID:       c8304ae3-415d-4ccf-8f4c-1f3f6a555e5b
+:END:
 :LOGBOOK:
 - State "NOTE"       from              [2024-03-02 Sat 21:30]
 :END:
@@ -100,6 +103,9 @@ compression/de-duplication can be done via VDO kernel mod
 https://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support
 
 * NOTE save-lisp-and-respawn
+:PROPERTIES:
+:ID:       e58a96e7-7b88-4e4a-b958-3000603d8baa
+:END:
 :LOGBOOK:
 - State "NOTE"       from              [2024-03-02 Sat 22:57]
 :END:
@@ -108,6 +114,9 @@ https://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support
 #+end_src
 
 * NOTE syslog for log
+:PROPERTIES:
+:ID:       2efa5e4a-f063-49bb-9e61-6917eb115c1a
+:END:
 :LOGBOOK:
 - State "NOTE"       from              [2024-03-03 Sun 16:35]
 :END:
