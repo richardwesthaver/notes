@@ -5,7 +5,7 @@
 #+setupfile: ../clean.theme
 #+export_file_name: index
 #+options: num:t prop:t timestamp:t toc:t d:t compact-itemx:t
-#+INFOJS_OPT: toc:nil view:info
+#+INFOJS_OPT: toc:t view:info
 
 #+INCLUDE: 20230730.org
 #+INCLUDE: 20231024.org
@@ -32,10 +32,13 @@
 #+INCLUDE: 20240325.org
 #+INCLUDE: 20240419.org
 #+INCLUDE: 20240425.org
+#+INCLUDE: 20240731.org
+#+INCLUDE: 20240804.org
+#+INCLUDE: 20240808.org
 #+INCLUDE: demo-notes.org
 #+INCLUDE: inbox-notes.org
 #+INCLUDE: nas-t.org
+#+INCLUDE: parquet-parsing.org
 #+INCLUDE: query-lang.org
 #+INCLUDE: refs.bib
 #+INCLUDE: skel-readme.org
-#+INCLUDE: vocab
