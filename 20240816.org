@@ -1,0 +1,8 @@
+* NOTE keys.compiler.company
+:LOGBOOK:
+- State "NOTE"       from              [2024-08-16 Fri 22:00]
+:END:
+- public openpgp server
+- [[keys.compiler.company]]
+- https://keys.openpgp.org/
+- [[vc:packy/hagrid/][packy/hagrid]]

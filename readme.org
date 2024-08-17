@@ -35,6 +35,7 @@
 #+INCLUDE: 20240731.org
 #+INCLUDE: 20240804.org
 #+INCLUDE: 20240808.org
+#+INCLUDE: 20240816.org
 #+INCLUDE: demo-notes.org
 #+INCLUDE: inbox-notes.org
 #+INCLUDE: nas-t.org
