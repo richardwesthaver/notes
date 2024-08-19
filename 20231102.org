@@ -2,7 +2,7 @@
 :PROPERTIES:
 :ID:       836b5ca7-6c6b-4d57-8b44-3bb4a8f38a38
 :END:
-** TODO shed
+** NOTE shed
 :PROPERTIES:
 :ID:       fc9a94e1-91c5-4915-90b8-73218fa3b8bc
 :END:
@@ -15,7 +15,7 @@ rlib
 > ulib
 > ulib
 
-*** TODO sh* tools
+*** NOTE sh* tools
 :PROPERTIES:
 :ID:       c0613a13-7ccb-4af9-b47e-e14a41c782c2
 :END:
@@ -23,63 +23,63 @@ rlib
 - State "TODO"       from "TODO"       [2023-04-07 Fri 23:22]
 :END:
 shc,shx,etc
-** WIP packy
+** NOTE packy
 :PROPERTIES:
 :ID:       6bd29c37-4b23-4a05-b3a4-72b6ee712f27
 :END:
 :LOGBOOK:
 - State "TODO"       from              [2023-04-07 Fri 23:33]
 :END:
-*** WIP rust
+*** NOTE rust
 :PROPERTIES:
 :ID:       3bfa733e-d777-4e82-b108-93ba74c4dc08
 :END:
-*** WIP common-lisp
+*** NOTE common-lisp
 :PROPERTIES:
 :ID:       0f3b6182-1dd1-4e65-8b1c-4630a46fff4c
 :END:
-*** WIP emacs-lisp
+*** NOTE emacs-lisp
 :PROPERTIES:
 :ID:       e9fc19d5-daea-40a5-a0f2-882b925e58f2
 :END:
-*** python
+*** NOTE python
 :PROPERTIES:
 :ID:       c2e62af0-0397-4560-a283-b33d12fbd966
 :END:
-*** julia
+*** NOTE julia
 :PROPERTIES:
 :ID:       d2466880-1721-4386-b385-ded06d5b15cf
 :END:
-*** C
+*** NOTE C
 :PROPERTIES:
 :ID:       fb722462-9e11-40c1-a5d7-30698dba7e20
 :END:
-*** C++
+*** NOTE C++
 :PROPERTIES:
 :ID:       663cd894-0a5f-4352-acf1-4528b9efeeaf
 :END:
-** TODO tenex
+** NOTE tenex
 :PROPERTIES:
 :ID:       b4264fa2-6e96-4679-bd17-2428ba3489ee
 :END:
 :LOGBOOK:
 - State "TODO"       from              [2023-04-07 Fri 23:52]
 :END:
-** TODO mpk
+** NOTE mpk
 :PROPERTIES:
 :ID:       d9661e4a-0328-4864-878d-096f76ddaf55
 :END:
 :LOGBOOK:
 - State "TODO"       from              [2023-04-07 Fri 23:52]
 :END:
-** TODO cfg
+** NOTE cfg
 :PROPERTIES:
 :ID:       501593d4-702a-40cb-8a8f-19edfe2f9f29
 :END:
 :LOGBOOK:
 - State "TODO"       from              [2023-04-07 Fri 23:34]
 :END:
-** TODO obj
+** NOTE obj
 :PROPERTIES:
 :ID:       24700a26-b238-48dd-a24f-5539984b4fa6
 :END:
@@ -88,14 +88,14 @@ shc,shx,etc
 :END:
 split out from rlib to separate package
 - a purely OOP class library
-** TODO lab
+** NOTE lab
 :PROPERTIES:
 :ID:       fa1c9563-338b-4a56-bfc3-6f4983f2a732
 :END:
 :LOGBOOK:
 - State "TODO"       from              [2023-04-07 Fri 23:34]
 :END:
-** TODO source categories
+** NOTE source categories
 :PROPERTIES:
 :ID:       c43fdb5d-4f52-478e-9384-ec0e6e89cf09
 :END:
@@ -107,7 +107,7 @@ split out from rlib to separate package
   - script?
   - dist
     - software distros
-** TODO generic query language
+** NOTE generic query language
 :PROPERTIES:
 :ID:       8647801a-d5ad-446d-8ae1-fd896bce129a
 :END:
@@ -115,7 +115,7 @@ from obj protocol?
 sql compatibility?
 
 /check out kdb/
-** TODO bbdb
+** NOTE bbdb
 :PROPERTIES:
 :ID:       ff7c2876-e471-480b-b532-9921dbd3bc89
 :END:
@@ -127,9 +127,12 @@ insidious Big Brother database.
 - an application built with obj
 - sql
 
-** TODO NAS-TV                                                        :nas:t:
+** NOTE NAS-TV                                                        :nas:t:
 :PROPERTIES:
 :ID:       00e5fe6c-80b4-4172-a9cb-ce8adc40d3dc
+:END:
+:LOGBOOK:
+- State "NOTE"       from "TODO"       [2024-08-18 Sun 18:46]
 :END:
 - media streaming
 - gstreamer backend

@@ -6,7 +6,7 @@
 #+export_file_name: index
 #+options: num:t prop:t timestamp:t toc:t d:t compact-itemx:t
 #+INFOJS_OPT: toc:t view:info
-
+#+property: header-args :eval no-export
 #+INCLUDE: 20230730.org
 #+INCLUDE: 20231024.org
 #+INCLUDE: 20231101.org
