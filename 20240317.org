@@ -1,4 +1,4 @@
-* NOTE DB Benchmarking
+* DB Benchmarking
 :PROPERTIES:
 :ID:       d30aec42-a9a1-425b-87ca-1e40db0e69de
 :END:
@@ -7,7 +7,7 @@
 :END:
 [[https://github.com/facebook/rocksdb/wiki/Benchmarking-tools][RocksDB benchmarking tools]]
 
-* NOTE packy design
+* packy design
 :PROPERTIES:
 :ID:       76ae24f5-46e8-4b91-8991-41245383d337
 :END:

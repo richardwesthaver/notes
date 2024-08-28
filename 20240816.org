@@ -1,4 +1,4 @@
-* NOTE keys.compiler.company
+* keys.compiler.company
 :PROPERTIES:
 :ID:       86c21790-72b5-4ea1-ba49-f7be3f65a8cc
 :END:

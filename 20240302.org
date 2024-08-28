@@ -1,4 +1,4 @@
-* NOTE On blocks and devices
+* On blocks and devices
 :PROPERTIES:
 :ID:       c8304ae3-415d-4ccf-8f4c-1f3f6a555e5b
 :END:
@@ -102,7 +102,7 @@ compression/de-duplication can be done via VDO kernel mod
 
 https://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support
 
-* NOTE save-lisp-and-respawn
+* save-lisp-and-respawn
 :PROPERTIES:
 :ID:       e58a96e7-7b88-4e4a-b958-3000603d8baa
 :END:
@@ -113,7 +113,7 @@ https://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support
   sb-ext:*save-hooks*
 #+end_src
 
-* NOTE syslog for log
+* syslog for log
 :PROPERTIES:
 :ID:       2efa5e4a-f063-49bb-9e61-6917eb115c1a
 :END:

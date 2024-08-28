@@ -1,4 +1,4 @@
-* NOTE WL vs X
+* WL vs X
 :PROPERTIES:
 :ID:       b4b29989-28f2-48db-ad84-cd8d08eeefdf
 :END:

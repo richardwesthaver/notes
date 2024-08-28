@@ -1,4 +1,4 @@
-* NOTE trash as block device
+* trash as block device
 :PROPERTIES:
 :ID:       4452b84f-f3a5-44f1-b60a-4efa6413cbb9
 :END:
@@ -14,7 +14,7 @@ An interesting experiment would be to designate a block device as
 
 may be an opportunity for ublk driver to shine - instead of /dev/null
 piping we need a driver for streaming a file to /dev/trash
-* NOTE compute power
+* compute power
 :PROPERTIES:
 :ID:       aa10a1d7-f1e7-4b92-b91a-56c234d52204
 :END:
