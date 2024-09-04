@@ -1,8 +1,0 @@
-* bookmarks
-:PROPERTIES:
-:ID:       6e9c6bce-0513-4628-b6f9-5c234cccdaa3
-:END:
-- How should such objects be represented within CORE?
-- skel/homer mostly
-  - already have alias
-- not sure about obj/otherwise, prob not

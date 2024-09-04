@@ -283,7 +283,7 @@ No tests failed.
 - TODO :: CLOS-based core classes
 - TODO :: EIEIO-based wrapper classes
 
-#+begin_src dot :file api.svg :exports results
+#+begin_src dot :file /tmp/api.svg :exports results
   digraph { splines=true; label="CLOS API"; labelloc="t"; node [shape=record];
     sk [label="(skel :ID :AST)"]
     methods [label="(sk-compile sk-expand sk-build\nsk-run sk-init sk-new sk-save\nsk-tangle sk-weave sk-call sk-print)"]
@@ -325,4 +325,4 @@ No tests failed.
 #+end_src
 
 #+RESULTS:
-[[file:api.svg]]
+[[file:/tmp/api.svg]]

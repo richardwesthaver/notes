@@ -1,8 +1,0 @@
-* global refs
-:PROPERTIES:
-:ID:       7fb40057-05aa-445b-bc75-0b1b6ca2c994
-:END:
-need a way of indexing, referring to, and annotating objects such as
-URLs, docs, articles, source files, etc.
-
-What is the best way to get this done?
