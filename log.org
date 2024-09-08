@@ -3,6 +3,9 @@
 #+email: richard.westhaver@gmail.com
 #+setupfile: ../clean.theme
 * [2023-07-30 Sun]
+:PROPERTIES:
+:ID:       3a6f861e-f464-4512-8d13-09e59fe6cbc5
+:END:
 ** VC infrastructure
 :PROPERTIES:
 :ID:       2d40eec1-62f4-4f3d-9be7-110400808e06
@@ -47,6 +50,9 @@ would be impacted. In this domain, Lisp takes the form of a glue
 rather than the bricks and mortar it sometimes appears to us as.
 
 * [2023-10-24 Tue]
+:PROPERTIES:
+:ID:       dbc29b84-e1ca-4629-a515-b9277e05f2a8
+:END:
 ** virt
 :PROPERTIES:
 :ID:       a51b54d9-5663-411e-b0ba-d1405622eb88
@@ -176,6 +182,9 @@ most places.
 [[https://www.nushell.sh/cookbook/][cookbook]]
 [[https://github.com/nushell/nu_scripts][nu_scripts]]
 * [2023-11-01 Wed]
+:PROPERTIES:
+:ID:       693e0604-1f5f-4f45-ade7-fc67cd278518
+:END:
 ** AWS usage
 :PROPERTIES:
 :ID:       b2f8d58f-a486-4fe9-895b-504987c0f63d
@@ -198,6 +207,9 @@ instance which requires a larger instance and some workers.
 
 We'll try to keep the cost at or around $30/month.
 * [2023-11-02 Thu]
+:PROPERTIES:
+:ID:       c097323d-ad44-43a8-9e1c-dea7ad9298b3
+:END:
 ** IDEAS
 :PROPERTIES:
 :ID:       836b5ca7-6c6b-4d57-8b44-3bb4a8f38a38
@@ -338,6 +350,9 @@ insidious Big Brother database.
 - gstreamer backend
 - audio/video
 * [2023-11-05 Sun]
+:PROPERTIES:
+:ID:       8d2c32db-769f-482d-86b7-b476e21a438f
+:END:
 ** DRAFT dylib-skel-1
 :PROPERTIES:
 :ID:       b4d1bc91-f344-45fd-becc-cb20f00a3a61
@@ -526,6 +541,9 @@ time target/release/dysk-test
 (time (dotimes (_ 500000000) (dysk-plus1 2)))
 #+end_src
 * [2023-11-24 Fri]
+:PROPERTIES:
+:ID:       63b7f08e-c2df-4a5e-a14f-a8abee2a12c5
+:END:
 ** cl-dot examples
 :PROPERTIES:
 :ID:       c5f4f25c-071b-4a2d-85bc-08676eacce5d
@@ -564,6 +582,9 @@ time target/release/dysk-test
 #+end_src
 
 * [2023-12-05 Tue]
+:PROPERTIES:
+:ID:       347fbd67-0b04-46a5-a1df-698a7398664d
+:END:
 ** global refs
 :PROPERTIES:
 :ID:       7fb40057-05aa-445b-bc75-0b1b6ca2c994
@@ -573,6 +594,9 @@ URLs, docs, articles, source files, etc.
 
 What is the best way to get this done?
 * [2023-12-09 Sat]
+:PROPERTIES:
+:ID:       92d35872-75a9-448f-acdf-e14daae0c956
+:END:
 ** doc best practices
 :PROPERTIES:
 :ID:       ba4a3074-f29d-4f81-b4ba-d6a523b3f291
@@ -581,6 +605,9 @@ https://rust-lang.github.io/api-guidelines/documentation.html
 
 also: https://lisp-lang.org/style-guide/
 * [2023-12-12 Tue]
+:PROPERTIES:
+:ID:       46c2a675-1dcb-4058-9284-55605f523463
+:END:
 ** On Computers
 :PROPERTIES:
 :ID:       7845b0fb-b5d3-4488-bdba-4876d9c8816e
@@ -682,6 +709,9 @@ be relying on hardware I have physical access to. I'm not opposed to
 cloud services at large but based on principle I like to think we
 shouldn't be built on them.
 * [2023-12-23 Sat]
+:PROPERTIES:
+:ID:       12189e52-0b21-4171-8b93-eaa6a82117ce
+:END:
 ** https://cal-coop.gitlab.io/utena/utena-specification/main.pdf
 :PROPERTIES:
 :ID:       5c3aac3a-67e1-4867-9ac4-b58a3247f9e0
@@ -689,6 +719,9 @@ shouldn't be built on them.
 from the author of cl-decentralise2. draft specification of a
 /Maximalist/ Computing System.
 * [2023-12-24 Sun]
+:PROPERTIES:
+:ID:       b5b9eae5-7d13-435a-9810-68e952b2f887
+:END:
 ** public datasets
 :PROPERTIES:
 :ID:       28738250-c34e-45e2-8793-f8245472d3a3
@@ -697,6 +730,9 @@ https://github.com/awesomedata/awesome-public-datasets
 https://docs.openml.org/Datasets/
 https://wiki.pathmind.com/open-datasets
 * [2023-12-28 Thu]
+:PROPERTIES:
+:ID:       e2012a31-462a-4f3b-9b92-8a812626ac69
+:END:
 ** useful internals
 :PROPERTIES:
 :ID:       28581a8e-ae05-45de-9744-24f447668418
@@ -741,6 +777,9 @@ https://wiki.pathmind.com/open-datasets
   sb-disassem:
 #+end_src
 * [2024-01-03 Wed]
+:PROPERTIES:
+:ID:       1c16670e-5470-4650-a07c-45c5884b92b8
+:END:
 ** [[https://github.com/sigmf/SigMF][SigMF]]
 :PROPERTIES:
 :ID:       f21a6477-6a3f-48f7-8a9e-43f5cf65286c
@@ -781,6 +820,9 @@ framebuffers, used by fbgrab/fbcat program
 :END:
 https://github.com/ming1/ubdsrv
 * [2024-01-04 Thu]
+:PROPERTIES:
+:ID:       002e9449-adb7-4902-ad84-5fbf832eb890
+:END:
 goals:
 make problems smaller.
 
@@ -788,6 +830,9 @@ sections:
 why lisp?
 - doesn't need mentioning more and more
 * [2024-01-20 Sat]
+:PROPERTIES:
+:ID:       3f3aa409-8b88-45bf-8dbd-6d06e4e053b5
+:END:
 ** TODO taobench demo
 :PROPERTIES:
 :ID:       81ac81c3-f183-4345-aaf3-ef7ef0434947
@@ -849,6 +894,9 @@ https://www.nushell.sh/book/cheat_sheet.html
   + block/object/archive storage
   + 30-day $300 credits
 * [2024-01-29 Mon]
+:PROPERTIES:
+:ID:       0ff31116-18c6-4471-a6fd-01d7b4e456ec
+:END:
 ** trash as block device
 :PROPERTIES:
 :ID:       4452b84f-f3a5-44f1-b60a-4efa6413cbb9
@@ -923,6 +971,9 @@ piping we need a driver for streaming a file to /dev/trash
       - 8 GB
       - DDR4 4200
 * [2024-02-10 Sat]
+:PROPERTIES:
+:ID:       8601ee46-5bf7-4a7a-a491-52c50eee619a
+:END:
 ** BigBenches
 :PROPERTIES:
 :ID:       87d0f5d4-c6fe-4e21-911e-2639a24e89f9
@@ -940,6 +991,9 @@ piping we need a driver for streaming a file to /dev/trash
   ]
 #+end_src
 * [2024-02-18 Sun]
+:PROPERTIES:
+:ID:       b3af34f4-367d-4a83-9c69-088f9ba4190e
+:END:
 ** WL vs X
 :PROPERTIES:
 :ID:       b4b29989-28f2-48db-ad84-cd8d08eeefdf
@@ -1019,6 +1073,9 @@ on top - I don't want to live on top of X, and I certainly don't want
 to live on top of X on top of WL. I want a /pure/ solution that hides
 as little as possible, exposing the interesting bits.
 * [2024-03-01 Fri]
+:PROPERTIES:
+:ID:       235cb90a-fd5b-43f0-83fa-d0e9f6b13119
+:END:
 ** TODO collect more data
 :PROPERTIES:
 :ID:       69ce5703-d3fe-4df7-abf4-dc93a08ebc12
@@ -1029,6 +1086,9 @@ as little as possible, exposing the interesting bits.
 https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/
 weather - music - etc
 * [2024-03-02 Sat]
+:PROPERTIES:
+:ID:       ecb6ee8a-3bc8-4414-9a43-0ad23b887c3b
+:END:
 ** On blocks and devices
 :PROPERTIES:
 :ID:       c8304ae3-415d-4ccf-8f4c-1f3f6a555e5b
@@ -1156,6 +1216,9 @@ sb-posix:
 - levels: emerg alert crit err warning notice info debug
 - setlogmask
 * [2024-03-13 Wed]
+:PROPERTIES:
+:ID:       3536e67a-51f7-45ea-98bb-f01093d9f2ca
+:END:
 ** RESEARCH [[https://github.com/guicho271828/sbcl-wiki/wiki/][sbcl-wiki]]
 :PROPERTIES:
 :ID:       33bc81c1-c5fa-4518-9456-58fd67f301ff
@@ -1172,6 +1235,9 @@ sb-posix:
 :ID:       8d015e5e-7ad3-44c3-88cd-81e293a887e0
 :END:
 * [2024-03-17 Sun]
+:PROPERTIES:
+:ID:       d741d3db-0a1b-4024-8d42-77f0edebf593
+:END:
 ** DB Benchmarking
 :PROPERTIES:
 :ID:       d30aec42-a9a1-425b-87ca-1e40db0e69de
@@ -1303,6 +1369,9 @@ Packy connection object
 :ID:       390cb42b-5170-4175-9ccc-b990842356a0
 :END:
 * [2024-03-25 Mon]
+:PROPERTIES:
+:ID:       b0ee90a7-a7ba-41c1-9864-5617f3bb2abe
+:END:
 ** TBD investigate alieneval for phash opps
 :PROPERTIES:
 :ID:       21ab0a6e-cb66-4c5e-9b10-4ac2340ce75d
@@ -1311,6 +1380,9 @@ Packy connection object
 - State "TBD"        from              [2024-03-25 Mon 18:56]
 :END:
 * [2024-04-19 Fri]
+:PROPERTIES:
+:ID:       0ce61202-62b4-4a18-8a2e-fabf0787970e
+:END:
 ** How it works
 :PROPERTIES:
 :ID:       439a4945-de2f-4985-ba6c-fe6421aa9ad9
@@ -1454,11 +1526,17 @@ work on doc generation -- Rust and CL should be accounted for.
 We have none! need to make it more comfy - set up testing in all Rust
 crates and for the lisp systems.
 * [2024-04-25 Thu]
+:PROPERTIES:
+:ID:       fe24785e-dffc-41f1-9740-ddf823751e31
+:END:
 ** https://docs.gitlab.com/ee/administration/backup_restore/migrate_to_new_server.html
 :PROPERTIES:
 :ID:       264b81f4-f953-4698-9c82-d8e20b6c31f9
 :END:
 * [2024-07-31 Wed]
+:PROPERTIES:
+:ID:       ff4f24b4-4b9c-4706-aceb-3a09276d2e11
+:END:
 ** alpine builders
 :PROPERTIES:
 :ID:       635925f6-e1d8-47bc-a32f-28bca0f19d2d
@@ -1471,6 +1549,9 @@ crates and for the lisp systems.
   - zstd-dev
   - libc-dev?
 * [2024-08-04 Sun]
+:PROPERTIES:
+:ID:       bc4078cc-7b47-401e-a75f-19b7ce3f0a66
+:END:
 ** bookmarks
 :PROPERTIES:
 :ID:       6e9c6bce-0513-4628-b6f9-5c234cccdaa3
@@ -1480,6 +1561,9 @@ crates and for the lisp systems.
   - already have alias
 - not sure about obj/otherwise, prob not
 * [2024-08-08 Thu]
+:PROPERTIES:
+:ID:       36f63b50-d717-41b1-bda8-4521c3b05072
+:END:
 ** Intelligent Design in Software
 :PROPERTIES:
 :ID:       1397d8bb-4848-4d9a-9dcc-ee65bed81c9e
@@ -1493,6 +1577,9 @@ crates and for the lisp systems.
 - build applications
 - re-integrate lessons learned
 * [2024-08-16 Fri]
+:PROPERTIES:
+:ID:       ceb25ff7-5ad9-4aa3-b093-260da4f35e56
+:END:
 ** keys.compiler.company
 :PROPERTIES:
 :ID:       86c21790-72b5-4ea1-ba49-f7be3f65a8cc

@@ -10,9 +10,30 @@
 #+options: num:nil prop:nil timestamp:nil toc:nil html-postamble:nil ^:nil
 #+property: header-args :eval no-export
 * [[file:log.org][log]]
+:PROPERTIES:
+:ID:       6a5c6879-c3cc-401d-a057-e7a5edab04b7
+:END:
 * [[file:demo-notes.org][demo-notes]]
+:PROPERTIES:
+:ID:       8ce33887-1d51-4d4a-bb69-c8cde3572a97
+:END:
 * [[file:inbox-notes.org][inbox-notes]]
+:PROPERTIES:
+:ID:       2a3dce1a-858d-4d02-b20a-cc6b8307cd6a
+:END:
 * [[file:nas-t.org][nas-t]]
+:PROPERTIES:
+:ID:       0c4ad35d-9b4d-4aa6-88a7-e0673b306dd6
+:END:
 * [[file:parquet-parsing.org][parquet-parsing]]
+:PROPERTIES:
+:ID:       4cc971f9-735f-42b0-bd81-2758524c5607
+:END:
 * [[file:query-lang.org][query-lang]]
+:PROPERTIES:
+:ID:       026d2357-85e6-429d-ac85-616e04683270
+:END:
 * [[file:skel-readme.org][skel-readme]]
+:PROPERTIES:
+:ID:       ea5544ed-68c8-4100-84c0-dd6bb4bcd938
+:END:
