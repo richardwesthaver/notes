@@ -1,4 +1,3 @@
-#+BIBLIOGRAPHY: refs.bib
 * File Systems
 :PROPERTIES:
 :ID:       29f7085e-53a3-4d70-90a7-e3437ee99775
@@ -381,4 +380,4 @@ Namespaces (ZNS) in NVMe SSDs.
 :PROPERTIES:
 :ID:       9a03c3b2-e9b6-4ab8-a1c5-3517374afbf0
 :END:
-#+print_bibliography:
+
