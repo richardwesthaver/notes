@@ -4,11 +4,11 @@
 #+setupfile: ../clean.theme
 * [2023-07-30 Sun]
 :PROPERTIES:
-:ID:       3a6f861e-f464-4512-8d13-09e59fe6cbc5
+:ID:       5a1f17a0-22bb-45bc-a313-ec2cb6c0bfd5
 :END:
 ** VC infrastructure
 :PROPERTIES:
-:ID:       2d40eec1-62f4-4f3d-9be7-110400808e06
+:ID:       9928339e-14d7-425d-a465-be87e2784590
 :END:
 In heptapod we have a root group named =comp=, containg a variety of
 subgroups. Some of these groups should be public, while others are
@@ -29,7 +29,7 @@ infrequent. They are more frequent in projects with a regular release
 life-cycle.
 ** Approaching Webapps
 :PROPERTIES:
-:ID:       0a52be58-990a-47da-ba5a-a7da7192361c
+:ID:       bafaceb9-2798-484d-80b7-7ad5d84fff1a
 :END:
 I started poking around in the webapp space again so that I can launch
 a landing page for NAS-T quickly. The Rust situation has improved
@@ -51,85 +51,85 @@ rather than the bricks and mortar it sometimes appears to us as.
 
 * [2023-10-24 Tue]
 :PROPERTIES:
-:ID:       dbc29b84-e1ca-4629-a515-b9277e05f2a8
+:ID:       7bd213b5-9a4b-4490-b0b8-8a0a9b42a9c6
 :END:
 ** virt
 :PROPERTIES:
-:ID:       a51b54d9-5663-411e-b0ba-d1405622eb88
+:ID:       07c7016f-c653-4d69-9ca0-366a7584a212
 :END:
 *** QEMU
 :PROPERTIES:
-:ID:       34dc9d12-d651-4204-9abb-a6a9a6aeb07e
+:ID:       f53afecb-561e-4545-a6d0-dbf6d9504ec4
 :END:
 *** KVM
 :PROPERTIES:
-:ID:       909e1127-14f5-4783-97af-65aa25439226
+:ID:       df9e07cd-986f-45a7-b9f7-ea88313c92ee
 :END:
 *** Hyper-V
 :PROPERTIES:
-:ID:       d89dc59d-25d9-4304-bcb8-379dd43cc3f7
+:ID:       87b019ff-7f05-496d-b7bb-153fea7f8595
 :END:
 *** Firecracker
 :PROPERTIES:
-:ID:       7c4f08b7-2bc0-4a85-a6ca-2decdce8dc91
+:ID:       b1c52088-4244-4342-b884-c551ce43cc9c
 :END:
 *** Docker
 :PROPERTIES:
-:ID:       42ff77c2-69c9-4f89-a297-88efd592502e
+:ID:       d1969d15-8dc0-4499-bddb-f92fa19aec13
 :END:
 *** Vagrant
 :PROPERTIES:
-:ID:       c53c4d87-b0fd-40de-8db7-b92c22dc946c
+:ID:       dd6e8169-fba6-45af-aaef-6acd9dbd7b3f
 :END:
 *** LXC
 :PROPERTIES:
-:ID:       85c5f471-cf87-49b7-a6ce-5c1526df4080
+:ID:       bd393c26-6014-42bb-a425-b9f72e5cee8b
 :END:
 *** LXD
 :PROPERTIES:
-:ID:       f92d34dd-7b24-498c-a5c8-29fd3b528092
+:ID:       800ee282-7b5c-465f-a372-344079f9d875
 :END:
 *** containerd
 :PROPERTIES:
-:ID:       a967645f-5df3-4bed-9e7b-a1adaed3796c
+:ID:       7f34835c-9135-4015-bdbd-99d28d7b40bb
 :END:
 *** systemd-nspawn
 :PROPERTIES:
-:ID:       6329c6f9-c54c-4eb0-99e7-4772399161e7
+:ID:       9fef114a-e2f3-40b4-bddb-9948b47b441f
 :END:
 *** VirtualBox
 :PROPERTIES:
-:ID:       638aa81a-8926-480a-854f-0434e8119426
+:ID:       04594cbd-5847-434d-aaf6-a7e23058d980
 :END:
 
 ** Concatenative
 :PROPERTIES:
-:ID:       964c6bac-486a-4459-825f-6e7e9351c9ab
+:ID:       ad2041de-3915-48f9-950c-03b01968952d
 :END:
 *** Factor                                                           :factor:
 :PROPERTIES:
-:ID:       52994125-5689-402a-ac61-680aa690bf24
+:ID:       edb7e4a8-d07d-4953-9b64-decdca1dd76f
 :END:
 - [2023-07-04 Tue]
   Factor is a cool concatenative lang but unfortunately the C interface
   (vm/master.h) no longer exists on the master branch.
 *** Joy                                                                 :joy:
 :PROPERTIES:
-:ID:       60ca3000-2ff5-4372-93fb-d5c311fb6409
+:ID:       257365d1-1b2e-4abd-a2e3-5d1705e41bcf
 :END:
 
 **** https://hypercubed.github.io/joy/html/j02maf.html
 :PROPERTIES:
-:ID:       56e64d52-4950-4fec-b933-73d1cd8048d1
+:ID:       a685ec2b-fbdc-4724-ab22-12d8a4498f81
 :END:
 
 **** [[https://builds.openlogicproject.org/content/incompleteness/arithmetization-syntax/arithmetization-syntax.pdf][arithmetization of syntax]]
 :PROPERTIES:
-:ID:       59979091-395d-4067-9c3d-e557fc5287ee
+:ID:       895a803a-63d5-4dfb-8ceb-c20627d97b02
 :END:
 ** Lisp                                                                :lisp:
 :PROPERTIES:
-:ID:       4b842734-135e-4c86-9337-3841c1241d3b
+:ID:       8109c42f-ccbb-4a08-ab99-1dced8b22a9f
 :END:
 These notes pertain to Lisp. More specifically, ANSI Common Lisp in
 most places.
@@ -139,11 +139,11 @@ most places.
   - what we really need is wasm compiler.. TBD
 ** Rust
 :PROPERTIES:
-:ID:       f92ce2ba-1b66-42f4-b5e2-f1586b14760b
+:ID:       94a9a2b7-3559-476c-9edf-66b3b0c8cbb0
 :END:
 *** Serde
 :PROPERTIES:
-:ID:       31512714-9c30-4144-9673-327808a18767
+:ID:       ffb4e87c-e265-4549-91f9-093e714708c0
 :END:
 - [2023-07-05 Wed] \\
   important part of the Rust ecosystem, another dtolnay
@@ -168,26 +168,26 @@ most places.
   (from_bytes, from_writer, etc).
 ** C
 :PROPERTIES:
-:ID:       060042a0-d581-411a-9091-d16d11860d89
+:ID:       05a7192a-4c05-44d9-b859-e2a0cff53d86
 :END:
 ** CPP
 :PROPERTIES:
-:ID:       f09d7294-a997-4715-bceb-ffe6af7f3978
+:ID:       6800e89d-f49e-4ffe-bbab-ed10fec43174
 :END:
 ** Nu
 :PROPERTIES:
-:ID:       765ad403-54e1-49cf-b4e6-918de9f910c2
+:ID:       b4048114-ec39-4e53-816f-2f1319d404ee
 :END:
 [[https://www.nushell.sh/][~]]
 [[https://www.nushell.sh/cookbook/][cookbook]]
 [[https://github.com/nushell/nu_scripts][nu_scripts]]
 * [2023-11-01 Wed]
 :PROPERTIES:
-:ID:       693e0604-1f5f-4f45-ade7-fc67cd278518
+:ID:       6d461ba3-f8cb-4a69-b172-038efcca923a
 :END:
 ** AWS usage
 :PROPERTIES:
-:ID:       b2f8d58f-a486-4fe9-895b-504987c0f63d
+:ID:       a14a7916-6743-45e5-8711-ecded8092131
 :END:
 We're leveraging AWS for some of our public web servers for now. It's
 really not realistic to expect that my home desktop and spotty Comcast
@@ -208,15 +208,15 @@ instance which requires a larger instance and some workers.
 We'll try to keep the cost at or around $30/month.
 * [2023-11-02 Thu]
 :PROPERTIES:
-:ID:       c097323d-ad44-43a8-9e1c-dea7ad9298b3
+:ID:       b74a60a5-fdc1-4ef2-ac74-7ff5c1395d0c
 :END:
 ** IDEAS
 :PROPERTIES:
-:ID:       836b5ca7-6c6b-4d57-8b44-3bb4a8f38a38
+:ID:       a0d84027-06ea-4080-a40c-8fa86ed7ee7a
 :END:
 *** shed
 :PROPERTIES:
-:ID:       fc9a94e1-91c5-4915-90b8-73218fa3b8bc
+:ID:       9fd5e6e1-bb06-4204-a5ed-01afb5d45379
 :END:
 :LOGBOOK:
 - State "TODO"       from              [2023-04-07 Fri 23:24]
@@ -229,7 +229,7 @@ rlib
 
 **** sh* tools
 :PROPERTIES:
-:ID:       c0613a13-7ccb-4af9-b47e-e14a41c782c2
+:ID:       3daae7ec-4d0a-4f3e-bd5a-5202707fa614
 :END:
 :LOGBOOK:
 - State "TODO"       from "TODO"       [2023-04-07 Fri 23:22]
@@ -237,63 +237,63 @@ rlib
 shc,shx,etc
 *** packy
 :PROPERTIES:
-:ID:       6bd29c37-4b23-4a05-b3a4-72b6ee712f27
+:ID:       6b2b99d7-9d45-49fc-bff2-463a82c45f90
 :END:
 :LOGBOOK:
 - State "TODO"       from              [2023-04-07 Fri 23:33]
 :END:
 **** rust
 :PROPERTIES:
-:ID:       3bfa733e-d777-4e82-b108-93ba74c4dc08
+:ID:       0fbbf620-c3b7-4aa8-8a79-b25beca802d0
 :END:
 **** common-lisp
 :PROPERTIES:
-:ID:       0f3b6182-1dd1-4e65-8b1c-4630a46fff4c
+:ID:       7fd63e2e-532b-4742-9d25-6cacbfbf2ca0
 :END:
 **** emacs-lisp
 :PROPERTIES:
-:ID:       e9fc19d5-daea-40a5-a0f2-882b925e58f2
+:ID:       2e6a146a-9a81-4b49-9127-646838f5e137
 :END:
 **** python
 :PROPERTIES:
-:ID:       c2e62af0-0397-4560-a283-b33d12fbd966
+:ID:       2d634517-84dc-4cf4-a95a-02ae2fe3c2cd
 :END:
 **** julia
 :PROPERTIES:
-:ID:       d2466880-1721-4386-b385-ded06d5b15cf
+:ID:       3d75df13-227c-4aee-a046-1443acdcf619
 :END:
 **** C
 :PROPERTIES:
-:ID:       fb722462-9e11-40c1-a5d7-30698dba7e20
+:ID:       8d44b6f9-e628-4983-aaa9-fea25117a303
 :END:
 **** C++
 :PROPERTIES:
-:ID:       663cd894-0a5f-4352-acf1-4528b9efeeaf
+:ID:       7c0febaa-468c-4835-83ac-8280faa067b9
 :END:
 *** tenex
 :PROPERTIES:
-:ID:       b4264fa2-6e96-4679-bd17-2428ba3489ee
+:ID:       4e5e71e4-be74-44d0-9221-74de37f11096
 :END:
 :LOGBOOK:
 - State "TODO"       from              [2023-04-07 Fri 23:52]
 :END:
 *** mpk
 :PROPERTIES:
-:ID:       d9661e4a-0328-4864-878d-096f76ddaf55
+:ID:       f9200923-f406-4104-9efe-33efab186f90
 :END:
 :LOGBOOK:
 - State "TODO"       from              [2023-04-07 Fri 23:52]
 :END:
 *** cfg
 :PROPERTIES:
-:ID:       501593d4-702a-40cb-8a8f-19edfe2f9f29
+:ID:       57a76ed9-76b9-442e-9a8e-3a7deb63dec4
 :END:
 :LOGBOOK:
 - State "TODO"       from              [2023-04-07 Fri 23:34]
 :END:
 *** obj
 :PROPERTIES:
-:ID:       24700a26-b238-48dd-a24f-5539984b4fa6
+:ID:       ce1ef5c1-61e0-4bed-84ff-bdf05d1cb379
 :END:
 :LOGBOOK:
 - State "TODO"       from              [2023-04-07 Fri 23:51]
@@ -302,14 +302,14 @@ split out from rlib to separate package
 - a purely OOP class library
 *** lab
 :PROPERTIES:
-:ID:       fa1c9563-338b-4a56-bfc3-6f4983f2a732
+:ID:       a9401df7-b77e-4648-bdcf-bc9f8d267faf
 :END:
 :LOGBOOK:
 - State "TODO"       from              [2023-04-07 Fri 23:34]
 :END:
 *** source categories
 :PROPERTIES:
-:ID:       c43fdb5d-4f52-478e-9384-ec0e6e89cf09
+:ID:       bdfaf877-a8a8-47c0-83b2-7ae3d18fcb8c
 :END:
 - need a way of extracting metadata from a repo
 - need ability to search and query libs/packages
@@ -321,7 +321,7 @@ split out from rlib to separate package
     - software distros
 *** generic query language
 :PROPERTIES:
-:ID:       8647801a-d5ad-446d-8ae1-fd896bce129a
+:ID:       4cbbb5bd-6fb0-4249-bce3-c60137a0545d
 :END:
 from obj protocol?
 sql compatibility?
@@ -329,7 +329,7 @@ sql compatibility?
 /check out kdb/
 *** bbdb
 :PROPERTIES:
-:ID:       ff7c2876-e471-480b-b532-9921dbd3bc89
+:ID:       2ef1a2d7-19f5-4d65-a4aa-2f6abf07a202
 :END:
 :LOGBOOK:
 - Note taken on [2023-10-24 Tue 22:16] \\
@@ -341,7 +341,7 @@ insidious Big Brother database.
 
 *** NAS-TV                                                            :nas:t:
 :PROPERTIES:
-:ID:       00e5fe6c-80b4-4172-a9cb-ce8adc40d3dc
+:ID:       416d5836-fd77-4f7f-ad5c-831f20802a14
 :END:
 :LOGBOOK:
 - State "NOTE"       from "TODO"       [2024-08-18 Sun 18:46]
@@ -351,16 +351,16 @@ insidious Big Brother database.
 - audio/video
 * [2023-11-05 Sun]
 :PROPERTIES:
-:ID:       8d2c32db-769f-482d-86b7-b476e21a438f
+:ID:       195067ad-1c7b-498a-9a90-8c9abba192f5
 :END:
 ** DRAFT dylib-skel-1
 :PROPERTIES:
-:ID:       b4d1bc91-f344-45fd-becc-cb20f00a3a61
+:ID:       55fc90c8-4261-4fd2-b991-280e76f0e59c
 :END:
 - State "DRAFT"      from              [2023-11-05 Sun 22:23]
 *** Overview
 :PROPERTIES:
-:ID:       2e490c4b-344e-4790-9184-1c05ba675f15
+:ID:       bd3b748b-e792-40b3-abb0-02c274038539
 :END:
 Our core languages are [[https://www.rust-lang.org/][Rust]] and [[https://lisp-lang.org/][Lisp]] - this is the killer combo which will allow NAS-T
 to rapidly develop high-quality software. As such, it's crucial that these two very
@@ -376,7 +376,7 @@ code-base, but it's definitely something worth adding to the toolbox in case we 
 
 *** FFI
 :PROPERTIES:
-:ID:       985019fc-612a-44ab-b726-b9067432ad87
+:ID:       c2ccef54-e93d-406a-af1d-ebb7ad1a935b
 :END:
 The level of interop we're after in this case is [[https://en.wikipedia.org/wiki/Foreign_function_interface][FFI]].
 
@@ -385,7 +385,7 @@ Rust from Common Lisp [[https://dev.to/veer66/calling-rust-from-common-lisp-45c5
 for those interested.
 **** Rust != C
 :PROPERTIES:
-:ID:       2f71a3c1-0b14-46a6-9d8d-f6ec697729cc
+:ID:       bb68152d-1794-47d8-86c0-03eb7f9256d7
 :END:
 The complication(s) with Rust I mentioned early is really just that /it is not C/. =C=
 is old, i.e. well-supported with a stable ABI, making the process of creating bindings
@@ -399,7 +399,7 @@ like the C ABI can.
 
 **** Overhead
 :PROPERTIES:
-:ID:       4ea79f68-55ec-4da3-a184-8343d49532b6
+:ID:       f74790d6-8fa9-4e76-8362-71f074058947
 :END:
 Using FFI involves some overhead. Check [[https://github.com/dyu/ffi-overhead][here]] for an example benchmark across a few
 languages. While building the NAS-T core, I'm very much aware of this, and will need a
@@ -408,18 +408,18 @@ I'm concerned about crossing multiple language barriers (Rust<->C<->Lisp).
 
 *** Rust -> C -> Lisp
 :PROPERTIES:
-:ID:       a498276c-8525-4a43-aa40-4b05f76a29a9
+:ID:       3d8e8664-337b-4bf1-832d-bc29e9761d56
 :END:
 **** Setup
 :PROPERTIES:
-:ID:       19f96ef7-af92-496e-9d42-70c4d4c85051
+:ID:       7c1a259a-8bc1-4a42-abb7-8d61d0a1c22d
 :END:
 For starters, I'm going to assume we all have Rust (via =rustup=) and Lisp (=sbcl= only)
 installed on our GNU/Linux system (some tweaks needed for Darwin/Windows, not covered in
 this post).
 ***** Cargo
 :PROPERTIES:
-:ID:       c929e0b6-b6f2-4383-9412-1610329ab28c
+:ID:       21b8d6b0-27fd-460d-b584-55765c5f7761
 :END:
 Create a new library crate. For this example we're focusing on a 'skeleton' for
 /dynamic/ libraries only, so our experiment will be called =dylib-skel= or *dysk* for
@@ -444,11 +444,11 @@ This tells Rust to generate a shared C-compatible object with a =.so= extension 
 can open using [[https://man.archlinux.org/man/dlopen.3.en][dlopen]].
 ***** cbindgen
 :PROPERTIES:
-:ID:       256ac288-c5a0-473a-ab65-2d6503bd423c
+:ID:       45c0e1cd-a441-4877-8b64-d30bc0381da2
 :END:
 ****** install
 :PROPERTIES:
-:ID:       fc476f64-6b68-417a-8540-ca23ce27fa25
+:ID:       d11805bf-1238-4359-ab52-6e6d1b74dc33
 :END:
 Next, we want the =cbindgen= program which we'll use to generate header files for
 C/C++. This step isn't necessary at all, we just want it for further experimentation.
@@ -462,7 +462,7 @@ cbindgen = "0.24"
 #+end_src
 ****** cbindgen.toml
 :PROPERTIES:
-:ID:       111e27f7-0b9c-4eef-9117-f7c8ba3f511c
+:ID:       e33424c1-a328-4e86-b817-86e171584944
 :END:
 #+begin_src conf-toml :tangle cbindgen.toml
 language = "C"
@@ -481,7 +481,7 @@ header = '"dysk.h"'
 #+end_src
 ****** build.rs
 :PROPERTIES:
-:ID:       9fc271b2-9acb-4f4b-aa61-82d60d2ddb9e
+:ID:       0e465a4e-6709-4920-bb8a-514189f36f84
 :END:
 #+begin_src rust :tangle build.rs
 fn main() -> Result<(), cbindgen::Error> {
@@ -491,7 +491,7 @@ fn main() -> Result<(), cbindgen::Error> {
 #+end_src
 **** lib.rs
 :PROPERTIES:
-:ID:       6b524921-2ae0-43f0-bb85-d9955b0e689c
+:ID:       884ae229-0b41-4de3-880b-fb31058dc00a
 :END:
 #+begin_src rust :tangle lib.rs
 //! lib.rs --- dysk library
@@ -506,7 +506,7 @@ pub extern "C" fn dysk_plus1(n:c_int) -> c_int {n+1}
 #+end_src
 **** test.rs
 :PROPERTIES:
-:ID:       cc7c6538-33a6-40c6-94ef-2a9c259c975a
+:ID:       b8b27643-3c41-412c-afb7-12e980ffffb3
 :END:
 #+begin_src rust :tangle test.rs
 //! test.rs --- dysk test
@@ -514,14 +514,14 @@ fn main() { let mut i = 0u32; while i < 500000000 {i+=1; dysk::dysk_plus1(2 as c
 #+end_src
 **** compile
 :PROPERTIES:
-:ID:       337a24d1-f305-4e1a-9052-47a53591cb2f
+:ID:       4d429e91-1b3b-40eb-86c0-b4896e277423
 :END:
 #+begin_src sh
 cargo build --release
 #+end_src
 **** load from SBCL
 :PROPERTIES:
-:ID:       a4813269-92fb-4f52-aef0-3a36dce3cf69
+:ID:       9db4d715-421c-4a06-ad25-68aa79396d3a
 :END:
 #+begin_src lisp :tangle dysk.lisp
 (load-shared-object #P"target/release/libdysk.so")
@@ -532,7 +532,7 @@ cargo build --release
 #+end_src
 **** benchmark
 :PROPERTIES:
-:ID:       1a8ca441-f290-46c7-b979-1e7e0d1d063b
+:ID:       88cd9e83-64da-4aa4-ab12-125b127bca06
 :END:
 #+begin_src shell
 time target/release/dysk-test
@@ -542,11 +542,11 @@ time target/release/dysk-test
 #+end_src
 * [2023-11-24 Fri]
 :PROPERTIES:
-:ID:       63b7f08e-c2df-4a5e-a14f-a8abee2a12c5
+:ID:       509a06ab-1a3d-4d5c-92e1-6fc50e8d1c00
 :END:
 ** cl-dot examples
 :PROPERTIES:
-:ID:       c5f4f25c-071b-4a2d-85bc-08676eacce5d
+:ID:       df12c00f-0264-4f08-bff6-a327c7089b4c
 :END:
 #+begin_src lisp
 (defmethod cl-dot:graph-object-node ((graph (eql 'example)) (object cons))
@@ -583,11 +583,11 @@ time target/release/dysk-test
 
 * [2023-12-05 Tue]
 :PROPERTIES:
-:ID:       347fbd67-0b04-46a5-a1df-698a7398664d
+:ID:       4f1d099a-2f9a-40c3-8cf7-57df6e660455
 :END:
 ** global refs
 :PROPERTIES:
-:ID:       7fb40057-05aa-445b-bc75-0b1b6ca2c994
+:ID:       a05618ad-ada2-44be-9260-8acc0cf30d4d
 :END:
 need a way of indexing, referring to, and annotating objects such as
 URLs, docs, articles, source files, etc.
@@ -595,22 +595,22 @@ URLs, docs, articles, source files, etc.
 What is the best way to get this done?
 * [2023-12-09 Sat]
 :PROPERTIES:
-:ID:       92d35872-75a9-448f-acdf-e14daae0c956
+:ID:       e304a97e-49fe-4fde-a273-7d3f78231033
 :END:
 ** doc best practices
 :PROPERTIES:
-:ID:       ba4a3074-f29d-4f81-b4ba-d6a523b3f291
+:ID:       ea2f3f8e-1c8c-4c05-b16c-fb197d346409
 :END:
 https://rust-lang.github.io/api-guidelines/documentation.html
 
 also: https://lisp-lang.org/style-guide/
 * [2023-12-12 Tue]
 :PROPERTIES:
-:ID:       46c2a675-1dcb-4058-9284-55605f523463
+:ID:       eff3b823-6ffd-4355-b289-bdcd7b31ee54
 :END:
 ** On Computers
 :PROPERTIES:
-:ID:       7845b0fb-b5d3-4488-bdba-4876d9c8816e
+:ID:       11bd7a7c-4d0c-4d7f-a487-dc59052da2b3
 :END:
 If you've met me in the past decade, you probably know that I am
 extremely passionate about computers. Let me first explain why.
@@ -633,7 +633,7 @@ problems.
 
 *** The Programmer
 :PROPERTIES:
-:ID:       b17c853e-1728-4bd3-94c5-82e5b33d7398
+:ID:       f75f9b5b-ec2b-4f62-9fee-1ed3cef4ac50
 :END:
 Now, let us consider the /programmer/. They have power. /real/
 power. They understand the language of computers, can whisper to them
@@ -667,7 +667,7 @@ machines you work with. I like to call this /Machine Empathy/.
 
 *** Programs
 :PROPERTIES:
-:ID:       a297e5f9-a875-4512-b126-9a2b3e75c1d8
+:ID:       b1187fd8-4d19-4566-827c-5594fbf90df7
 :END:
 I already mentioned bugs - I write plenty of those, but usually I try
 to write /programs/. Programs to me are like poetry. I like to think
@@ -686,7 +686,7 @@ music itself.
 
 ** On Infra
 :PROPERTIES:
-:ID:       80d800de-d305-4b95-a28c-a6f19d6f7a11
+:ID:       332145f8-50b4-46d1-8368-ddaf097c875f
 :END:
 Something that is missing from many organizations big or large, is an
 effective way to store and access information, even about their own
@@ -710,32 +710,32 @@ cloud services at large but based on principle I like to think we
 shouldn't be built on them.
 * [2023-12-23 Sat]
 :PROPERTIES:
-:ID:       12189e52-0b21-4171-8b93-eaa6a82117ce
+:ID:       67b51ca5-909b-495f-b263-5979efe36448
 :END:
 ** https://cal-coop.gitlab.io/utena/utena-specification/main.pdf
 :PROPERTIES:
-:ID:       5c3aac3a-67e1-4867-9ac4-b58a3247f9e0
+:ID:       03b3d70c-5ab6-4be8-b811-a7ba7f84be8f
 :END:
 from the author of cl-decentralise2. draft specification of a
 /Maximalist/ Computing System.
 * [2023-12-24 Sun]
 :PROPERTIES:
-:ID:       b5b9eae5-7d13-435a-9810-68e952b2f887
+:ID:       bcc178c2-6a96-4ad9-98db-4ddf045e6371
 :END:
 ** public datasets
 :PROPERTIES:
-:ID:       28738250-c34e-45e2-8793-f8245472d3a3
+:ID:       59e3ba53-3f40-47db-929c-acc998f9092d
 :END:
 https://github.com/awesomedata/awesome-public-datasets
 https://docs.openml.org/Datasets/
 https://wiki.pathmind.com/open-datasets
 * [2023-12-28 Thu]
 :PROPERTIES:
-:ID:       e2012a31-462a-4f3b-9b92-8a812626ac69
+:ID:       db3d353b-8f1c-4645-a4ad-459d36392b22
 :END:
 ** useful internals
 :PROPERTIES:
-:ID:       28581a8e-ae05-45de-9744-24f447668418
+:ID:       a8ee911d-6d19-452b-b03a-249a446c1b20
 :END:
 #+begin_src lisp
   sb-sys:*runtime-dlhandle*
@@ -778,11 +778,11 @@ https://wiki.pathmind.com/open-datasets
 #+end_src
 * [2024-01-03 Wed]
 :PROPERTIES:
-:ID:       1c16670e-5470-4650-a07c-45c5884b92b8
+:ID:       b83e3b40-17cc-4fc0-a412-d8b3f8733354
 :END:
 ** [[https://github.com/sigmf/SigMF][SigMF]]
 :PROPERTIES:
-:ID:       f21a6477-6a3f-48f7-8a9e-43f5cf65286c
+:ID:       82a9833e-39f8-434f-94b4-4f34ce2fef25
 :END:
 #+begin_quote
 Sharing sets of recorded signal data is an important part of science
@@ -806,22 +806,22 @@ enabling data portability between tools and workflows.
 the-spec: https://github.com/sigmf/SigMF/blob/sigmf-v1.x/sigmf-spec.md
 ** [[https://www.libvolk.org/][LibVOLK]]
 :PROPERTIES:
-:ID:       ae34135c-488e-4aff-b795-a4d0d558f22b
+:ID:       af88cd62-2610-4ba7-a5f4-d98c942c81dc
 :END:
 Vector-Optimized Library of Kernels (simd)
 ** [[https://docs.kernel.org/fb/framebuffer.html][/dev/fb*]]
 :PROPERTIES:
-:ID:       7819a970-1f37-40a6-985f-905b25a08a4a
+:ID:       b866d034-2d59-4e1e-934f-02903b3de8e7
 :END:
 framebuffers, used by fbgrab/fbcat program
 ** [[https://docs.kernel.org/block/ublk.html][ublk]]
 :PROPERTIES:
-:ID:       5ccaed39-7055-4a51-ab62-769a73425270
+:ID:       d58cb494-ce43-49cc-859b-aa6a518ac314
 :END:
 https://github.com/ming1/ubdsrv
 * [2024-01-04 Thu]
 :PROPERTIES:
-:ID:       002e9449-adb7-4902-ad84-5fbf832eb890
+:ID:       86fdf7a7-9d26-4ce5-95a2-484db1843fb3
 :END:
 goals:
 make problems smaller.
@@ -831,11 +831,11 @@ why lisp?
 - doesn't need mentioning more and more
 * [2024-01-20 Sat]
 :PROPERTIES:
-:ID:       3f3aa409-8b88-45bf-8dbd-6d06e4e053b5
+:ID:       e8015df1-c8f3-4766-9cda-e4bb87c9aa62
 :END:
 ** TODO taobench demo
 :PROPERTIES:
-:ID:       81ac81c3-f183-4345-aaf3-ef7ef0434947
+:ID:       72d7e1cf-79a4-4f30-88da-bb0c13551b1f
 :END:
 :LOGBOOK:
 - State "TODO"       from              [2024-01-21 Sun 00:32]
@@ -844,7 +844,7 @@ https://github.com/audreyccheng/taobench - shouldn't have missed this :)
 obviously we need to implement this using core -- in demo/bench/tao?
 ** TODO clap completion for nushell
 :PROPERTIES:
-:ID:       a4b35281-83f7-4244-93e9-20e57ba31eb3
+:ID:       91d3f9ba-92ab-43c7-ac0f-5fab172b7ba1
 :END:
 :LOGBOOK:
 - State "TODO"       from              [2024-01-20 Sat 23:23]
@@ -852,7 +852,7 @@ obviously we need to implement this using core -- in demo/bench/tao?
 https://github.com/clap-rs/clap/tree/master/clap_complete_nushell
 ** Dataframe scripting
 :PROPERTIES:
-:ID:       8dc7339e-71c6-4a60-b285-c0d56d1cbc24
+:ID:       23ba507b-8d56-4e1c-bbd6-0d2f5983e792
 :END:
 https://studioterabyte.nl/en/blog/polars-vs-pandas
 nushell supports DFs, polars underneath?
@@ -863,11 +863,11 @@ https://www.nushell.sh/book/cheat_sheet.html
 #+end_src
 ** Cloud Squatting
 :PROPERTIES:
-:ID:       d5131c54-9082-4424-91dd-70f17561bbf7
+:ID:       31263e62-7de6-425a-8b3e-0522b4222322
 :END:
 *** Google
 :PROPERTIES:
-:ID:       2b0f67de-1217-48a6-b5b7-a85d3ca15926
+:ID:       e9724ccb-f4f6-4f75-816e-34887e2fd776
 :END:
 - [[https://cloud.google.com/free/docs/free-cloud-features][Free Cloud Features]]
   + 90-day $300 credits
@@ -875,17 +875,17 @@ https://www.nushell.sh/book/cheat_sheet.html
   + 
 *** Amazon
 :PROPERTIES:
-:ID:       0fd0dedd-59b0-4b1a-9241-f65699e20c46
+:ID:       048a6b82-2a8f-480b-a892-b8c80f97a13c
 :END:
 - AWS Free Tier
 *** Akamai
 :PROPERTIES:
-:ID:       8315a33f-dd22-4374-979a-9cccd5b5b6a9
+:ID:       af1dbf25-4b58-4a89-a968-9a8f24499419
 :END:
 - Linode Free Trial
 *** Oracle
 :PROPERTIES:
-:ID:       3f1e1116-c123-4fdf-a336-0d9b50c3dcc7
+:ID:       d2316ff4-4448-4209-87ca-22572def8125
 :END:
 - [[https://www.oracle.com/cloud/free/?intcmp=ohp052322ocift][OCI Free Tier]]
   + always free: 2 x oracle autonomous DB
@@ -895,11 +895,11 @@ https://www.nushell.sh/book/cheat_sheet.html
   + 30-day $300 credits
 * [2024-01-29 Mon]
 :PROPERTIES:
-:ID:       0ff31116-18c6-4471-a6fd-01d7b4e456ec
+:ID:       9bad5422-eea9-4328-a68e-fd2180da2df1
 :END:
 ** trash as block device
 :PROPERTIES:
-:ID:       4452b84f-f3a5-44f1-b60a-4efa6413cbb9
+:ID:       cdf84840-46dd-42f3-82df-f5b57c908118
 :END:
 :LOGBOOK:
 - State "NOTE"       from              [2024-01-29 Mon 20:53]
@@ -915,7 +915,7 @@ may be an opportunity for ublk driver to shine - instead of /dev/null
 piping we need a driver for streaming a file to /dev/trash
 ** compute power
 :PROPERTIES:
-:ID:       aa10a1d7-f1e7-4b92-b91a-56c234d52204
+:ID:       fdc5a933-6792-40e0-914e-49629a4d7332
 :END:
 :LOGBOOK:
 - State "NOTE"       from              [2024-01-29 Mon 16:28]
@@ -972,11 +972,11 @@ piping we need a driver for streaming a file to /dev/trash
       - DDR4 4200
 * [2024-02-10 Sat]
 :PROPERTIES:
-:ID:       8601ee46-5bf7-4a7a-a491-52c50eee619a
+:ID:       d05fd1f5-2f85-485f-8963-11a1cd2322fc
 :END:
 ** BigBenches
 :PROPERTIES:
-:ID:       87d0f5d4-c6fe-4e21-911e-2639a24e89f9
+:ID:       d7e1885d-fb19-448c-beb6-0ed0bd701cec
 :END:
 #+name: 1trc-nu
 #+begin_src nushell
@@ -992,11 +992,11 @@ piping we need a driver for streaming a file to /dev/trash
 #+end_src
 * [2024-02-18 Sun]
 :PROPERTIES:
-:ID:       b3af34f4-367d-4a83-9c69-088f9ba4190e
+:ID:       908fd9e6-6307-402c-ba76-813e82839f53
 :END:
 ** WL vs X
 :PROPERTIES:
-:ID:       b4b29989-28f2-48db-ad84-cd8d08eeefdf
+:ID:       9a398886-858a-450b-9029-2339cc551bc3
 :END:
 :LOGBOOK:
 - State "NOTE"       from              [2024-02-18 Sun 11:55]
@@ -1074,11 +1074,11 @@ to live on top of X on top of WL. I want a /pure/ solution that hides
 as little as possible, exposing the interesting bits.
 * [2024-03-01 Fri]
 :PROPERTIES:
-:ID:       235cb90a-fd5b-43f0-83fa-d0e9f6b13119
+:ID:       5d5159dd-5887-4823-81c6-1624f8cc4fd4
 :END:
 ** TODO collect more data
 :PROPERTIES:
-:ID:       69ce5703-d3fe-4df7-abf4-dc93a08ebc12
+:ID:       9e0339dd-17a8-436c-afd4-245437fe2fea
 :END:
 :LOGBOOK:
 - State "TODO"       from              [2024-03-01 Fri 15:27]
@@ -1087,11 +1087,11 @@ https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/
 weather - music - etc
 * [2024-03-02 Sat]
 :PROPERTIES:
-:ID:       ecb6ee8a-3bc8-4414-9a43-0ad23b887c3b
+:ID:       148d3b53-be56-4c34-9313-cac26c57300e
 :END:
 ** On blocks and devices
 :PROPERTIES:
-:ID:       c8304ae3-415d-4ccf-8f4c-1f3f6a555e5b
+:ID:       242a2380-3d87-403d-b529-0245e77ed1f0
 :END:
 :LOGBOOK:
 - State "NOTE"       from              [2024-03-02 Sat 21:30]
@@ -1195,7 +1195,7 @@ https://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support
 
 ** save-lisp-and-respawn
 :PROPERTIES:
-:ID:       e58a96e7-7b88-4e4a-b958-3000603d8baa
+:ID:       bef3c7e0-c929-434a-9118-cca57fcb5bd3
 :END:
 :LOGBOOK:
 - State "NOTE"       from              [2024-03-02 Sat 22:57]
@@ -1206,7 +1206,7 @@ https://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support
 
 ** syslog for log
 :PROPERTIES:
-:ID:       2efa5e4a-f063-49bb-9e61-6917eb115c1a
+:ID:       570a1587-486c-49c0-bca4-9cbcfcd3013e
 :END:
 :LOGBOOK:
 - State "NOTE"       from              [2024-03-03 Sun 16:35]
@@ -1217,30 +1217,30 @@ sb-posix:
 - setlogmask
 * [2024-03-13 Wed]
 :PROPERTIES:
-:ID:       3536e67a-51f7-45ea-98bb-f01093d9f2ca
+:ID:       f2293a24-442b-458e-99c8-6488b85cb3c2
 :END:
 ** RESEARCH [[https://github.com/guicho271828/sbcl-wiki/wiki/][sbcl-wiki]]
 :PROPERTIES:
-:ID:       33bc81c1-c5fa-4518-9456-58fd67f301ff
+:ID:       9a507eb4-2153-4abd-9be3-3b38b4989e8c
 :END:
 :LOGBOOK:
 - State "RESEARCH"   from              [2024-03-13 Wed 21:49]
 :END:
 ** IR1
 :PROPERTIES:
-:ID:       2c012572-ea16-408c-b741-d1f6cd0c7961
+:ID:       ca497ebc-b3b0-419e-aa59-a082c96d61f6
 :END:
 ** IR2
 :PROPERTIES:
-:ID:       8d015e5e-7ad3-44c3-88cd-81e293a887e0
+:ID:       c5d40dfe-b059-44f4-8d42-78f61f6e9a95
 :END:
 * [2024-03-17 Sun]
 :PROPERTIES:
-:ID:       d741d3db-0a1b-4024-8d42-77f0edebf593
+:ID:       b9961009-0a47-4122-a5d7-a6e72e4b5f92
 :END:
 ** DB Benchmarking
 :PROPERTIES:
-:ID:       d30aec42-a9a1-425b-87ca-1e40db0e69de
+:ID:       78f5150b-4ccb-4682-bf9c-60ed1649905d
 :END:
 :LOGBOOK:
 - State "NOTE"       from              [2024-02-04 Sun 20:40]
@@ -1249,7 +1249,7 @@ sb-posix:
 
 ** packy design
 :PROPERTIES:
-:ID:       76ae24f5-46e8-4b91-8991-41245383d337
+:ID:       1eae39fb-ccb4-419e-857a-cc357e1d3eda
 :END:
 :LOGBOOK:
 - State "NOTE"       from              [2024-01-25 Thu 22:39]
@@ -1258,134 +1258,134 @@ sb-posix:
 - source packs: https://vc.compiler.company/packy
 *** Lib
 :PROPERTIES:
-:ID:       2d6aa6fb-a34c-4ccd-99d3-4f98d33bb2f9
+:ID:       3863c9f9-89d9-4233-b6e4-5c5bc0178e02
 :END:
 **** Types
 :PROPERTIES:
-:ID:       8017b6c7-3a04-4e52-b3d6-afc68cbce139
+:ID:       010cb138-70c4-4d2d-ba7b-ad423d861690
 :END:
 ***** Pack
 :PROPERTIES:
-:ID:       2722b7dc-9546-4d94-82b0-abfc02647b4d
+:ID:       b2bbc87a-dc55-4df8-81d1-a9de8429dad0
 :END:
 Primary data type of the library - typically represents a compressed
 archive, metadata, and ops.
 ***** Bundle
 :PROPERTIES:
-:ID:       9ec5d682-da8e-4d02-b2fc-a56a8f209c22
+:ID:       432f7779-a93b-48f1-a095-25482c8d3702
 :END:
 Collection data type, usually contains a set of packs with metadata.
 ***** PackyEndpoint
 :PROPERTIES:
-:ID:       8cf2658a-92d5-41ab-8630-4f4e6ddb140d
+:ID:       c3c21988-8bb2-448a-a98a-f26cc862c2f3
 :END:
 Represents a Packy instance bound to a UDP socket
 ***** PackyEndpointConfig
 :PROPERTIES:
-:ID:       421b8aaa-66e1-4883-937d-fc6705146998
+:ID:       f732c36f-6e55-4c44-a2fb-6514706ec326
 :END:
 Global endpoint configuration object
 ***** PackyClientConfig
 :PROPERTIES:
-:ID:       c1899710-034e-4ed6-959a-1eb2df72e5f9
+:ID:       794952de-a5c5-4031-a1e1-0b1e0325584a
 :END:
 Configuration for outgoing packy connections on an endpoint
 ***** PackyServerConfig
 :PROPERTIES:
-:ID:       955e8ce9-ff7e-4f42-9d25-3aeb9846528b
+:ID:       b65636cc-0523-4a1b-992d-6aff66cbab5d
 :END:
 Configuration for incoming packy connection son an endpoint
 ***** PackyConnection
 :PROPERTIES:
-:ID:       7075e0c8-65b3-4fbf-9a6b-f27017276a72
+:ID:       74646244-ee39-4ef8-8193-d5484438b81b
 :END:
 Packy connection object
 **** Traits
 :PROPERTIES:
-:ID:       ea92ad07-d12c-4ee8-a3d4-0955f0af3921
+:ID:       dfe9d569-f951-4485-9b72-055e77404281
 :END:
 ***** PackyClient
 :PROPERTIES:
-:ID:       6c0fdd7e-bc0a-4217-b315-72fe7766e4df
+:ID:       71d4af37-6e24-48ef-a49e-683ee41ce5d2
 :END:
 ****** query
 :PROPERTIES:
-:ID:       1358e1c5-b215-48eb-9e1b-4116cc32b2ae
+:ID:       47424475-837c-4996-a1b9-3eb6599105d6
 :END:
 ****** install
 :PROPERTIES:
-:ID:       b8298207-4d92-4628-8687-9f4e20c8cfec
+:ID:       e80b3402-6afd-4ad7-a800-790994867479
 :END:
 ****** update
 :PROPERTIES:
-:ID:       a6fb4fb6-b188-4033-8291-107cf1f00e6d
+:ID:       f4801fb0-bace-48ae-ab63-1a5cac3ea98f
 :END:
 ****** login
 :PROPERTIES:
-:ID:       1fd91c8b-ab90-4db0-b74e-1c2b9ae2e440
+:ID:       1f24bd33-1e00-4dc2-bc6c-fac8374e14f0
 :END:
 ****** logout
 :PROPERTIES:
-:ID:       75c0db2e-37cf-4f33-95bd-3f5c95b45c49
+:ID:       b1f91455-68bc-4cc6-94c7-5fb3544e7539
 :END:
 ****** pull
 :PROPERTIES:
-:ID:       60de92f4-b4a6-4cae-95bc-174e2036e57b
+:ID:       b718721a-3f22-4eb6-80bf-5e7d5def1346
 :END:
 ****** push
 :PROPERTIES:
-:ID:       e379b71e-8a84-4547-a694-90cad3b7952e
+:ID:       7781e76b-51a4-42fd-929a-a1ff08ccb95b
 :END:
 ***** PackyServer
 :PROPERTIES:
-:ID:       73ea9478-5251-40c3-8331-cf042d0b9bf1
+:ID:       af8409ec-9865-46d3-a593-df109b45cdff
 :END:
 ****** start_packy_server
 :PROPERTIES:
-:ID:       c8a9bac3-971a-45a7-988f-92db19ef6601
+:ID:       13e65c38-9591-484d-be1d-3d4b98f95f41
 :END:
 ****** stop_packy_server
 :PROPERTIES:
-:ID:       e3122bf1-f770-46a7-a36b-2df9c48bc233
+:ID:       3cae6660-755c-4242-ac4f-eccb7188c6b5
 :END:
 ****** start_packy_registry
 :PROPERTIES:
-:ID:       b6d214f2-d6de-4d46-b2c2-c51ff0f3b3e6
+:ID:       6ca2bd7d-9c1a-4790-a3a0-08bda811318b
 :END:
 ***** PackyRegistry
 :PROPERTIES:
-:ID:       0e846cbb-5cb4-496f-8100-beae6e66972e
+:ID:       1d2ad8dc-6aef-48fa-b079-71d8bb88832f
 :END:
 ****** register_pack
 :PROPERTIES:
-:ID:       764642ad-a33b-415b-9c32-8a729a7cd62d
+:ID:       43221579-6f71-42aa-8332-96af33531015
 :END:
 ****** register_user
 :PROPERTIES:
-:ID:       2b92f584-d769-4266-940e-cfbd466d4e62
+:ID:       3c6034fa-d543-47cd-ae35-bcfd3f2b8150
 :END:
 ****** register_bundle
 :PROPERTIES:
-:ID:       390cb42b-5170-4175-9ccc-b990842356a0
+:ID:       1b041060-7f5e-48fe-8566-e4781a597686
 :END:
 * [2024-03-25 Mon]
 :PROPERTIES:
-:ID:       b0ee90a7-a7ba-41c1-9864-5617f3bb2abe
+:ID:       c6e0fb44-21ba-4a94-bd04-e7528dc46dba
 :END:
 ** TBD investigate alieneval for phash opps
 :PROPERTIES:
-:ID:       21ab0a6e-cb66-4c5e-9b10-4ac2340ce75d
+:ID:       18989904-85ad-403b-8195-5ba7f643437f
 :END:
 :LOGBOOK:
 - State "TBD"        from              [2024-03-25 Mon 18:56]
 :END:
 * [2024-04-19 Fri]
 :PROPERTIES:
-:ID:       0ce61202-62b4-4a18-8a2e-fabf0787970e
+:ID:       8ffd1283-5a63-4fe3-868f-57a4f9f09f74
 :END:
 ** How it works
 :PROPERTIES:
-:ID:       439a4945-de2f-4985-ba6c-fe6421aa9ad9
+:ID:       1b26fcd9-8d32-4031-a0cc-7ed2e26a75d0
 :END:
 The backend services are written in Rust and controlled by a simple
 messaging protocol. Services provide common runtime capabilities known
@@ -1403,11 +1403,11 @@ which also compiles to WASM (slint-rs).
 
 ** Guide
 :PROPERTIES:
-:ID:       65140d2c-5d59-48cd-946c-01c380a37f08
+:ID:       90772707-ee13-463a-b0b2-7884745ec640
 :END:
 *** Build
 :PROPERTIES:
-:ID:       ad0652ca-4abf-4d27-8897-a61a13a6e61d
+:ID:       a2f7f5f5-0cbd-4aa4-b80e-afa1d86990cd
 :END:
 - *install dependencies*
   #+begin_src bash
@@ -1421,49 +1421,49 @@ which also compiles to WASM (slint-rs).
 - CFG :: Config (default.cfg)
 *** Run
 :PROPERTIES:
-:ID:       b2295442-ccb7-4a5c-8a9e-ea8502aad636
+:ID:       572b1b68-f099-4bdb-9a06-9aa2186c17cc
 :END:
 #+begin_src shell
   ./demo -i
 #+end_src
 *** Config
 :PROPERTIES:
-:ID:       600be170-d032-4280-a7b5-c46e3c157206
+:ID:       cadb26fe-5fc1-4639-9bb1-abeb490e91af
 :END:
 Configs can be specified in JSON, TOML, RON, or of course SEXP. See
 =default.cfg= for an example.
 *** Play
 :PROPERTIES:
-:ID:       56a69ed7-2eb3-4490-95a1-072cee985df5
+:ID:       a8296224-60bc-46e7-9fa0-9a600e9f869e
 :END:
 The high-level user interface is presented as a multi-modal GUI
 application which adapts to the specific application /instances/
 below.
 **** Weather
 :PROPERTIES:
-:ID:       804a174b-534c-4a04-966a-b44c0a86fbd4
+:ID:       ec07eb9b-3f83-4ff7-9809-b8190572e821
 :END:
 This backend retrieves weather data using the NWS API.
 **** Stocks
 :PROPERTIES:
-:ID:       4e7339bb-aaf3-4fab-90e4-05e13f24f881
+:ID:       a61d9eff-ffc9-42a4-a5ac-16d4a0cbd24e
 :END:
 The 'Stocks' backend features a stock ticker with real-time analysis
 capabilities.
 **** Bench
 :PROPERTIES:
-:ID:       e3cf0add-6ded-4c05-a05d-7ef463b85b08
+:ID:       a23c7805-2b48-4910-9231-96a90a0467f2
 :END:
 This is a benchmark backend for testing the capabilities of our
 demo. It spins up some mock services and allows fine-grained control
 of input/throughput.
 ** tasks
 :PROPERTIES:
-:ID:       a16a3807-0e06-4c8d-baf6-5dfa8f8f5585
+:ID:       ba4bdf0d-c29f-4643-af33-09de5e5d1d45
 :END:
 *** TODO DSLs
 :PROPERTIES:
-:ID:       3ae4754e-0c0f-4923-9e53-ae962b8638a1
+:ID:       4d7b2ef7-569a-40bf-b37d-d2e1d4dc01e2
 :END:
 - consider tree-sitter parsing layout, use as a guide for developing a
   single syntax which expands to Rust or C.
@@ -1474,7 +1474,7 @@ of input/throughput.
 - compile-rs/c
 **** TODO rs-macroexpand
 :PROPERTIES:
-:ID:       f612975f-6bcc-4aab-b0d8-65b8ff0a0d0f
+:ID:       ab16b2fb-ec87-4c0e-b0be-185a4ae93537
 :END:
 - rs-gen-file
 - rs-defmacro
@@ -1483,7 +1483,7 @@ of input/throughput.
 - rs-macroexpand-1
 **** TODO c-macroexpand
 :PROPERTIES:
-:ID:       49f5c224-026d-4cdc-a326-1742e64c4279
+:ID:       6e97665d-3e29-4c3a-8040-0a15eeb4bf0a
 :END:
 - c-gen-file h/c
 - c-defmacro
@@ -1492,7 +1492,7 @@ of input/throughput.
 - c-macroexpand-1
 **** TODO slint-macroexpand
 :PROPERTIES:
-:ID:       486beb12-179b-4acc-8507-cdc498edb628
+:ID:       629303bb-ab04-4840-8264-18f1b43fa748
 :END:
 - slint-gen-file
 - slint-defmacro
@@ -1501,45 +1501,45 @@ of input/throughput.
 - slint-macroexpand-1
 **** TODO html (using who)
 :PROPERTIES:
-:ID:       2e81a19c-874c-4fd7-be0f-f6cd62c660db
+:ID:       09eb1d3a-4f73-4a29-95cf-92d589f7fec9
 :END:
 *** TODO web templates
 :PROPERTIES:
-:ID:       95f7d6ac-c010-4d1d-a47d-1693bb7d6eab
+:ID:       6c70f44f-4d03-4663-92c8-e4a5b8fedfc1
 :END:
 create a basic static page in CL which will be used to host Slint UIs
 and other WASM doo-dads in a browser.
 *** TODO CLI
 :PROPERTIES:
-:ID:       fc1d5364-279c-4d5f-baea-ed2c110b63f0
+:ID:       bd213f5b-1abf-450f-b3f3-6093dd050ea8
 :END:
 using clingon, decide on generic options and write it up
 *** TODO docs
 :PROPERTIES:
-:ID:       467e84e3-e72f-4764-8858-cc15fdc17e8a
+:ID:       d5d980f2-c032-4e15-a1e6-067fee7197fc
 :END:
 work on doc generation -- Rust and CL should be accounted for.
 *** TODO tests
 :PROPERTIES:
-:ID:       70aea01c-d01e-4ddf-aaf5-c86183a7e250
+:ID:       92d6ff4d-a643-4f75-89cf-e19b0e2e0d9a
 :END:
 We have none! need to make it more comfy - set up testing in all Rust
 crates and for the lisp systems.
 * [2024-04-25 Thu]
 :PROPERTIES:
-:ID:       fe24785e-dffc-41f1-9740-ddf823751e31
+:ID:       ab37ae2a-b168-455e-a4f5-c8c1baada2be
 :END:
 ** https://docs.gitlab.com/ee/administration/backup_restore/migrate_to_new_server.html
 :PROPERTIES:
-:ID:       264b81f4-f953-4698-9c82-d8e20b6c31f9
+:ID:       d18c642a-b8f9-40ff-9f99-df4e9764bbd5
 :END:
 * [2024-07-31 Wed]
 :PROPERTIES:
-:ID:       ff4f24b4-4b9c-4706-aceb-3a09276d2e11
+:ID:       4b9ab3c7-5ea3-4f1e-9e0e-db4be8548de4
 :END:
 ** alpine builders
 :PROPERTIES:
-:ID:       635925f6-e1d8-47bc-a32f-28bca0f19d2d
+:ID:       ab5c8dc6-6941-4b5d-b624-8b232385ebf1
 :END:
 - make sure to apk add:
   - git, hg
@@ -1550,11 +1550,11 @@ crates and for the lisp systems.
   - libc-dev?
 * [2024-08-04 Sun]
 :PROPERTIES:
-:ID:       bc4078cc-7b47-401e-a75f-19b7ce3f0a66
+:ID:       cb3f0071-a1b9-4ef4-897a-c5edd3435a5e
 :END:
 ** bookmarks
 :PROPERTIES:
-:ID:       6e9c6bce-0513-4628-b6f9-5c234cccdaa3
+:ID:       2a650229-df59-46b9-bd92-f5cdd9eab4d2
 :END:
 - How should such objects be represented within CORE?
 - skel/homer mostly
@@ -1562,11 +1562,11 @@ crates and for the lisp systems.
 - not sure about obj/otherwise, prob not
 * [2024-08-08 Thu]
 :PROPERTIES:
-:ID:       36f63b50-d717-41b1-bda8-4521c3b05072
+:ID:       298b1333-c6f7-45d3-9829-c4c831e84707
 :END:
 ** Intelligent Design in Software
 :PROPERTIES:
-:ID:       1397d8bb-4848-4d9a-9dcc-ee65bed81c9e
+:ID:       c2e682b3-d72a-41b3-b093-16614e7852ff
 :END:
 - starting from a space where there are no external influences - a biome
 - answer questions regarding the nature of the software and its capabilities
@@ -1578,11 +1578,11 @@ crates and for the lisp systems.
 - re-integrate lessons learned
 * [2024-08-16 Fri]
 :PROPERTIES:
-:ID:       ceb25ff7-5ad9-4aa3-b093-260da4f35e56
+:ID:       2877ab07-156b-4b00-97fa-9b12952f0ac1
 :END:
 ** keys.compiler.company
 :PROPERTIES:
-:ID:       86c21790-72b5-4ea1-ba49-f7be3f65a8cc
+:ID:       26922400-2249-4e1d-a2ed-8014df5ad341
 :END:
 :LOGBOOK:
 - State "NOTE"       from              [2024-08-16 Fri 22:00]
