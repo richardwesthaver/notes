@@ -1,6 +1,3 @@
-:PROPERTIES:
-:ID:       751af716-6308-4433-8f2d-78cb4c59c665
-:END:
 #+title: notes
 #+description: CC Notes
 #+author: Richard Westhaver

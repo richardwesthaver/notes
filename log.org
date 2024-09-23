@@ -170,6 +170,9 @@ most places.
 :PROPERTIES:
 :ID:       05a7192a-4c05-44d9-b859-e2a0cff53d86
 :END:
+:EDGES:
+[2024-09-22 Sun 21:07] <- [[id:26922400-2249-4e1d-a2ed-8014df5ad341][keys.compiler.company]]
+:END:
 ** CPP
 :PROPERTIES:
 :ID:       6800e89d-f49e-4ffe-bbab-ed10fec43174
@@ -1583,6 +1586,9 @@ crates and for the lisp systems.
 ** keys.compiler.company
 :PROPERTIES:
 :ID:       26922400-2249-4e1d-a2ed-8014df5ad341
+:END:
+:EDGES:
+[2024-09-22 Sun 21:07] -> [[id:05a7192a-4c05-44d9-b859-e2a0cff53d86][C]]
 :END:
 :LOGBOOK:
 - State "NOTE"       from              [2024-08-16 Fri 22:00]
