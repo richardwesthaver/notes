@@ -1,3 +1,6 @@
+:PROPERTIES:
+:ID:       24783ed6-bb4d-43bc-9763-bb4e96a5088f
+:END:
 #+title: log
 #+author: Richard Westhaver
 #+email: richard.westhaver@gmail.com
@@ -171,7 +174,7 @@ most places.
 :ID:       05a7192a-4c05-44d9-b859-e2a0cff53d86
 :END:
 :EDGES:
-[2024-09-22 Sun 21:07] <- [[id:26922400-2249-4e1d-a2ed-8014df5ad341][keys.compiler.company]]
+[2024-09-22 Sun 22:09] <- [[id:26922400-2249-4e1d-a2ed-8014df5ad341][keys.compiler.company]]
 :END:
 ** CPP
 :PROPERTIES:
@@ -1588,7 +1591,7 @@ crates and for the lisp systems.
 :ID:       26922400-2249-4e1d-a2ed-8014df5ad341
 :END:
 :EDGES:
-[2024-09-22 Sun 21:07] -> [[id:05a7192a-4c05-44d9-b859-e2a0cff53d86][C]]
+[2024-09-22 Sun 22:09] -> [[id:05a7192a-4c05-44d9-b859-e2a0cff53d86][C]]
 :END:
 :LOGBOOK:
 - State "NOTE"       from              [2024-08-16 Fri 22:00]
@@ -1597,3 +1600,100 @@ crates and for the lisp systems.
 - [[https://keys.compiler.company][keys.compiler.company]]
 - https://keys.openpgp.org/
 - [[vc:packy/hagrid/][packy/hagrid]]
+
+* [2024-10-08 Tue]
+:PROPERTIES:
+:ID:       87dc3279-2433-4f49-ba56-f59699a79c26
+:END:
+- from core/readme.org - bit too verbose
+** Bootstrap
+:PROPERTIES:
+:ID:       9d23b461-2f1f-4463-a107-26c6d916dd19
+:END:
+To bootstrap the core you will need recent versions of [[https://www.rust-lang.org/][Rust]], [[http://www.sbcl.org/][SBCL]], and
+a C compiler (clang or gcc). Only Unix systems are explicitly
+supported.
+
+Many parts of the core depend on additional libraries which may or may
+not be provided by your system's package manager. See the dependency
+matrix below for details.
+
+In any case, it is always preferred to make use of the [[https://vc.compiler.company/comp/infra][infra]] project
+to reliably provision the host either from source or pre-built
+platform-specific [[https://packy.compiler.company/dist][binary distributions]].
+
+#+NAME: Dependencies
+| dependency  | required by            | src                                           |
+|-------------+------------------------+-----------------------------------------------|
+| Blake3      | ffi/blake3             | https://vc.compiler.company/packy/blake3      |
+| Tree-sitter | ffi/tree-sitter        | https://vc.compiler.company/packy/tree-sitter |
+| Uring       | ffi/uring              | https://vc.compiler.company/packy/uring       |
+| Btrfs       | ffi/btrfs              | https://vc.compiler.company/packy/btrfs       |
+| Ublksrv     | ffi/ublk               | https://vc.compiler.company/packy/ublksrv     |
+| OpenSSL     | lib/net                | [[https://vc.compiler.company/packy/openssl]]     |
+| RocksDB     | ffi/rocksdb            | https://vc.compiler.company/packy/rocksdb     |
+| Git         | lib/vc/git             | https://vc.compiler.company/packy/git         |
+| Hg          | lib/vc/hg              | https://vc.compiler.company/packy/hg          |
+| Zstd        | ffi/zstd               | https://vc.compiler.company/packy/zstd        |
+| Qemu        | lib/box                | https://vc.compiler.company/packy/qemu        |
+| Podman      | lib/pod                | https://vc.compiler.company/packy/podman      |
+| Emacs       | emacs                  | https://vc.compiler.company/packy/emacs       |
+| StumpWM     | lib/gui/wm/x11/stumpwm | https://vc.compiler.company/packy/stumpwm     |
+| Readline    | ffi/readline           | [[https://vc.compiler.company/packy/readline]]    |
+| Keyutils    | ffi/keyutils           | [[https://vc.compiler.company/packy/libkeyutils]] |
+| Mpd         | lib/aud/mpd            | https://vc.compiler.company/packy/mpd         |
+
+** Build
+:PROPERTIES:
+:ID:       332c9902-fd4f-45ae-a95f-6406f9df50c6
+:END:
+The Core consists of two major system: the *lisp* system and the
+*rust* system. There is also an auxiliary *emacs* system containing a
+complete Emacs IDE configuration which serves as the base for user
+customizations.
+
+Building the core will produce its output to the =.stash= directory by
+default. You can then test, run, and install the resulting files or
+package them up to be shipped elsewhere.
+*** From Source
+:PROPERTIES:
+:ID:       4ff3cf50-3568-4809-ab9f-479a9685e231
+:END:
+**** Lisp
+:PROPERTIES:
+:ID:       03277a1f-9e10-4193-878a-250bda4f7c84
+:END:
+The Lisp Core can be found under the =lisp= directory. It is the
+largest system, most actively developed, and is intended to cover the
+complete surface of the user-facing APIs contained in the core.
+
+The core is self-hosted in the sense that it is intended to be built
+from one of its own programs - the =skel= project compiler. You may
+also load any part of the core individually as long as you have [[https://www.sbcl.org/][SBCL]]
+and [[https://www.quicklisp.org/beta/][Quicklisp]] installed.
+**** Rust
+:PROPERTIES:
+:ID:       d5817f90-ef3b-4858-bdf9-0a972f15b1db
+:END:
+Today, the Rust components of the core are quite small and
+isolated. We like Rust right now for the reasonable memory safety
+guarantees, as an interface to (W)GPU, WASM, LLVM, etc, and because it
+has an industry-sponsored ecosystem (guaranteed future). 
+
+Our Rust code is far less concerned with being completely from
+scratch - dependencies are imported freely and at will - adapting to
+whatever FOTM is hot right now.
+
+A workspace is configured such that you can build all components with
+the following command (~NOTE~ - takes a long time):
+#+begin_src shell :exports both :results output
+  cd rust && cargo build
+#+end_src
+
+**** Emacs
+:PROPERTIES:
+:ID:       30e23eda-2e59-40f8-9777-5a67155b7e04
+:END:
+The core contains a collection of Emacs Lisp libraries under =emacs=
+which may be installed for the current user using the corresponding
+Makefile.
