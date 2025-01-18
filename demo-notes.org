@@ -22,7 +22,7 @@ for libraries, always prefer [[https://common-lisp-libraries.readthedocs.io/][de
   - full quicklisp source
   - asdf, etc
 - addresses many of my concerns about running CL in prod
-- the repo is too heavy for my liking though
+- the repo is too heavy for my liking
 - I do like the idea of having many systems though
 ** DB
 :PROPERTIES:

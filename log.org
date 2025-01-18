@@ -1,6 +1,3 @@
-:PROPERTIES:
-:ID:       24783ed6-bb4d-43bc-9763-bb4e96a5088f
-:END:
 #+title: log
 #+author: Richard Westhaver
 #+email: richard.westhaver@gmail.com
@@ -169,24 +166,6 @@ most places.
   but the convention is to implement for T where T is bound by std::io
   Read or Write trait. Then you can provide a more robust public API
   (from_bytes, from_writer, etc).
-** C
-:PROPERTIES:
-:ID:       05a7192a-4c05-44d9-b859-e2a0cff53d86
-:END:
-:EDGES:
-[2024-09-22 Sun 22:09] <- [[id:26922400-2249-4e1d-a2ed-8014df5ad341][keys.compiler.company]]
-:END:
-** CPP
-:PROPERTIES:
-:ID:       6800e89d-f49e-4ffe-bbab-ed10fec43174
-:END:
-** Nu
-:PROPERTIES:
-:ID:       b4048114-ec39-4e53-816f-2f1319d404ee
-:END:
-[[https://www.nushell.sh/][~]]
-[[https://www.nushell.sh/cookbook/][cookbook]]
-[[https://github.com/nushell/nu_scripts][nu_scripts]]
 * [2023-11-01 Wed]
 :PROPERTIES:
 :ID:       6d461ba3-f8cb-4a69-b172-038efcca923a
@@ -718,12 +697,6 @@ shouldn't be built on them.
 :PROPERTIES:
 :ID:       67b51ca5-909b-495f-b263-5979efe36448
 :END:
-** https://cal-coop.gitlab.io/utena/utena-specification/main.pdf
-:PROPERTIES:
-:ID:       03b3d70c-5ab6-4be8-b811-a7ba7f84be8f
-:END:
-from the author of cl-decentralise2. draft specification of a
-/Maximalist/ Computing System.
 * [2023-12-24 Sun]
 :PROPERTIES:
 :ID:       bcc178c2-6a96-4ad9-98db-4ddf045e6371
@@ -739,49 +712,6 @@ https://wiki.pathmind.com/open-datasets
 :PROPERTIES:
 :ID:       db3d353b-8f1c-4645-a4ad-459d36392b22
 :END:
-** useful internals
-:PROPERTIES:
-:ID:       a8ee911d-6d19-452b-b03a-249a446c1b20
-:END:
-#+begin_src lisp
-  sb-sys:*runtime-dlhandle*
-  sb-fasl:+fasl-file-version+
-  sb-fasl:+backend-fasl-file-implementation+
-  sb-debug:print-backtrace
-  sb-debug:map-backtrace
-  sb-pretty:pprint-dispatch-table
-  sb-lockless:
-  sb-ext:simd-pack
-  sb-walker:define-walker-template
-  sb-walker:macroexpand-all
-  sb-walker:walk-form
-  sb-kernel:empty-type
-  sb-kernel:*eval-calls*
-  sb-kernel:*gc-pin-code-pages*
-  sb-kernel:*restart-clusters*
-  sb-kernel:*save-lisp-clobbered-globals*
-  sb-kernel:*top-level-form-p*
-  sb-kernel:*universal-fun-type*
-  sb-kernel:*universal-type*
-  sb-kernel:*wild-type*
-  sb-kernel:+simd-pack-element-types+
-  (sb-vm:memory-usage)
-  (sb-vm:boxed-context-register)
-  (sb-vm:c-find-heap->arena)
-  (sb-vm:copy-number-to-heap)
-  (sb-vm:dump-arena-objects)
-  (sb-vm:fixnumize)
-  (sb-vm:rewind-arena)
-  (sb-vm:show-heap->arena)
-  (sb-vm:with/without-arena)
-  (sb-cltl2:{augment-environment,compiler-let,define-declaration,parse-macro})
-  (sb-cltl2:{declaration-information, variable-information, function-information})
-  sb-di:
-  sb-assem:
-  sb-md5:
-  sb-regalloc:
-  sb-disassem:
-#+end_src
 * [2024-01-03 Wed]
 :PROPERTIES:
 :ID:       b83e3b40-17cc-4fc0-a412-d8b3f8733354
@@ -790,26 +720,6 @@ https://wiki.pathmind.com/open-datasets
 :PROPERTIES:
 :ID:       82a9833e-39f8-434f-94b4-4f34ce2fef25
 :END:
-#+begin_quote
-Sharing sets of recorded signal data is an important part of science
-and engineering. It enables multiple parties to collaborate, is often
-a necessary part of reproducing scientific results (a requirement of
-scientific rigor), and enables sharing data with those who do not have
-direct access to the equipment required to capture it.
-
-Unfortunately, these datasets have historically not been very
-portable, and there is not an agreed upon method of sharing metadata
-descriptions of the recorded data itself. This is the problem that
-SigMF solves.
-
-By providing a standard way to describe data recordings, SigMF
-facilitates the sharing of data, prevents the "bitrot" of datasets
-wherein details of the capture are lost over time, and makes it
-possible for different tools to operate on the same dataset, thus
-enabling data portability between tools and workflows.
-#+end_quote
-
-the-spec: https://github.com/sigmf/SigMF/blob/sigmf-v1.x/sigmf-spec.md
 ** [[https://www.libvolk.org/][LibVOLK]]
 :PROPERTIES:
 :ID:       af88cd62-2610-4ba7-a5f4-d98c942c81dc
@@ -1225,21 +1135,6 @@ sb-posix:
 :PROPERTIES:
 :ID:       f2293a24-442b-458e-99c8-6488b85cb3c2
 :END:
-** RESEARCH [[https://github.com/guicho271828/sbcl-wiki/wiki/][sbcl-wiki]]
-:PROPERTIES:
-:ID:       9a507eb4-2153-4abd-9be3-3b38b4989e8c
-:END:
-:LOGBOOK:
-- State "RESEARCH"   from              [2024-03-13 Wed 21:49]
-:END:
-** IR1
-:PROPERTIES:
-:ID:       ca497ebc-b3b0-419e-aa59-a082c96d61f6
-:END:
-** IR2
-:PROPERTIES:
-:ID:       c5d40dfe-b059-44f4-8d42-78f61f6e9a95
-:END:
 * [2024-03-17 Sun]
 :PROPERTIES:
 :ID:       b9961009-0a47-4122-a5d7-a6e72e4b5f92
@@ -1463,74 +1358,6 @@ capabilities.
 This is a benchmark backend for testing the capabilities of our
 demo. It spins up some mock services and allows fine-grained control
 of input/throughput.
-** tasks
-:PROPERTIES:
-:ID:       ba4bdf0d-c29f-4643-af33-09de5e5d1d45
-:END:
-*** TODO DSLs
-:PROPERTIES:
-:ID:       4d7b2ef7-569a-40bf-b37d-d2e1d4dc01e2
-:END:
-- consider tree-sitter parsing layout, use as a guide for developing a
-  single syntax which expands to Rust or C.
-- with-rs
-- with-c
-- with-rs/c
-- with-cargo
-- compile-rs/c
-**** TODO rs-macroexpand
-:PROPERTIES:
-:ID:       ab16b2fb-ec87-4c0e-b0be-185a4ae93537
-:END:
-- rs-gen-file
-- rs-defmacro
-- rs-macros
-- rs-macroexpand
-- rs-macroexpand-1
-**** TODO c-macroexpand
-:PROPERTIES:
-:ID:       6e97665d-3e29-4c3a-8040-0a15eeb4bf0a
-:END:
-- c-gen-file h/c
-- c-defmacro
-- c-macros
-- c-macroexpand
-- c-macroexpand-1
-**** TODO slint-macroexpand
-:PROPERTIES:
-:ID:       629303bb-ab04-4840-8264-18f1b43fa748
-:END:
-- slint-gen-file
-- slint-defmacro
-- slint-macros
-- slint-macroexpand
-- slint-macroexpand-1
-**** TODO html (using who)
-:PROPERTIES:
-:ID:       09eb1d3a-4f73-4a29-95cf-92d589f7fec9
-:END:
-*** TODO web templates
-:PROPERTIES:
-:ID:       6c70f44f-4d03-4663-92c8-e4a5b8fedfc1
-:END:
-create a basic static page in CL which will be used to host Slint UIs
-and other WASM doo-dads in a browser.
-*** TODO CLI
-:PROPERTIES:
-:ID:       bd213f5b-1abf-450f-b3f3-6093dd050ea8
-:END:
-using clingon, decide on generic options and write it up
-*** TODO docs
-:PROPERTIES:
-:ID:       d5d980f2-c032-4e15-a1e6-067fee7197fc
-:END:
-work on doc generation -- Rust and CL should be accounted for.
-*** TODO tests
-:PROPERTIES:
-:ID:       92d6ff4d-a643-4f75-89cf-e19b0e2e0d9a
-:END:
-We have none! need to make it more comfy - set up testing in all Rust
-crates and for the lisp systems.
 * [2024-04-25 Thu]
 :PROPERTIES:
 :ID:       ab37ae2a-b168-455e-a4f5-c8c1baada2be
@@ -1581,7 +1408,7 @@ crates and for the lisp systems.
 - protect the biome at all costs
 - focus on composition
 - build applications
-- re-integrate lessons learned
+- aggresively incorporate lessons learned
 * [2024-08-16 Fri]
 :PROPERTIES:
 :ID:       2877ab07-156b-4b00-97fa-9b12952f0ac1
@@ -1589,9 +1416,6 @@ crates and for the lisp systems.
 ** keys.compiler.company
 :PROPERTIES:
 :ID:       26922400-2249-4e1d-a2ed-8014df5ad341
-:END:
-:EDGES:
-[2024-09-22 Sun 22:09] -> [[id:05a7192a-4c05-44d9-b859-e2a0cff53d86][C]]
 :END:
 :LOGBOOK:
 - State "NOTE"       from              [2024-08-16 Fri 22:00]
