@@ -17,26 +17,28 @@ yet.
 #+RESULTS:
 | :RDB/TESTS |
 
-#+begin_src lisp :package rdb :results output
+#+begin_src lisp :package rdb :results none
   (defmacro profile-rdb-functions ()
     `(sb-profile:profile 
       ,@(remove-if-not 'fboundp 
                        (remove-if 'macro-function (std:package-symbols :rdb)))))
+#+end_src
 
+#+begin_src lisp :package rdb :results output
+  (db:load-database-backend :rdb)
   (profile-rdb-functions)
-
   (locally
       (declare (optimize (speed 3) (safety 0)))
-    (sb-sprof:with-profiling (:mode :alloc :sample-interval 0.01 :alloc-interval 0.1 :show-progress t)
-      (rdb:with-temp-rdb (db () :open t)
-        db
-        (dotimes (i 100)
-          (io/static-vector:with-static-vector (v1 10000)
-            (loop for i below 10000
-                  do (setf (aref v1 i) (random 256))
-                  do (let ((k (string-to-octets (string (gensym "foo")))))
-                       (obj/db:put-key db k v1)
-                       (obj/db:get-val db k))))))))
+    (rt/flamegraph:with-flamegraph (".trace" :mode :alloc :show-progress t)
+        (db:with-temp-db (db :open t :close t)
+          db
+          (dotimes (i 100)
+            (io/static:with-static-vector (v1 100)
+              (loop for i below 100
+                    do (setf (aref v1 i) (random 256))
+                    do (let ((k (string-to-octets (string (gensym "foo")))))
+                         (obj/db:put-key db k v1)
+                         (obj/db:get-val db k))))))))
   (sb-sprof:report :type :graph)
   (sb-profile:report)
 #+end_src
@@ -45,796 +47,876 @@ yet.
 #+begin_example
 
 Number of samples:     50000
-Unique traces:         116
+Unique traces:         1394
 Alloc interval:        1 regions (approximately 32 kB)
 Total sampling amount: 50000 regions (approximately 1600000 kB)
 Graph cycles:        0
 Sampled threads:
-   #<THREAD tid=44812 "control-thread" RUNNING {10089B1623}> (1128/1048576 bytes, 6 hash buckets)
-   #<THREAD tid=50873 "worker" RUNNING {1009B83123}> (40264/1048576 bytes, 108 hash buckets)
-   #<THREAD tid=44819 "auto-flush-thread" RUNNING {100ADF8153}> (304/1048576 bytes, 2 hash buckets)
+   #<THREAD tid=203935 "control-thread" RUNNING {1004920DB3}> (920/1048576 bytes, 5 hash buckets)
+   #<THREAD tid=217436 "worker" RUNNING {1035957E13}> (82984/1048576 bytes, 245 hash buckets)
+   #<THREAD tid=203942 "auto-flush-thread" RUNNING {100A9B8153}> (120/1048576 bytes, 1 hash buckets)
+   #<THREAD tid=218369 "worker" RUNNING {100D339323}> (116304/1048576 bytes, 436 hash buckets)
+   #<THREAD "worker" FINISHED values: T {10070012D3}> (154152/1048576 bytes, 455 hash buckets)
+   #<THREAD tid=217463 "worker" RUNNING {101EF21333}> (65888/1048576 bytes, 246 hash buckets)
 
                                Callers
                  Total.     Function
  Count     %  Count     %      Callees
 ------------------------------------------------------------------------
-  1109   2.2                   SB-ALIEN::ROOT-DEPOSIT-GEN-METHOD [73]
-   378   0.8                   SB-ALIEN-INTERNALS:COMPUTE-DEPORT-ALLOC-LAMBDA [91]
-  3215   6.4                   SB-ALIEN-INTERNALS:COMPUTE-DEPORT-LAMBDA [60]
-  3014   6.0                   SB-ALIEN-INTERNALS:COMPUTE-EXTRACT-LAMBDA [88]
-  4115   8.2                   SB-ALIEN-INTERNALS:COMPUTE-NATURALIZE-LAMBDA [87]
- 10528  21.1                   SB-ALIEN-INTERNALS:COMPUTE-DEPOSIT-LAMBDA [72]
-  4343   8.7                   SB-ALIEN::INTEGER-EXTRACT-GEN-METHOD [74]
-     3   0.0                   (FLET "WITHOUT-GCING-BODY-" :IN SB-KERNEL:SUB-GC) [67]
-   819   1.6                   SB-ALIEN::INTEGER-LISP-REP-METHOD [61]
- 27524  55.0  27524  55.0   SYS-LIST-ALLOC-TRAMP [1]
-------------------------------------------------------------------------
-     1   0.0                   SB-KERNEL:VECTOR-SUBSEQ* [128]
-     1   0.0                   (LAMBDA (STRING) :IN SWANK-REPL::MAKE-OUTPUT-FUNCTION) [127]
-     1   0.0                   SB-C::MAKE-LAMBDA-VAR [115]
-     1   0.0                   SB-C::%MAKE-BASIC-DEFINITION-SOURCE-LOCATION [98]
-  2224   4.4                   (SB-INTERPRETER::.APPLY. 3) [92]
-     1   0.0                   LET [49]
-    15   0.0                   Unknown fn 113173 [53]
-  4624   9.2                   LET* [71]
-     1   0.0                   ROCKSDB-READOPTIONS-CREATE [69]
-  5989  12.0                   (SB-INTERPRETER::.APPLY. 2) [62]
-  2561   5.1                   (SB-INTERPRETER::.APPLY. 4) [57]
-     3   0.0                   SB-ALIEN-INTERNALS:%SAP-ALIEN [54]
-     4   0.0                   SB-IMPL::STRING-OUTPUT-STREAM-NEW-BUFFER [24]
+     5   0.0                   SB-ALIEN-INTERNALS:%SAP-ALIEN [125]
+     1   0.0                   SB-IMPL::STRING->UTF8 [122]
+     5   0.0                   GET-KV-RAW [68]
+     1   0.0                   SWANK/GRAY::%STREAM-FINISH-OUTPUT [115]
+     9   0.0                   SB-KERNEL:%MAKE-ARRAY [113]
+     1   0.0                   (LABELS SB-IMPL::RECURSE :IN SB-IMPL::%SYMBOL-NAMEIFY) [108]
+   837   1.7                   (LAMBDA (SB-EVAL::ENV) :IN SB-EVAL::CALL-WITH-NEW-ENV-FULL-PARSING) [97]
+  1710   3.4                   SB-EVAL::INTERPRETED-APPLY [86]
+ 14109  28.2                   SB-EVAL::%MAKE-ENV [84]
+ 17279  34.6                   SB-EVAL::MAKE-EVAL-LEXENV [80]
+   211   0.4                   SB-EVAL::EVAL-LET* [79]
+   443   0.9                   SB-EVAL::EVAL-LET [70]
+  8391  16.8                   SB-INT:PARSE-LAMBDA-LIST [75]
+  2826   5.7                   SB-EVAL::CALL-WITH-NEW-ENV-FULL-PARSING [72]
+     3   0.0                   SB-IMPL::STRING-OUTPUT-STREAM-NEW-BUFFER [24]
      2   0.0                   GET-OUTPUT-STREAM-STRING [20]
- 19088  38.2  19088  38.2   ALLOC-TRAMP [2]
+ 47204  94.4  47204  94.4   ALLOC-TRAMP [1]
 ------------------------------------------------------------------------
-     1   0.0                   (MACRO-FUNCTION PROG1) [120]
-     1   0.0                   COPY-TREE [112]
-  1852   3.7                   SB-VM::INTEGER-NATURALIZE-GEN-METHOD [90]
-   383   0.8                   LET* [71]
-  2237   4.5   2237   4.5   LIST-ALLOC-TRAMP [3]
+   859   1.7                   SB-EVAL::EVAL-LET [70]
+  3080   6.2                   SB-EVAL::CALL-WITH-NEW-ENV [76]
+   829   1.7                   SB-VM::INTEGER-NATURALIZE-GEN-METHOD [109]
+  2973   5.9                   SB-EVAL::EVAL-ARGS [102]
+   570   1.1                   SB-INT:MAKE-GENSYM-LIST [101]
+   194   0.4                   (LABELS SB-IMPL::GEN-MV-BIND :IN "SYS:SRC;CODE;SETF.LISP") [99]
+  2595   5.2                   SB-IMPL::APPEND2 [96]
+  2572   5.1                   SB-INT:PARSE-LAMBDA-LIST [75]
+   572   1.1                   CONS [95]
+  1135   2.3                   (MACRO-FUNCTION SETF) [64]
+  1303   2.6                   GET-SETF-EXPANSION [65]
+  2578   5.2                   SB-EVAL::EVAL-NEXT-LET*-BINDING [85]
+   586   1.2                   SB-EVAL::EVAL-LET* [79]
+  6197  12.4                   SB-EVAL::FABRICATE-NEW-NATIVE-ENVIRONMENT [78]
+  5265  10.5                   SB-EVAL::PARSE-ARGUMENTS [73]
+  1318   2.6                   (LABELS SB-IMPL::GEN-LET* :IN "SYS:SRC;CODE;SETF.LISP") [69]
+   584   1.2                   SB-IMPL::COLLECT-SETF-TEMPS [66]
+ 33851  67.7  33851  67.7   LIST-ALLOC-TRAMP [2]
 ------------------------------------------------------------------------
-  1146   2.3                   LISTIFY-&REST [86]
-  1146   2.3   1146   2.3   foreign function listify_rest_arg [4]
+   337   0.7                   SB-ALIEN::ROOT-DEPOSIT-GEN-METHOD [110]
+    99   0.2                   SB-ALIEN::INTEGER-LISP-REP-METHOD [112]
+    28   0.1                   (MACRO-FUNCTION SB-ALIEN-INTERNALS:MAYBE-WITH-PINNED-OBJECTS) [111]
+  1494   3.0                   SB-ALIEN-INTERNALS:COMPUTE-EXTRACT-LAMBDA [105]
+  1633   3.3                   SB-ALIEN::INTEGER-EXTRACT-GEN-METHOD [106]
+  1967   3.9                   SB-ALIEN-INTERNALS:COMPUTE-NATURALIZE-LAMBDA [103]
+   741   1.5                   SB-ALIEN-INTERNALS:COMPUTE-DEPORT-ALLOC-LAMBDA [100]
+  1115   2.2                   SB-ALIEN-INTERNALS:COMPUTE-DEPORT-LAMBDA [98]
+     9   0.0                   (FLET "WITHOUT-GCING-BODY-" :IN SB-KERNEL:SUB-GC) [94]
+  6833  13.7                   SB-ALIEN-INTERNALS:COMPUTE-DEPOSIT-LAMBDA [67]
+ 14256  28.5  14256  28.5   SYS-LIST-ALLOC-TRAMP [3]
 ------------------------------------------------------------------------
-     1   0.0                   SB-BROTHERTREE::N3 [113]
-     4   0.0                   SB-BROTHERTREE::N2 [82]
-     5   0.0      5   0.0   SYS-ALLOC-TRAMP [5]
+  3099   6.2                   LISTIFY-&REST [83]
+  3099   6.2   3099   6.2   foreign function listify_rest_arg [4]
 ------------------------------------------------------------------------
- 50000 100.0                   (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-THREAD::RUN) [10]
-     0   0.0  50000 100.0   (FLET SB-UNIX::BODY :IN SB-THREAD::RUN) [11]
-     1   0.0                   Unknown fn 32068 [121]
+  1590   3.2                   SB-KERNEL:%MAKE-SYMBOL [87]
+  1590   3.2   1590   3.2   SYS-ALLOC-TRAMP [5]
+------------------------------------------------------------------------
+100000 200.0                   (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-THREAD::RUN) [10]
+     0   0.0 100000 200.0   (FLET SB-UNIX::BODY :IN SB-THREAD::RUN) [11]
+     1   0.0                   SWANK/BACKEND:AUTO-FLUSH-LOOP [114]
      1   0.0                   (LAMBDA NIL :IN SWANK::SPAWN-WORKER-THREAD) [35]
-     1   0.0                   Unknown fn 33089 [12]
- 50000 100.0                   (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-THREAD::RUN) [10]
+     1   0.0                   SWANK::DISPATCH-LOOP [12]
+100000 200.0                   (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-THREAD::RUN) [10]
 ------------------------------------------------------------------------
- 50000 100.0                   (FLET SB-UNIX::BODY :IN SB-THREAD::RUN) [11]
- 50000 100.0                   SB-THREAD::RUN [9]
-     0   0.0  50000 100.0   (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-THREAD::RUN) [10]
- 50000 100.0                   (FLET SB-UNIX::BODY :IN SB-THREAD::RUN) [11]
+100000 200.0                   (FLET SB-UNIX::BODY :IN SB-THREAD::RUN) [11]
+100000 200.0                   SB-THREAD::RUN [9]
+     0   0.0 100000 200.0   (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-THREAD::RUN) [10]
+100000 200.0                   (FLET SB-UNIX::BODY :IN SB-THREAD::RUN) [11]
 ------------------------------------------------------------------------
- 50000 100.0                   foreign function call_into_lisp_ [8]
-     0   0.0  50000 100.0   SB-THREAD::RUN [9]
- 50000 100.0                   (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-THREAD::RUN) [10]
+100000 200.0                   foreign function call_into_lisp_ [8]
+     0   0.0 100000 200.0   SB-THREAD::RUN [9]
+100000 200.0                   (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-THREAD::RUN) [10]
 ------------------------------------------------------------------------
- 50000 100.0                   foreign function funcall1 [7]
-     0   0.0  50000 100.0   foreign function call_into_lisp_ [8]
-     1   0.0                   SB-KERNEL:SUB-GC [65]
- 50000 100.0                   SB-THREAD::RUN [9]
+100000 200.0                   foreign function funcall1 [7]
+     0   0.0 100000 200.0   foreign function call_into_lisp_ [8]
+     1   0.0                   SB-KERNEL:SUB-GC [92]
+100000 200.0                   SB-THREAD::RUN [9]
 ------------------------------------------------------------------------
-     3   0.0                   foreign function maybe_gc [64]
- 50000 100.0                   foreign function new_thread_trampoline [6]
-     0   0.0  50000 100.0   foreign function funcall1 [7]
- 50000 100.0                   foreign function call_into_lisp_ [8]
+     9   0.0                   foreign function maybe_gc [91]
+100000 200.0                   foreign function new_thread_trampoline [6]
+     0   0.0 100000 200.0   foreign function funcall1 [7]
+100000 200.0                   foreign function call_into_lisp_ [8]
 ------------------------------------------------------------------------
-     0   0.0  50000 100.0   foreign function new_thread_trampoline [6]
- 50000 100.0                   foreign function funcall1 [7]
+     0   0.0 100000 200.0   foreign function new_thread_trampoline [6]
+100000 200.0                   foreign function funcall1 [7]
 ------------------------------------------------------------------------
-     1   0.0                   SB-INTERPRETER::LET/SPEC [45]
-     1   0.0                   PROGN [46]
- 49992 100.0                   MULTIPLE-VALUE-PROG1 [47]
-     0   0.0  49992 100.0   UNWIND-PROTECT [48]
-     1   0.0                   SB-INTERPRETER::LET/SPEC [45]
- 49992 100.0                   MULTIPLE-VALUE-PROG1 [47]
+ 99994 200.0                   SB-INT:SIMPLE-EVAL-IN-LEXENV [41]
+     0   0.0  99994 200.0   SWANK::CALL-WITH-BUFFER-SYNTAX [42]
+ 41819  83.6                   SWANK::CALL-WITH-RETRY-RESTART [116]
+ 58175 116.3                   SWANK::COLLECT-NOTES [43]
 ------------------------------------------------------------------------
- 49992 100.0                   UNWIND-PROTECT [48]
-     1   0.0                   SB-INTERPRETER::LET/SPEC [45]
-     0   0.0  49992 100.0   MULTIPLE-VALUE-PROG1 [47]
-     1   0.0                   PROGN [46]
- 49992 100.0                   UNWIND-PROTECT [48]
+ 99994 200.0                   EVAL [40]
+     0   0.0  99994 200.0   SB-INT:SIMPLE-EVAL-IN-LEXENV [41]
+     1   0.0                   (LAMBDA ()) in #<code id=1BD7F [2] (LAMBDA ()) {100D8C940F..100D8CA0F0}> [129]
+     1   0.0                   (LAMBDA ()) in #<code id=1BE04 [5] (LAMBDA ()) {100971000F..10097111F0}> [118]
+ 99994 200.0                   SWANK::CALL-WITH-BUFFER-SYNTAX [42]
 ------------------------------------------------------------------------
-  2580   5.2                   (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE) [56]
- 49988 100.0                   SB-INTERPRETER::EVAL-TAGBODY [51]
-     1   0.0                   MULTIPLE-VALUE-PROG1 [47]
- 49992 100.0                   SB-INTERPRETER::LET/SPEC [45]
-     0   0.0  49992 100.0   PROGN [46]
-     1   0.0                   BLOCK [50]
-     1   0.0                   FLET [75]
-     1   0.0                   LET* [71]
-     1   0.0                   (LAMBDA (FUNCTION &REST SB-PROFILE::ARGS) :IN SB-PROFILE::PROFILE-ENCAPSULATION-LAMBDAS) [52]
-     1   0.0                   UNWIND-PROTECT [48]
- 49992 100.0                   SB-INTERPRETER::LET/SPEC [45]
-------------------------------------------------------------------------
-     1   0.0                   UNWIND-PROTECT [48]
- 49992 100.0                   PROGN [46]
-     1   0.0                   SB-INT:EVAL-IN-LEXENV [41]
-     0   0.0  49992 100.0   SB-INTERPRETER::LET/SPEC [45]
-     1   0.0                   SB-INTERPRETER::DIGEST-FORM [116]
-     1   0.0                   (SB-PCL::FAST-METHOD GET-VAL (RDB T)) [68]
-     1   0.0                   (LAMBDA (FUNCTION &REST SB-PROFILE::ARGS) :IN SB-PROFILE::PROFILE-ENCAPSULATION-LAMBDAS) [52]
-     1   0.0                   UNWIND-PROTECT [48]
-     1   0.0                   LET [49]
-     1   0.0                   MULTIPLE-VALUE-PROG1 [47]
- 49992 100.0                   PROGN [46]
-------------------------------------------------------------------------
- 49992 100.0                   SWANK::CALL-WITH-RETRY-RESTART [43]
-     0   0.0  49992 100.0   (LAMBDA NIL :IN SWANK:EVAL-AND-GRAB-OUTPUT) [44]
- 49992 100.0                   EVAL [40]
-------------------------------------------------------------------------
- 49992 100.0                   SWANK::CALL-WITH-BUFFER-SYNTAX [42]
-     0   0.0  49992 100.0   SWANK::CALL-WITH-RETRY-RESTART [43]
- 49992 100.0                   (LAMBDA NIL :IN SWANK:EVAL-AND-GRAB-OUTPUT) [44]
-------------------------------------------------------------------------
- 49992 100.0                   SB-INT:EVAL-IN-LEXENV [41]
-     0   0.0  49992 100.0   SWANK::CALL-WITH-BUFFER-SYNTAX [42]
- 49992 100.0                   SWANK::CALL-WITH-RETRY-RESTART [43]
-------------------------------------------------------------------------
- 49992 100.0                   EVAL [40]
-     0   0.0  49992 100.0   SB-INT:EVAL-IN-LEXENV [41]
-     1   0.0                   (:IMMEDIATE FUNCTION) [95]
-     1   0.0                   SB-INTERPRETER::LET/SPEC [45]
- 49992 100.0                   SWANK::CALL-WITH-BUFFER-SYNTAX [42]
-------------------------------------------------------------------------
-     1   0.0                   SB-ALIEN::COERCE-TO-INTERPRETED-FUNCTION [94]
- 49992 100.0                   (LAMBDA NIL :IN SWANK:EVAL-AND-GRAB-OUTPUT) [44]
- 49992 100.0                   SWANK:EVAL-FOR-EMACS [39]
-     0   0.0  49992 100.0   EVAL [40]
- 49992 100.0                   SB-INT:EVAL-IN-LEXENV [41]
+ 41819  83.6                   (LAMBDA NIL :IN SWANK:EVAL-AND-GRAB-OUTPUT) [117]
+ 99994 200.0                   SWANK:EVAL-FOR-EMACS [39]
+     0   0.0  99994 200.0   EVAL [40]
+ 99994 200.0                   SB-INT:SIMPLE-EVAL-IN-LEXENV [41]
 ------------------------------------------------------------------------
      1   0.0                   (LAMBDA NIL :IN SWANK::SPAWN-WORKER-THREAD) [35]
-     0   0.0  49992 100.0   SWANK:EVAL-FOR-EMACS [39]
- 49992 100.0                   EVAL [40]
+     0   0.0  99994 200.0   SWANK:EVAL-FOR-EMACS [39]
+ 99994 200.0                   EVAL [40]
 ------------------------------------------------------------------------
- 49992 100.0                   (FLET SWANK/BACKEND:CALL-WITH-DEBUGGER-HOOK :IN "/home/ellis/.emacs.d/elpa/slime-20241027.2104/swank/sbcl.lisp") [37]
-     0   0.0  49992 100.0   SWANK/SBCL::CALL-WITH-BREAK-HOOK [38]
- 49992 100.0                   (LAMBDA NIL :IN SWANK::SPAWN-WORKER-THREAD) [35]
+ 99994 200.0                   (FLET SWANK/BACKEND:CALL-WITH-DEBUGGER-HOOK :IN "/home/ellis/.stash/lisp/slime/swank/sbcl.lisp") [37]
+     0   0.0  99994 200.0   SWANK/SBCL::CALL-WITH-BREAK-HOOK [38]
+ 99994 200.0                   (LAMBDA NIL :IN SWANK::SPAWN-WORKER-THREAD) [35]
 ------------------------------------------------------------------------
- 49992 100.0                   SWANK::CALL-WITH-BINDINGS [36]
-     0   0.0  49992 100.0   (FLET SWANK/BACKEND:CALL-WITH-DEBUGGER-HOOK :IN "/home/ellis/.emacs.d/elpa/slime-20241027.2104/swank/sbcl.lisp") [37]
- 49992 100.0                   SWANK/SBCL::CALL-WITH-BREAK-HOOK [38]
+ 99994 200.0                   SWANK::CALL-WITH-BINDINGS [36]
+     0   0.0  99994 200.0   (FLET SWANK/BACKEND:CALL-WITH-DEBUGGER-HOOK :IN "/home/ellis/.stash/lisp/slime/swank/sbcl.lisp") [37]
+ 99994 200.0                   SWANK/SBCL::CALL-WITH-BREAK-HOOK [38]
 ------------------------------------------------------------------------
- 49992 100.0                   (LAMBDA NIL :IN SWANK::SPAWN-WORKER-THREAD) [35]
-     0   0.0  49992 100.0   SWANK::CALL-WITH-BINDINGS [36]
- 49992 100.0                   (FLET SWANK/BACKEND:CALL-WITH-DEBUGGER-HOOK :IN "/home/ellis/.emacs.d/elpa/slime-20241027.2104/swank/sbcl.lisp") [37]
+ 99994 200.0                   (LAMBDA NIL :IN SWANK::SPAWN-WORKER-THREAD) [35]
+     0   0.0  99994 200.0   SWANK::CALL-WITH-BINDINGS [36]
+ 99994 200.0                   (FLET SWANK/BACKEND:CALL-WITH-DEBUGGER-HOOK :IN "/home/ellis/.stash/lisp/slime/swank/sbcl.lisp") [37]
 ------------------------------------------------------------------------
- 49992 100.0                   SWANK/SBCL::CALL-WITH-BREAK-HOOK [38]
+ 99994 200.0                   SWANK/SBCL::CALL-WITH-BREAK-HOOK [38]
      1   0.0                   (FLET SB-UNIX::BODY :IN SB-THREAD::RUN) [11]
-     0   0.0  49992 100.0   (LAMBDA NIL :IN SWANK::SPAWN-WORKER-THREAD) [35]
+     0   0.0  99994 200.0   (LAMBDA NIL :IN SWANK::SPAWN-WORKER-THREAD) [35]
      1   0.0                   SWANK:EVAL-FOR-EMACS [39]
- 49992 100.0                   SWANK::CALL-WITH-BINDINGS [36]
+ 99994 200.0                   SWANK::CALL-WITH-BINDINGS [36]
 ------------------------------------------------------------------------
-     1   0.0                   BLOCK [50]
- 10685  21.4                   (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE) [56]
-     1   0.0                   SB-INTERPRETER::LET/SPEC [45]
-     0   0.0  49991 100.0   LET [49]
-     2   0.0                   SB-SPROF::UNAVAILABLE-FRAMES [99]
-     1   0.0                   ALLOC-TRAMP [2]
-     1   0.0                   SB-ALIEN-INTERNALS:DEPORT-ALLOC [89]
-     1   0.0                   SB-ALIEN-INTERNALS:DEPORT [59]
- 49989 100.0                   BLOCK [50]
+  3458   6.9                   GET-KV-RAW [68]
+ 75210 150.4                   Unknown fn 111311 [59]
+     0   0.0  78668 157.3   SETFA [60]
+   225   0.4                   SB-ALIEN-INTERNALS:%SET-DEREF [104]
+ 78443 156.9                   (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE) [61]
 ------------------------------------------------------------------------
-     1   0.0                   PROGN [46]
- 49989 100.0                   LET [49]
-     0   0.0  49989 100.0   BLOCK [50]
-     1   0.0                   LET [49]
- 49988 100.0                   SB-INTERPRETER::EVAL-TAGBODY [51]
+ 78443 156.9                   SETFA [60]
+     0   0.0  78443 156.9   (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE) [61]
+   652   1.3                   SB-EVAL::%EVAL [63]
+   114   0.2                   SB-EVAL::INTERPRETED-APPLY [86]
+   117   0.2                   (LAMBDA (SB-EVAL::ENV) :IN SB-EVAL::CALL-WITH-NEW-ENV-FULL-PARSING) [97]
+   771   1.5                   (LAMBDA (&REST SB-EVAL::ARGS) :IN SB-EVAL::MAKE-INTERPRETED-FUNCTION) [82]
+ 12509  25.0                   SB-EVAL::CALL-WITH-NEW-ENV [76]
+  9632  19.3                   SB-ALIEN-INTERNALS:NATURALIZE [74]
+  4078   8.2                   SB-EVAL::CALL-WITH-NEW-ENV-FULL-PARSING [72]
+ 19407  38.8                   SB-EVAL::EVAL-LET [70]
+  7969  15.9                   SB-ALIEN-INTERNALS:COMPUTE-DEPOSIT-LAMBDA [67]
+ 23193  46.4                   SB-EVAL::EVAL-PROGN [62]
 ------------------------------------------------------------------------
- 49988 100.0                   BLOCK [50]
-     0   0.0  49988 100.0   SB-INTERPRETER::EVAL-TAGBODY [51]
-     1   0.0                   LET* [71]
- 49988 100.0                   PROGN [46]
+ 23089  46.2                   (FLET SB-UNIX::BODY :IN #:DROP-THRU-TAG-1) [131]
+ 20446  40.9                   (FLET SB-UNIX::BODY :IN #:BLOCK2) [128]
+  8579  17.2                   (FLET SB-UNIX::BODY :IN #:BLOCK2) [120]
+ 23099  46.2                   (FLET SB-UNIX::BODY :IN #:DROP-THRU-TAG-1) [58]
+     0   0.0  75213 150.4   Unknown fn 111311 [59]
+     3   0.0                   SB-ALIEN-INTERNALS:%SAP-ALIEN [125]
+ 75210 150.4                   SETFA [60]
 ------------------------------------------------------------------------
-     1   0.0                   PROGN [46]
-     1   0.0                   SB-INTERPRETER::LET/SPEC [45]
-     0   0.0  47555  95.1   (LAMBDA (FUNCTION &REST SB-PROFILE::ARGS) :IN SB-PROFILE::PROFILE-ENCAPSULATION-LAMBDAS) [52]
- 36344  72.7                   PUT-KV-RAW [58]
- 11211  22.4                   Unknown fn 113173 [53]
+ 58175 116.3                   (LAMBDA NIL :IN SB-FASL::LOAD-AS-FASL) [54]
+     0   0.0  58175 116.3   SB-FASL::LOAD-FASL-GROUP [55]
+ 28060  56.1                   top level form [126]
+ 30115  60.2                   top level form [56]
 ------------------------------------------------------------------------
- 36343  72.7                   PUT-KV-RAW [58]
-    41   0.1                   Unknown fn 113173 [53]
-     0   0.0  36384  72.8   SETFA [55]
-   813   1.6                   SB-ALIEN-INTERNALS:%SET-DEREF [85]
- 35571  71.1                   (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE) [56]
+ 58175 116.3                   SB-IMPL::CALL-WITH-LOADER-PACKAGE-NAMES [53]
+     0   0.0  58175 116.3   (LAMBDA NIL :IN SB-FASL::LOAD-AS-FASL) [54]
+ 58175 116.3                   SB-FASL::LOAD-FASL-GROUP [55]
 ------------------------------------------------------------------------
- 36344  72.7                   (LAMBDA (FUNCTION &REST SB-PROFILE::ARGS) :IN SB-PROFILE::PROFILE-ENCAPSULATION-LAMBDAS) [52]
-     0   0.0  36344  72.7   PUT-KV-RAW [58]
-     1   0.0                   SB-ALIEN-INTERNALS:%SAP-ALIEN [54]
- 36343  72.7                   SETFA [55]
+ 58175 116.3                   SB-FASL::LOAD-AS-FASL [52]
+     0   0.0  58175 116.3   SB-IMPL::CALL-WITH-LOADER-PACKAGE-NAMES [53]
+ 58175 116.3                   (LAMBDA NIL :IN SB-FASL::LOAD-AS-FASL) [54]
 ------------------------------------------------------------------------
- 35571  71.1                   SETFA [55]
-     0   0.0  35571  71.1   (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE) [56]
- 14485  29.0                   SB-ALIEN-INTERNALS:COMPUTE-DEPOSIT-LAMBDA [72]
-  2580   5.2                   PROGN [46]
-  5258  10.5                   SB-ALIEN-INTERNALS:NATURALIZE [70]
- 10685  21.4                   LET [49]
-  2561   5.1                   (SB-INTERPRETER::.APPLY. 4) [57]
+ 58175 116.3                   (LABELS SB-FASL::LOAD-STREAM-1 :IN LOAD) [51]
+     0   0.0  58175 116.3   SB-FASL::LOAD-AS-FASL [52]
+ 58175 116.3                   SB-IMPL::CALL-WITH-LOADER-PACKAGE-NAMES [53]
 ------------------------------------------------------------------------
- 14485  29.0                   (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE) [56]
-     0   0.0  14485  29.0   SB-ALIEN-INTERNALS:COMPUTE-DEPOSIT-LAMBDA [72]
- 10528  21.1                   SYS-LIST-ALLOC-TRAMP [1]
-  3957   7.9                   SB-ALIEN::ROOT-DEPOSIT-GEN-METHOD [73]
+ 58175 116.3                   SB-FASL::CALL-WITH-LOAD-BINDINGS [50]
+     0   0.0  58175 116.3   (LABELS SB-FASL::LOAD-STREAM-1 :IN LOAD) [51]
+ 58175 116.3                   SB-FASL::LOAD-AS-FASL [52]
 ------------------------------------------------------------------------
- 11211  22.4                   (LAMBDA (FUNCTION &REST SB-PROFILE::ARGS) :IN SB-PROFILE::PROFILE-ENCAPSULATION-LAMBDAS) [52]
-     0   0.0  11211  22.4   Unknown fn 113173 [53]
-    15   0.0                   ALLOC-TRAMP [2]
- 11153  22.3                   CLONE-OCTETS-FROM-ALIEN [83]
-    41   0.1                   SETFA [55]
-     2   0.0                   SB-ALIEN-INTERNALS:%SAP-ALIEN [54]
+ 58175 116.3                   LOAD [49]
+     0   0.0  58175 116.3   SB-FASL::CALL-WITH-LOAD-BINDINGS [50]
+ 58175 116.3                   (LABELS SB-FASL::LOAD-STREAM-1 :IN LOAD) [51]
 ------------------------------------------------------------------------
- 11153  22.3                   Unknown fn 113173 [53]
-     0   0.0  11153  22.3   CLONE-OCTETS-FROM-ALIEN [83]
-   333   0.7                   DEREF [93]
- 10820  21.6                   SB-ALIEN-INTERNALS:%ALIEN-VALUE [84]
+ 58175 116.3                   (FLET SWANK/BACKEND:CALL-WITH-COMPILATION-HOOKS :IN "/home/ellis/.stash/lisp/slime/swank/sbcl.lisp") [48]
+     0   0.0  58175 116.3   LOAD [49]
+ 58175 116.3                   SB-FASL::CALL-WITH-LOAD-BINDINGS [50]
 ------------------------------------------------------------------------
- 10820  21.6                   CLONE-OCTETS-FROM-ALIEN [83]
-     0   0.0  10820  21.6   SB-ALIEN-INTERNALS:%ALIEN-VALUE [84]
-  2224   4.4                   (SB-INTERPRETER::.APPLY. 3) [92]
-  4086   8.2                   SB-ALIEN-INTERNALS:NATURALIZE [70]
-  4509   9.0                   SB-ALIEN-INTERNALS:COMPUTE-EXTRACT-LAMBDA [88]
+ 58175 116.3                   (FLET SWANK/BACKEND:SWANK-COMPILE-STRING :IN "/home/ellis/.stash/lisp/slime/swank/sbcl.lisp") [47]
+     0   0.0  58175 116.3   (FLET SWANK/BACKEND:CALL-WITH-COMPILATION-HOOKS :IN "/home/ellis/.stash/lisp/slime/swank/sbcl.lisp") [48]
+ 58175 116.3                   LOAD [49]
 ------------------------------------------------------------------------
-  4086   8.2                   SB-ALIEN-INTERNALS:%ALIEN-VALUE [84]
-  5258  10.5                   (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE) [56]
-     0   0.0   9344  18.7   SB-ALIEN-INTERNALS:NATURALIZE [70]
-     1   0.0                   SB-ALIEN::COERCE-TO-INTERPRETED-FUNCTION [94]
-  5967  11.9                   SB-ALIEN-INTERNALS:COMPUTE-NATURALIZE-LAMBDA [87]
-  3376   6.8                   (SB-INTERPRETER::.APPLY. 2) [62]
+ 58175 116.3                   (LAMBDA NIL :IN SWANK:COMPILE-STRING-FOR-EMACS) [46]
+     0   0.0  58175 116.3   (FLET SWANK/BACKEND:SWANK-COMPILE-STRING :IN "/home/ellis/.stash/lisp/slime/swank/sbcl.lisp") [47]
+ 58175 116.3                   (FLET SWANK/BACKEND:CALL-WITH-COMPILATION-HOOKS :IN "/home/ellis/.stash/lisp/slime/swank/sbcl.lisp") [48]
 ------------------------------------------------------------------------
-   843   1.7                   SB-ALIEN-INTERNALS:DEPORT-ALLOC [89]
-  3376   6.8                   SB-ALIEN-INTERNALS:NATURALIZE [70]
-  1770   3.5                   SB-ALIEN-INTERNALS:DEPORT [59]
-     0   0.0   5989  12.0   (SB-INTERPRETER::.APPLY. 2) [62]
-  5989  12.0                   ALLOC-TRAMP [2]
+ 58175 116.3                   (LAMBDA NIL :IN SWANK::COLLECT-NOTES) [45]
+     0   0.0  58175 116.3   (LAMBDA NIL :IN SWANK:COMPILE-STRING-FOR-EMACS) [46]
+ 58175 116.3                   (FLET SWANK/BACKEND:SWANK-COMPILE-STRING :IN "/home/ellis/.stash/lisp/slime/swank/sbcl.lisp") [47]
 ------------------------------------------------------------------------
-  5967  11.9                   SB-ALIEN-INTERNALS:NATURALIZE [70]
-     0   0.0   5967  11.9   SB-ALIEN-INTERNALS:COMPUTE-NATURALIZE-LAMBDA [87]
-  1852   3.7                   SB-VM::INTEGER-NATURALIZE-GEN-METHOD [90]
-  4115   8.2                   SYS-LIST-ALLOC-TRAMP [1]
+ 58175 116.3                   SWANK::MEASURE-TIME-INTERVAL [44]
+     0   0.0  58175 116.3   (LAMBDA NIL :IN SWANK::COLLECT-NOTES) [45]
+ 58175 116.3                   (LAMBDA NIL :IN SWANK:COMPILE-STRING-FOR-EMACS) [46]
 ------------------------------------------------------------------------
-     1   0.0                   LET [49]
-     0   0.0   5804  11.6   SB-ALIEN-INTERNALS:DEPORT [59]
-  1770   3.5                   (SB-INTERPRETER::.APPLY. 2) [62]
-  4034   8.1                   SB-ALIEN-INTERNALS:COMPUTE-DEPORT-LAMBDA [60]
+ 58175 116.3                   SWANK::COLLECT-NOTES [43]
+     0   0.0  58175 116.3   SWANK::MEASURE-TIME-INTERVAL [44]
+ 58175 116.3                   (LAMBDA NIL :IN SWANK::COLLECT-NOTES) [45]
 ------------------------------------------------------------------------
-     1   0.0                   SB-INTERPRETER::EVAL-TAGBODY [51]
-     1   0.0                   PROGN [46]
-     0   0.0   5007  10.0   LET* [71]
-  4624   9.2                   ALLOC-TRAMP [2]
-   383   0.8                   LIST-ALLOC-TRAMP [3]
+ 58175 116.3                   SWANK::CALL-WITH-BUFFER-SYNTAX [42]
+     0   0.0  58175 116.3   SWANK::COLLECT-NOTES [43]
+ 58175 116.3                   SWANK::MEASURE-TIME-INTERVAL [44]
 ------------------------------------------------------------------------
-  4509   9.0                   SB-ALIEN-INTERNALS:%ALIEN-VALUE [84]
-     0   0.0   4509   9.0   SB-ALIEN-INTERNALS:COMPUTE-EXTRACT-LAMBDA [88]
-  1495   3.0                   SB-ALIEN::INTEGER-EXTRACT-GEN-METHOD [74]
-  3014   6.0                   SYS-LIST-ALLOC-TRAMP [1]
+ 41819  83.6                   SWANK::CALL-WITH-RETRY-RESTART [116]
+     0   0.0  41819  83.6   (LAMBDA NIL :IN SWANK:EVAL-AND-GRAB-OUTPUT) [117]
+ 41819  83.6                   EVAL [40]
 ------------------------------------------------------------------------
-  1495   3.0                   SB-ALIEN-INTERNALS:COMPUTE-EXTRACT-LAMBDA [88]
-  2848   5.7                   SB-ALIEN::ROOT-DEPOSIT-GEN-METHOD [73]
-     0   0.0   4343   8.7   SB-ALIEN::INTEGER-EXTRACT-GEN-METHOD [74]
-  4343   8.7                   SYS-LIST-ALLOC-TRAMP [1]
+ 41819  83.6                   SWANK::CALL-WITH-BUFFER-SYNTAX [42]
+     0   0.0  41819  83.6   SWANK::CALL-WITH-RETRY-RESTART [116]
+ 41819  83.6                   (LAMBDA NIL :IN SWANK:EVAL-AND-GRAB-OUTPUT) [117]
 ------------------------------------------------------------------------
-  4034   8.1                   SB-ALIEN-INTERNALS:DEPORT [59]
-     0   0.0   4034   8.1   SB-ALIEN-INTERNALS:COMPUTE-DEPORT-LAMBDA [60]
-  3215   6.4                   SYS-LIST-ALLOC-TRAMP [1]
-   819   1.6                   SB-ALIEN::INTEGER-LISP-REP-METHOD [61]
+  4309   8.6                   SB-ALIEN-INTERNALS:%ALIEN-VALUE [89]
+  4215   8.4                   SB-ALIEN-INTERNALS:DEPORT [81]
+  8361  16.7                   SB-ALIEN-INTERNALS:NATURALIZE [74]
+  3504   7.0                   SB-ALIEN-INTERNALS:DEPORT-ALLOC [71]
+ 12509  25.0                   (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE) [61]
+     0   0.0  32898  65.8   SB-EVAL::CALL-WITH-NEW-ENV [76]
+  3080   6.2                   LIST-ALLOC-TRAMP [2]
+  9356  18.7                   SB-EVAL::%MAKE-ENV [84]
+ 20462  40.9                   SB-EVAL::MAKE-ENV [77]
 ------------------------------------------------------------------------
-  3957   7.9                   SB-ALIEN-INTERNALS:COMPUTE-DEPOSIT-LAMBDA [72]
-     0   0.0   3957   7.9   SB-ALIEN::ROOT-DEPOSIT-GEN-METHOD [73]
-  1109   2.2                   SYS-LIST-ALLOC-TRAMP [1]
-  2848   5.7                   SB-ALIEN::INTEGER-EXTRACT-GEN-METHOD [74]
+ 30115  60.2                   (FLET "WITHOUT-INTERRUPTS-BODY-11" :IN #:DROP-THRU-TAG-1) [57]
+     0   0.0  30115  60.2   (FLET SB-UNIX::BODY :IN #:DROP-THRU-TAG-1) [58]
+     1   0.0                   SB-KERNEL:%MAKE-SYMBOL [87]
+  7015  14.0                   GET-KV-RAW [68]
+ 23099  46.2                   Unknown fn 111311 [59]
 ------------------------------------------------------------------------
-  2561   5.1                   (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE) [56]
-     0   0.0   2561   5.1   (SB-INTERPRETER::.APPLY. 4) [57]
-  2561   5.1                   ALLOC-TRAMP [2]
+ 30115  60.2                   top level form [56]
+     0   0.0  30115  60.2   (FLET "WITHOUT-INTERRUPTS-BODY-11" :IN #:DROP-THRU-TAG-1) [57]
+ 30115  60.2                   (FLET SB-UNIX::BODY :IN #:DROP-THRU-TAG-1) [58]
 ------------------------------------------------------------------------
-  2224   4.4                   SB-ALIEN-INTERNALS:%ALIEN-VALUE [84]
-     0   0.0   2224   4.4   (SB-INTERPRETER::.APPLY. 3) [92]
-  2224   4.4                   ALLOC-TRAMP [2]
+ 30115  60.2                   SB-FASL::LOAD-FASL-GROUP [55]
+     0   0.0  30115  60.2   top level form [56]
+ 30115  60.2                   (FLET "WITHOUT-INTERRUPTS-BODY-11" :IN #:DROP-THRU-TAG-1) [57]
 ------------------------------------------------------------------------
-  1852   3.7                   SB-ALIEN-INTERNALS:COMPUTE-NATURALIZE-LAMBDA [87]
-     0   0.0   1852   3.7   SB-VM::INTEGER-NATURALIZE-GEN-METHOD [90]
-  1852   3.7                   LIST-ALLOC-TRAMP [3]
+ 30090  60.2                   (FLET "WITHOUT-INTERRUPTS-BODY-11" :IN #:DROP-THRU-TAG-1) [130]
+     0   0.0  30090  60.2   (FLET SB-UNIX::BODY :IN #:DROP-THRU-TAG-1) [131]
+  7000  14.0                   GET-KV-RAW [68]
+     1   0.0                   SB-KERNEL:%MAKE-SYMBOL [87]
+ 23089  46.2                   Unknown fn 111311 [59]
 ------------------------------------------------------------------------
-     1   0.0                   LET [49]
-     0   0.0   1221   2.4   SB-ALIEN-INTERNALS:DEPORT-ALLOC [89]
-   378   0.8                   SB-ALIEN-INTERNALS:COMPUTE-DEPORT-ALLOC-LAMBDA [91]
-   843   1.7                   (SB-INTERPRETER::.APPLY. 2) [62]
+ 30090  60.2                   (LAMBDA ()) in #<code id=1BD7F [2] (LAMBDA ()) {100D8C940F..100D8CA0F0}> [129]
+     0   0.0  30090  60.2   (FLET "WITHOUT-INTERRUPTS-BODY-11" :IN #:DROP-THRU-TAG-1) [130]
+ 30090  60.2                   (FLET SB-UNIX::BODY :IN #:DROP-THRU-TAG-1) [131]
 ------------------------------------------------------------------------
-   333   0.7                   DEREF [93]
-   813   1.6                   SB-ALIEN-INTERNALS:%SET-DEREF [85]
-     0   0.0   1146   2.3   LISTIFY-&REST [86]
-  1146   2.3                   foreign function listify_rest_arg [4]
+     1   0.0                   SB-INT:SIMPLE-EVAL-IN-LEXENV [41]
+     0   0.0  30090  60.2   (LAMBDA ()) in #<code id=1BD7F [2] (LAMBDA ()) {100D8C940F..100D8CA0F0}> [129]
+ 30090  60.2                   (FLET "WITHOUT-INTERRUPTS-BODY-11" :IN #:DROP-THRU-TAG-1) [130]
 ------------------------------------------------------------------------
-   819   1.6                   SB-ALIEN-INTERNALS:COMPUTE-DEPORT-LAMBDA [60]
-     0   0.0    819   1.6   SB-ALIEN::INTEGER-LISP-REP-METHOD [61]
-   819   1.6                   SYS-LIST-ALLOC-TRAMP [1]
+ 28060  56.1                   (FLET "WITHOUT-INTERRUPTS-BODY-16" :IN #:BLOCK2) [127]
+     0   0.0  28060  56.1   (FLET SB-UNIX::BODY :IN #:BLOCK2) [128]
+     4   0.0                   SB-KERNEL:%MAKE-SYMBOL [87]
+ 20446  40.9                   Unknown fn 111311 [59]
+  7610  15.2                   GET-KV-RAW [68]
 ------------------------------------------------------------------------
-   813   1.6                   SETFA [55]
-     0   0.0    813   1.6   SB-ALIEN-INTERNALS:%SET-DEREF [85]
-   813   1.6                   LISTIFY-&REST [86]
+ 28060  56.1                   top level form [126]
+     0   0.0  28060  56.1   (FLET "WITHOUT-INTERRUPTS-BODY-16" :IN #:BLOCK2) [127]
+ 28060  56.1                   (FLET SB-UNIX::BODY :IN #:BLOCK2) [128]
 ------------------------------------------------------------------------
-   378   0.8                   SB-ALIEN-INTERNALS:DEPORT-ALLOC [89]
-     0   0.0    378   0.8   SB-ALIEN-INTERNALS:COMPUTE-DEPORT-ALLOC-LAMBDA [91]
-   378   0.8                   SYS-LIST-ALLOC-TRAMP [1]
+ 28060  56.1                   SB-FASL::LOAD-FASL-GROUP [55]
+     0   0.0  28060  56.1   top level form [126]
+ 28060  56.1                   (FLET "WITHOUT-INTERRUPTS-BODY-16" :IN #:BLOCK2) [127]
 ------------------------------------------------------------------------
-   333   0.7                   CLONE-OCTETS-FROM-ALIEN [83]
-     0   0.0    333   0.7   DEREF [93]
-   333   0.7                   LISTIFY-&REST [86]
+   581   1.2                   SB-EVAL::EVAL-LET* [79]
+  4620   9.2                   SB-EVAL::EVAL-NEXT-LET*-BINDING [85]
+ 20462  40.9                   SB-EVAL::CALL-WITH-NEW-ENV [76]
+     0   0.0  25663  51.3   SB-EVAL::MAKE-ENV [77]
+  2182   4.4                   SB-IMPL::APPEND2 [96]
+ 23479  47.0                   SB-EVAL::FABRICATE-NEW-NATIVE-ENVIRONMENT [78]
 ------------------------------------------------------------------------
-     3   0.0                   SWANK::LOG-EVENT [29]
-     3   0.0                   SWANK/RPC::PRIN1-TO-STRING-FOR-EMACS [15]
-     0   0.0      6   0.0   SB-IMPL::%WITH-STANDARD-IO-SYNTAX [16]
-     3   0.0                   (FLET "THUNK" :IN SWANK::LOG-EVENT) [30]
-     3   0.0                   (FLET "THUNK" :IN SWANK/RPC::PRIN1-TO-STRING-FOR-EMACS) [17]
+  7000  14.0                   (FLET SB-UNIX::BODY :IN #:DROP-THRU-TAG-1) [131]
+  7610  15.2                   (FLET SB-UNIX::BODY :IN #:BLOCK2) [128]
+  3148   6.3                   (FLET SB-UNIX::BODY :IN #:BLOCK2) [120]
+  7015  14.0                   (FLET SB-UNIX::BODY :IN #:DROP-THRU-TAG-1) [58]
+     0   0.0  24773  49.5   GET-KV-RAW [68]
+     1   0.0                   SB-ALIEN-INTERNALS:%SAP-ALIEN [125]
+     5   0.0                   ALLOC-TRAMP [1]
+     9   0.0                   SB-KERNEL:%MAKE-ARRAY [113]
+ 21300  42.6                   CLONE-OCTETS-FROM-ALIEN [88]
+  3458   6.9                   SETFA [60]
 ------------------------------------------------------------------------
-     1   0.0                   (FLET SB-UNIX::BODY :IN SB-THREAD::RUN) [11]
-     0   0.0      6   0.0   Unknown fn 33089 [12]
-     3   0.0                   SWANK::DISPATCH-EVENT [28]
-     3   0.0                   SWANK::ENCODE-MESSAGE [13]
+ 23479  47.0                   SB-EVAL::MAKE-ENV [77]
+     0   0.0  23479  47.0   SB-EVAL::FABRICATE-NEW-NATIVE-ENVIRONMENT [78]
+ 17279  34.6                   SB-EVAL::MAKE-EVAL-LEXENV [80]
+  6197  12.4                   LIST-ALLOC-TRAMP [2]
 ------------------------------------------------------------------------
-     5   0.0                   SB-VM::UPDATE-DYNAMIC-SPACE-CODE-TREE [79]
-     0   0.0      5   0.0   SB-BROTHERTREE:INSERT [80]
-     3   0.0                   SB-BROTHERTREE::N2 [82]
-     2   0.0                   (LABELS SB-BROTHERTREE::INS :IN SB-BROTHERTREE:INSERT) [81]
+ 23193  46.4                   (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE) [61]
+     0   0.0  23193  46.4   SB-EVAL::EVAL-PROGN [62]
+ 10777  21.6                   SB-EVAL::EVAL-NEXT-LET*-BINDING [85]
+  2831   5.7                   SB-EVAL::EVAL-LET* [79]
+  9585  19.2                   SB-EVAL::%EVAL [63]
 ------------------------------------------------------------------------
-     5   0.0                   SB-VM::WRITE-FUNINSTANCE-PROLOGUE [78]
-     0   0.0      5   0.0   SB-VM::UPDATE-DYNAMIC-SPACE-CODE-TREE [79]
-     5   0.0                   SB-BROTHERTREE:INSERT [80]
+ 21300  42.6                   GET-KV-RAW [68]
+     0   0.0  21300  42.6   CLONE-OCTETS-FROM-ALIEN [88]
+     9   0.0                   DEREF [121]
+ 21291  42.6                   SB-ALIEN-INTERNALS:%ALIEN-VALUE [89]
 ------------------------------------------------------------------------
-     5   0.0                   SB-INTERPRETER::%MAKE-INTERPRETED-FUNCTION [77]
-     0   0.0      5   0.0   SB-VM::WRITE-FUNINSTANCE-PROLOGUE [78]
-     5   0.0                   SB-VM::UPDATE-DYNAMIC-SPACE-CODE-TREE [79]
+ 21291  42.6                   CLONE-OCTETS-FROM-ALIEN [88]
+     0   0.0  21291  42.6   SB-ALIEN-INTERNALS:%ALIEN-VALUE [89]
+   888   1.8                   SB-EVAL::%EVAL [63]
+   583   1.2                   (LAMBDA (&REST SB-EVAL::ARGS) :IN SB-EVAL::MAKE-INTERPRETED-FUNCTION) [82]
+    80   0.2                   SB-EVAL::INTERPRETED-APPLY [86]
+   228   0.5                   (LAMBDA (SB-EVAL::ENV) :IN SB-EVAL::CALL-WITH-NEW-ENV-FULL-PARSING) [97]
+  2328   4.7                   SB-ALIEN-INTERNALS:COMPUTE-EXTRACT-LAMBDA [105]
+  3649   7.3                   SB-EVAL::CALL-WITH-NEW-ENV-FULL-PARSING [72]
+  4309   8.6                   SB-EVAL::CALL-WITH-NEW-ENV [76]
+  9226  18.5                   SB-ALIEN-INTERNALS:NATURALIZE [74]
 ------------------------------------------------------------------------
-     5   0.0                   SB-INTERPRETER::MAKE-FUNCTION [76]
-     0   0.0      5   0.0   SB-INTERPRETER::%MAKE-INTERPRETED-FUNCTION [77]
-     5   0.0                   SB-VM::WRITE-FUNINSTANCE-PROLOGUE [78]
+ 19407  38.8                   (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE) [61]
+     0   0.0  19407  38.8   SB-EVAL::EVAL-LET [70]
+   859   1.7                   LIST-ALLOC-TRAMP [2]
+   542   1.1                   SB-EVAL::%EVAL [63]
+  8619  17.2                   SB-ALIEN-INTERNALS:DEPORT [81]
+   443   0.9                   ALLOC-TRAMP [1]
+  8944  17.9                   SB-ALIEN-INTERNALS:DEPORT-ALLOC [71]
 ------------------------------------------------------------------------
-     5   0.0                   FLET [75]
-     0   0.0      5   0.0   SB-INTERPRETER::MAKE-FUNCTION [76]
-     5   0.0                   SB-INTERPRETER::%MAKE-INTERPRETED-FUNCTION [77]
+  3649   7.3                   SB-ALIEN-INTERNALS:%ALIEN-VALUE [89]
+  1734   3.5                   SB-ALIEN-INTERNALS:DEPORT [81]
+  5751  11.5                   SB-ALIEN-INTERNALS:NATURALIZE [74]
+  4078   8.2                   (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE) [61]
+  3843   7.7                   SB-ALIEN-INTERNALS:DEPORT-ALLOC [71]
+     0   0.0  19055  38.1   SB-EVAL::CALL-WITH-NEW-ENV-FULL-PARSING [72]
+ 16229  32.5                   SB-EVAL::PARSE-ARGUMENTS [73]
+  2826   5.7                   ALLOC-TRAMP [1]
 ------------------------------------------------------------------------
-     1   0.0                   PROGN [46]
-     0   0.0      5   0.0   FLET [75]
-     5   0.0                   SB-INTERPRETER::MAKE-FUNCTION [76]
+  9226  18.5                   SB-ALIEN-INTERNALS:%ALIEN-VALUE [89]
+  9632  19.3                   (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE) [61]
+     0   0.0  18858  37.7   SB-ALIEN-INTERNALS:NATURALIZE [74]
+   752   1.5                   (LAMBDA (&REST SB-EVAL::ARGS) :IN SB-EVAL::MAKE-INTERPRETED-FUNCTION) [82]
+   742   1.5                   SB-EVAL::%EVAL [63]
+   188   0.4                   SB-EVAL::INTERPRETED-APPLY [86]
+  2796   5.6                   SB-ALIEN-INTERNALS:COMPUTE-NATURALIZE-LAMBDA [103]
+   267   0.5                   (LAMBDA (SB-EVAL::ENV) :IN SB-EVAL::CALL-WITH-NEW-ENV-FULL-PARSING) [97]
+  8361  16.7                   SB-EVAL::CALL-WITH-NEW-ENV [76]
+  5751  11.5                   SB-EVAL::CALL-WITH-NEW-ENV-FULL-PARSING [72]
 ------------------------------------------------------------------------
-     2   0.0                   SB-IMPL::STRING-SOUT [27]
-     2   0.0                   (LABELS SB-IMPL::DEFAULT-OUT :IN SB-IMPL::%INIT-STRING-OUTPUT-STREAM) [23]
-     0   0.0      4   0.0   SB-IMPL::STRING-OUTPUT-STREAM-NEW-BUFFER [24]
-     4   0.0                   ALLOC-TRAMP [2]
+ 17279  34.6                   SB-EVAL::FABRICATE-NEW-NATIVE-ENVIRONMENT [78]
+     0   0.0  17279  34.6   SB-EVAL::MAKE-EVAL-LEXENV [80]
+ 17279  34.6                   ALLOC-TRAMP [1]
 ------------------------------------------------------------------------
-     4   0.0                   (LABELS SB-IMPL::HANDLE-IT :IN SB-KERNEL:OUTPUT-OBJECT) [21]
-     0   0.0      4   0.0   (SB-PCL::FAST-METHOD PRINT-OBJECT (CONS T)) [22]
-     4   0.0                   (LABELS SB-IMPL::HANDLE-IT :IN SB-KERNEL:OUTPUT-OBJECT) [21]
+ 16229  32.5                   SB-EVAL::CALL-WITH-NEW-ENV-FULL-PARSING [72]
+     0   0.0  16229  32.5   SB-EVAL::PARSE-ARGUMENTS [73]
+ 10963  21.9                   SB-INT:PARSE-LAMBDA-LIST [75]
+  5265  10.5                   LIST-ALLOC-TRAMP [2]
 ------------------------------------------------------------------------
-     2   0.0                   PRIN1 [34]
-     4   0.0                   (SB-PCL::FAST-METHOD PRINT-OBJECT (CONS T)) [22]
-     2   0.0                   SB-INT:STRINGIFY-OBJECT [19]
-     0   0.0      4   0.0   (LABELS SB-IMPL::HANDLE-IT :IN SB-KERNEL:OUTPUT-OBJECT) [21]
-     1   0.0                   (SB-PCL::FAST-METHOD PRINT-OBJECT (VECTOR T)) [25]
-     1   0.0                   (LABELS SB-IMPL::DEFAULT-OUT :IN SB-IMPL::%INIT-STRING-OUTPUT-STREAM) [23]
-     4   0.0                   (SB-PCL::FAST-METHOD PRINT-OBJECT (CONS T)) [22]
+  1453   2.9                   SB-EVAL::EVAL-LET* [79]
+  3300   6.6                   SB-EVAL::EVAL-NEXT-LET*-BINDING [85]
+  9356  18.7                   SB-EVAL::CALL-WITH-NEW-ENV [76]
+     0   0.0  14109  28.2   SB-EVAL::%MAKE-ENV [84]
+ 14109  28.2                   ALLOC-TRAMP [1]
 ------------------------------------------------------------------------
-     3   0.0                   SB-BROTHERTREE:INSERT [80]
-     1   0.0                   (LABELS SB-BROTHERTREE::INS :IN SB-BROTHERTREE:INSERT) [81]
-     0   0.0      4   0.0   SB-BROTHERTREE::N2 [82]
-     4   0.0                   SYS-ALLOC-TRAMP [5]
+   642   1.3                   SB-EVAL::EVAL-ARGS [102]
+   888   1.8                   SB-ALIEN-INTERNALS:%ALIEN-VALUE [89]
+   279   0.6                   SB-EVAL::EVAL-NEXT-LET*-BINDING [85]
+   742   1.5                   SB-ALIEN-INTERNALS:NATURALIZE [74]
+   652   1.3                   (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE) [61]
+   542   1.1                   SB-EVAL::EVAL-LET [70]
+  9585  19.2                   SB-EVAL::EVAL-PROGN [62]
+     0   0.0  12688  25.4   SB-EVAL::%EVAL [63]
+    28   0.1                   (MACRO-FUNCTION SB-ALIEN-INTERNALS:MAYBE-WITH-PINNED-OBJECTS) [111]
+  3615   7.2                   SB-EVAL::EVAL-ARGS [102]
+  9045  18.1                   (MACRO-FUNCTION SETF) [64]
 ------------------------------------------------------------------------
-     3   0.0                   PRIN1-TO-STRING [18]
-     0   0.0      3   0.0   SB-INT:STRINGIFY-OBJECT [19]
-     2   0.0                   (LABELS SB-IMPL::HANDLE-IT :IN SB-KERNEL:OUTPUT-OBJECT) [21]
-     1   0.0                   GET-OUTPUT-STREAM-STRING [20]
+ 11729  23.5                   (FLET "WITHOUT-INTERRUPTS-BODY-16" :IN #:BLOCK2) [119]
+     0   0.0  11729  23.5   (FLET SB-UNIX::BODY :IN #:BLOCK2) [120]
+     1   0.0                   (SB-PCL::FAST-METHOD GET-VAL (RDB T)) [123]
+     1   0.0                   SB-IMPL::STRING->UTF8 [122]
+  3148   6.3                   GET-KV-RAW [68]
+  8579  17.2                   Unknown fn 111311 [59]
 ------------------------------------------------------------------------
-     3   0.0                   (FLET "THUNK" :IN SWANK/RPC::PRIN1-TO-STRING-FOR-EMACS) [17]
-     0   0.0      3   0.0   PRIN1-TO-STRING [18]
-     3   0.0                   SB-INT:STRINGIFY-OBJECT [19]
+ 11729  23.5                   (LAMBDA ()) in #<code id=1BE04 [5] (LAMBDA ()) {100971000F..10097111F0}> [118]
+     0   0.0  11729  23.5   (FLET "WITHOUT-INTERRUPTS-BODY-16" :IN #:BLOCK2) [119]
+ 11729  23.5                   (FLET SB-UNIX::BODY :IN #:BLOCK2) [120]
 ------------------------------------------------------------------------
-     3   0.0                   SB-IMPL::%WITH-STANDARD-IO-SYNTAX [16]
-     0   0.0      3   0.0   (FLET "THUNK" :IN SWANK/RPC::PRIN1-TO-STRING-FOR-EMACS) [17]
-     3   0.0                   PRIN1-TO-STRING [18]
+     1   0.0                   SB-INT:SIMPLE-EVAL-IN-LEXENV [41]
+     0   0.0  11729  23.5   (LAMBDA ()) in #<code id=1BE04 [5] (LAMBDA ()) {100971000F..10097111F0}> [118]
+ 11729  23.5                   (FLET "WITHOUT-INTERRUPTS-BODY-16" :IN #:BLOCK2) [119]
 ------------------------------------------------------------------------
-     3   0.0                   SB-IMPL::%WITH-STANDARD-IO-SYNTAX [16]
-     0   0.0      3   0.0   (FLET "THUNK" :IN SWANK::LOG-EVENT) [30]
-     2   0.0                   SB-FORMAT::%FORMAT [31]
-     1   0.0                   GET-OUTPUT-STREAM-STRING [20]
+ 10963  21.9                   SB-EVAL::PARSE-ARGUMENTS [73]
+     0   0.0  10963  21.9   SB-INT:PARSE-LAMBDA-LIST [75]
+  2572   5.1                   LIST-ALLOC-TRAMP [2]
+  8391  16.8                   ALLOC-TRAMP [1]
 ------------------------------------------------------------------------
-     3   0.0                   SWANK/RPC:WRITE-MESSAGE [14]
-     0   0.0      3   0.0   SWANK/RPC::PRIN1-TO-STRING-FOR-EMACS [15]
-     3   0.0                   SB-IMPL::%WITH-STANDARD-IO-SYNTAX [16]
+ 10777  21.6                   SB-EVAL::EVAL-PROGN [62]
+     0   0.0  10777  21.6   SB-EVAL::EVAL-NEXT-LET*-BINDING [85]
+   279   0.6                   SB-EVAL::%EVAL [63]
+  4620   9.2                   SB-EVAL::MAKE-ENV [77]
+  3300   6.6                   SB-EVAL::%MAKE-ENV [84]
+  2578   5.2                   LIST-ALLOC-TRAMP [2]
 ------------------------------------------------------------------------
-     3   0.0                   SWANK::ENCODE-MESSAGE [13]
-     0   0.0      3   0.0   SWANK/RPC:WRITE-MESSAGE [14]
-     3   0.0                   SWANK/RPC::PRIN1-TO-STRING-FOR-EMACS [15]
+  9045  18.1                   SB-EVAL::%EVAL [63]
+     0   0.0   9045  18.1   (MACRO-FUNCTION SETF) [64]
+   194   0.4                   (LABELS SB-IMPL::GEN-MV-BIND :IN "SYS:SRC;CODE;SETF.LISP") [99]
+  1135   2.3                   LIST-ALLOC-TRAMP [2]
+  1731   3.5                   (LABELS SB-IMPL::GEN-LET* :IN "SYS:SRC;CODE;SETF.LISP") [69]
+  5985  12.0                   GET-SETF-EXPANSION [65]
 ------------------------------------------------------------------------
-     3   0.0                   Unknown fn 33089 [12]
-     0   0.0      3   0.0   SWANK::ENCODE-MESSAGE [13]
-     3   0.0                   SWANK/RPC:WRITE-MESSAGE [14]
+  8944  17.9                   SB-EVAL::EVAL-LET [70]
+     0   0.0   8944  17.9   SB-ALIEN-INTERNALS:DEPORT-ALLOC [71]
+   588   1.2                   (LAMBDA (&REST SB-EVAL::ARGS) :IN SB-EVAL::MAKE-INTERPRETED-FUNCTION) [82]
+   153   0.3                   (LAMBDA (SB-EVAL::ENV) :IN SB-EVAL::CALL-WITH-NEW-ENV-FULL-PARSING) [97]
+   741   1.5                   SB-ALIEN-INTERNALS:COMPUTE-DEPORT-ALLOC-LAMBDA [100]
+   115   0.2                   SB-EVAL::INTERPRETED-APPLY [86]
+  3504   7.0                   SB-EVAL::CALL-WITH-NEW-ENV [76]
+  3843   7.7                   SB-EVAL::CALL-WITH-NEW-ENV-FULL-PARSING [72]
 ------------------------------------------------------------------------
-     3   0.0                   SWANK::DISPATCH-EVENT [28]
-     0   0.0      3   0.0   SWANK::LOG-EVENT [29]
-     3   0.0                   SB-IMPL::%WITH-STANDARD-IO-SYNTAX [16]
+  8619  17.2                   SB-EVAL::EVAL-LET [70]
+     0   0.0   8619  17.2   SB-ALIEN-INTERNALS:DEPORT [81]
+  1213   2.4                   SB-EVAL::INTERPRETED-APPLY [86]
+   171   0.3                   (LAMBDA (&REST SB-EVAL::ARGS) :IN SB-EVAL::MAKE-INTERPRETED-FUNCTION) [82]
+    72   0.1                   (LAMBDA (SB-EVAL::ENV) :IN SB-EVAL::CALL-WITH-NEW-ENV-FULL-PARSING) [97]
+  1214   2.4                   SB-ALIEN-INTERNALS:COMPUTE-DEPORT-LAMBDA [98]
+  4215   8.4                   SB-EVAL::CALL-WITH-NEW-ENV [76]
+  1734   3.5                   SB-EVAL::CALL-WITH-NEW-ENV-FULL-PARSING [72]
 ------------------------------------------------------------------------
-     3   0.0                   Unknown fn 33089 [12]
-     0   0.0      3   0.0   SWANK::DISPATCH-EVENT [28]
-     3   0.0                   SWANK::LOG-EVENT [29]
+  7969  15.9                   (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE) [61]
+     0   0.0   7969  15.9   SB-ALIEN-INTERNALS:COMPUTE-DEPOSIT-LAMBDA [67]
+  1136   2.3                   SB-ALIEN::ROOT-DEPOSIT-GEN-METHOD [110]
+  6833  13.7                   SYS-LIST-ALLOC-TRAMP [3]
 ------------------------------------------------------------------------
-     1   0.0                   PUT-KV-RAW [58]
-     2   0.0                   Unknown fn 113173 [53]
-     0   0.0      3   0.0   SB-ALIEN-INTERNALS:%SAP-ALIEN [54]
-     3   0.0                   ALLOC-TRAMP [2]
+  5985  12.0                   (MACRO-FUNCTION SETF) [64]
+     0   0.0   5985  12.0   GET-SETF-EXPANSION [65]
+  1212   2.4                   SB-INT:MAKE-GENSYM-LIST [101]
+   572   1.1                   CONS [95]
+  1303   2.6                   LIST-ALLOC-TRAMP [2]
+  2898   5.8                   SB-IMPL::COLLECT-SETF-TEMPS [66]
 ------------------------------------------------------------------------
-     3   0.0                   (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-KERNEL:SUB-GC) [66]
-     0   0.0      3   0.0   (FLET "WITHOUT-GCING-BODY-" :IN SB-KERNEL:SUB-GC) [67]
-     3   0.0                   SYS-LIST-ALLOC-TRAMP [1]
+  3615   7.2                   SB-EVAL::%EVAL [63]
+     0   0.0   3615   7.2   SB-EVAL::EVAL-ARGS [102]
+   642   1.3                   SB-EVAL::%EVAL [63]
+  2973   5.9                   LIST-ALLOC-TRAMP [2]
 ------------------------------------------------------------------------
-     3   0.0                   SB-KERNEL:SUB-GC [65]
-     0   0.0      3   0.0   (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-KERNEL:SUB-GC) [66]
-     3   0.0                   (FLET "WITHOUT-GCING-BODY-" :IN SB-KERNEL:SUB-GC) [67]
+     9   0.0                   DEREF [121]
+   225   0.4                   SB-ALIEN-INTERNALS:%SET-DEREF [104]
+  2865   5.7                   (LAMBDA (&REST SB-EVAL::ARGS) :IN SB-EVAL::MAKE-INTERPRETED-FUNCTION) [82]
+     0   0.0   3099   6.2   LISTIFY-&REST [83]
+  3099   6.2                   foreign function listify_rest_arg [4]
+------------------------------------------------------------------------
+  2898   5.8                   GET-SETF-EXPANSION [65]
+     0   0.0   2898   5.8   SB-IMPL::COLLECT-SETF-TEMPS [66]
+  1283   2.6                   GENSYM [107]
+  1031   2.1                   SB-KERNEL:%MAKE-SYMBOL [87]
+   584   1.2                   LIST-ALLOC-TRAMP [2]
+------------------------------------------------------------------------
+   588   1.2                   SB-ALIEN-INTERNALS:DEPORT-ALLOC [71]
+   583   1.2                   SB-ALIEN-INTERNALS:%ALIEN-VALUE [89]
+   752   1.5                   SB-ALIEN-INTERNALS:NATURALIZE [74]
+   171   0.3                   SB-ALIEN-INTERNALS:DEPORT [81]
+   771   1.5                   (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE) [61]
+     0   0.0   2865   5.7   (LAMBDA (&REST SB-EVAL::ARGS) :IN SB-EVAL::MAKE-INTERPRETED-FUNCTION) [82]
+  2865   5.7                   LISTIFY-&REST [83]
+------------------------------------------------------------------------
+  2831   5.7                   SB-EVAL::EVAL-PROGN [62]
+     0   0.0   2831   5.7   SB-EVAL::EVAL-LET* [79]
+  1453   2.9                   SB-EVAL::%MAKE-ENV [84]
+   581   1.2                   SB-EVAL::MAKE-ENV [77]
+   586   1.2                   LIST-ALLOC-TRAMP [2]
+   211   0.4                   ALLOC-TRAMP [1]
+------------------------------------------------------------------------
+  2796   5.6                   SB-ALIEN-INTERNALS:NATURALIZE [74]
+     0   0.0   2796   5.6   SB-ALIEN-INTERNALS:COMPUTE-NATURALIZE-LAMBDA [103]
+   829   1.7                   SB-VM::INTEGER-NATURALIZE-GEN-METHOD [109]
+  1967   3.9                   SYS-LIST-ALLOC-TRAMP [3]
+------------------------------------------------------------------------
+  2182   4.4                   SB-EVAL::MAKE-ENV [77]
+   413   0.8                   (LABELS SB-IMPL::GEN-LET* :IN "SYS:SRC;CODE;SETF.LISP") [69]
+     0   0.0   2595   5.2   SB-IMPL::APPEND2 [96]
+  2595   5.2                   LIST-ALLOC-TRAMP [2]
+------------------------------------------------------------------------
+  2328   4.7                   SB-ALIEN-INTERNALS:%ALIEN-VALUE [89]
+     0   0.0   2328   4.7   SB-ALIEN-INTERNALS:COMPUTE-EXTRACT-LAMBDA [105]
+  1494   3.0                   SYS-LIST-ALLOC-TRAMP [3]
+   834   1.7                   SB-ALIEN::INTEGER-EXTRACT-GEN-METHOD [106]
+------------------------------------------------------------------------
+  1731   3.5                   (MACRO-FUNCTION SETF) [64]
+     0   0.0   1731   3.5   (LABELS SB-IMPL::GEN-LET* :IN "SYS:SRC;CODE;SETF.LISP") [69]
+   413   0.8                   SB-IMPL::APPEND2 [96]
+  1318   2.6                   LIST-ALLOC-TRAMP [2]
+------------------------------------------------------------------------
+  1213   2.4                   SB-ALIEN-INTERNALS:DEPORT [81]
+   188   0.4                   SB-ALIEN-INTERNALS:NATURALIZE [74]
+   114   0.2                   (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE) [61]
+    80   0.2                   SB-ALIEN-INTERNALS:%ALIEN-VALUE [89]
+   115   0.2                   SB-ALIEN-INTERNALS:DEPORT-ALLOC [71]
+     0   0.0   1710   3.4   SB-EVAL::INTERPRETED-APPLY [86]
+  1710   3.4                   ALLOC-TRAMP [1]
+------------------------------------------------------------------------
+   799   1.6                   SB-ALIEN::ROOT-DEPOSIT-GEN-METHOD [110]
+   834   1.7                   SB-ALIEN-INTERNALS:COMPUTE-EXTRACT-LAMBDA [105]
+     0   0.0   1633   3.3   SB-ALIEN::INTEGER-EXTRACT-GEN-METHOD [106]
+  1633   3.3                   SYS-LIST-ALLOC-TRAMP [3]
+------------------------------------------------------------------------
+     1   0.0                   (FLET SB-UNIX::BODY :IN #:DROP-THRU-TAG-1) [131]
+     4   0.0                   (FLET SB-UNIX::BODY :IN #:BLOCK2) [128]
+   553   1.1                   SB-INT:MAKE-GENSYM-LIST [101]
+  1031   2.1                   SB-IMPL::COLLECT-SETF-TEMPS [66]
+     1   0.0                   (FLET SB-UNIX::BODY :IN #:DROP-THRU-TAG-1) [58]
+     0   0.0   1590   3.2   SB-KERNEL:%MAKE-SYMBOL [87]
+  1590   3.2                   SYS-ALLOC-TRAMP [5]
+------------------------------------------------------------------------
+  1372   2.7                   (LABELS SB-IMPL::RECURSE :IN SB-IMPL::%SYMBOL-NAMEIFY) [108]
+  1372   2.7                   GENSYM [107]
+     0   0.0   1372   2.7   (LABELS SB-IMPL::RECURSE :IN SB-IMPL::%SYMBOL-NAMEIFY) [108]
+     1   0.0                   ALLOC-TRAMP [1]
+  1372   2.7                   (LABELS SB-IMPL::RECURSE :IN SB-IMPL::%SYMBOL-NAMEIFY) [108]
+------------------------------------------------------------------------
+  1283   2.6                   SB-IMPL::COLLECT-SETF-TEMPS [66]
+    89   0.2                   SB-INT:MAKE-GENSYM-LIST [101]
+     0   0.0   1372   2.7   GENSYM [107]
+  1372   2.7                   (LABELS SB-IMPL::RECURSE :IN SB-IMPL::%SYMBOL-NAMEIFY) [108]
+------------------------------------------------------------------------
+  1214   2.4                   SB-ALIEN-INTERNALS:DEPORT [81]
+     0   0.0   1214   2.4   SB-ALIEN-INTERNALS:COMPUTE-DEPORT-LAMBDA [98]
+    99   0.2                   SB-ALIEN::INTEGER-LISP-REP-METHOD [112]
+  1115   2.2                   SYS-LIST-ALLOC-TRAMP [3]
+------------------------------------------------------------------------
+  1212   2.4                   GET-SETF-EXPANSION [65]
+     0   0.0   1212   2.4   SB-INT:MAKE-GENSYM-LIST [101]
+   553   1.1                   SB-KERNEL:%MAKE-SYMBOL [87]
+    89   0.2                   GENSYM [107]
+   570   1.1                   LIST-ALLOC-TRAMP [2]
+------------------------------------------------------------------------
+  1136   2.3                   SB-ALIEN-INTERNALS:COMPUTE-DEPOSIT-LAMBDA [67]
+     0   0.0   1136   2.3   SB-ALIEN::ROOT-DEPOSIT-GEN-METHOD [110]
+   337   0.7                   SYS-LIST-ALLOC-TRAMP [3]
+   799   1.6                   SB-ALIEN::INTEGER-EXTRACT-GEN-METHOD [106]
+------------------------------------------------------------------------
+   153   0.3                   SB-ALIEN-INTERNALS:DEPORT-ALLOC [71]
+    72   0.1                   SB-ALIEN-INTERNALS:DEPORT [81]
+   228   0.5                   SB-ALIEN-INTERNALS:%ALIEN-VALUE [89]
+   267   0.5                   SB-ALIEN-INTERNALS:NATURALIZE [74]
+   117   0.2                   (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE) [61]
+     0   0.0    837   1.7   (LAMBDA (SB-EVAL::ENV) :IN SB-EVAL::CALL-WITH-NEW-ENV-FULL-PARSING) [97]
+   837   1.7                   ALLOC-TRAMP [1]
+------------------------------------------------------------------------
+   829   1.7                   SB-ALIEN-INTERNALS:COMPUTE-NATURALIZE-LAMBDA [103]
+     0   0.0    829   1.7   SB-VM::INTEGER-NATURALIZE-GEN-METHOD [109]
+   829   1.7                   LIST-ALLOC-TRAMP [2]
+------------------------------------------------------------------------
+   741   1.5                   SB-ALIEN-INTERNALS:DEPORT-ALLOC [71]
+     0   0.0    741   1.5   SB-ALIEN-INTERNALS:COMPUTE-DEPORT-ALLOC-LAMBDA [100]
+   741   1.5                   SYS-LIST-ALLOC-TRAMP [3]
+------------------------------------------------------------------------
+   572   1.1                   GET-SETF-EXPANSION [65]
+     0   0.0    572   1.1   CONS [95]
+   572   1.1                   LIST-ALLOC-TRAMP [2]
+------------------------------------------------------------------------
+   225   0.4                   SETFA [60]
+     0   0.0    225   0.4   SB-ALIEN-INTERNALS:%SET-DEREF [104]
+   225   0.4                   LISTIFY-&REST [83]
+------------------------------------------------------------------------
+   194   0.4                   (MACRO-FUNCTION SETF) [64]
+     0   0.0    194   0.4   (LABELS SB-IMPL::GEN-MV-BIND :IN "SYS:SRC;CODE;SETF.LISP") [99]
+   194   0.4                   LIST-ALLOC-TRAMP [2]
+------------------------------------------------------------------------
+    99   0.2                   SB-ALIEN-INTERNALS:COMPUTE-DEPORT-LAMBDA [98]
+     0   0.0     99   0.2   SB-ALIEN::INTEGER-LISP-REP-METHOD [112]
+    99   0.2                   SYS-LIST-ALLOC-TRAMP [3]
+------------------------------------------------------------------------
+    28   0.1                   SB-EVAL::%EVAL [63]
+     0   0.0     28   0.1   (MACRO-FUNCTION SB-ALIEN-INTERNALS:MAYBE-WITH-PINNED-OBJECTS) [111]
+    28   0.1                   SYS-LIST-ALLOC-TRAMP [3]
+------------------------------------------------------------------------
+     9   0.0                   (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-KERNEL:SUB-GC) [93]
+     0   0.0      9   0.0   (FLET "WITHOUT-GCING-BODY-" :IN SB-KERNEL:SUB-GC) [94]
+     9   0.0                   SYS-LIST-ALLOC-TRAMP [3]
+------------------------------------------------------------------------
+     9   0.0                   SB-KERNEL:SUB-GC [92]
+     0   0.0      9   0.0   (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-KERNEL:SUB-GC) [93]
+     9   0.0                   (FLET "WITHOUT-GCING-BODY-" :IN SB-KERNEL:SUB-GC) [94]
 ------------------------------------------------------------------------
      1   0.0                   foreign function call_into_lisp_ [8]
-     0   0.0      3   0.0   SB-KERNEL:SUB-GC [65]
-     3   0.0                   (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-KERNEL:SUB-GC) [66]
+     0   0.0      9   0.0   SB-KERNEL:SUB-GC [92]
+     9   0.0                   (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-KERNEL:SUB-GC) [93]
 ------------------------------------------------------------------------
-     3   0.0                   foreign function interrupt_handle_pending [63]
-     0   0.0      3   0.0   foreign function maybe_gc [64]
-     3   0.0                   foreign function funcall1 [7]
+     9   0.0                   GET-KV-RAW [68]
+     0   0.0      9   0.0   SB-KERNEL:%MAKE-ARRAY [113]
+     9   0.0                   ALLOC-TRAMP [1]
 ------------------------------------------------------------------------
-     0   0.0      3   0.0   foreign function interrupt_handle_pending [63]
-     3   0.0                   foreign function maybe_gc [64]
+     9   0.0                   CLONE-OCTETS-FROM-ALIEN [88]
+     0   0.0      9   0.0   DEREF [121]
+     9   0.0                   LISTIFY-&REST [83]
 ------------------------------------------------------------------------
-     1   0.0                   (FLET "THUNK" :IN SWANK::LOG-EVENT) [30]
+     9   0.0                   foreign function interrupt_handle_pending [90]
+     0   0.0      9   0.0   foreign function maybe_gc [91]
+     9   0.0                   foreign function funcall1 [7]
+------------------------------------------------------------------------
+     0   0.0      9   0.0   foreign function interrupt_handle_pending [90]
+     9   0.0                   foreign function maybe_gc [91]
+------------------------------------------------------------------------
+     3   0.0                   SWANK::LOG-EVENT [26]
+     2   0.0                   SWANK/RPC::PRIN1-TO-STRING-FOR-EMACS [15]
+     0   0.0      5   0.0   SB-IMPL::%WITH-STANDARD-IO-SYNTAX [16]
+     3   0.0                   (FLET "THUNK" :IN SWANK::LOG-EVENT) [27]
+     2   0.0                   (FLET "THUNK" :IN SWANK/RPC::PRIN1-TO-STRING-FOR-EMACS) [17]
+------------------------------------------------------------------------
+     1   0.0                   (FLET SB-UNIX::BODY :IN SB-THREAD::RUN) [11]
+     0   0.0      5   0.0   SWANK::DISPATCH-LOOP [12]
+     3   0.0                   SWANK::DISPATCH-EVENT [25]
+     2   0.0                   SWANK::ENCODE-MESSAGE [13]
+------------------------------------------------------------------------
+     1   0.0                   GET-KV-RAW [68]
+     3   0.0                   Unknown fn 111311 [59]
+     1   0.0                   Unknown fn 106750 [124]
+     0   0.0      5   0.0   SB-ALIEN-INTERNALS:%SAP-ALIEN [125]
+     5   0.0                   ALLOC-TRAMP [1]
+------------------------------------------------------------------------
+     1   0.0                   SB-IMPL::STRING-SOUT [34]
+     2   0.0                   (LABELS SB-IMPL::DEFAULT-OUT :IN SB-IMPL::%INIT-STRING-OUTPUT-STREAM) [23]
+     0   0.0      3   0.0   SB-IMPL::STRING-OUTPUT-STREAM-NEW-BUFFER [24]
+     3   0.0                   ALLOC-TRAMP [1]
+------------------------------------------------------------------------
+     3   0.0                   (LABELS SB-IMPL::HANDLE-IT :IN SB-KERNEL:OUTPUT-OBJECT) [21]
+     0   0.0      3   0.0   (SB-PCL::FAST-METHOD PRINT-OBJECT (CONS T)) [22]
+     3   0.0                   (LABELS SB-IMPL::HANDLE-IT :IN SB-KERNEL:OUTPUT-OBJECT) [21]
+------------------------------------------------------------------------
+     2   0.0                   PRIN1 [31]
+     3   0.0                   (SB-PCL::FAST-METHOD PRINT-OBJECT (CONS T)) [22]
+     1   0.0                   SB-INT:STRINGIFY-OBJECT [19]
+     0   0.0      3   0.0   (LABELS SB-IMPL::HANDLE-IT :IN SB-KERNEL:OUTPUT-OBJECT) [21]
+     1   0.0                   (SB-PCL::FAST-METHOD PRINT-OBJECT (VECTOR T)) [32]
+     1   0.0                   (LABELS SB-IMPL::DEFAULT-OUT :IN SB-IMPL::%INIT-STRING-OUTPUT-STREAM) [23]
+     3   0.0                   (SB-PCL::FAST-METHOD PRINT-OBJECT (CONS T)) [22]
+------------------------------------------------------------------------
+     3   0.0                   SB-IMPL::%WITH-STANDARD-IO-SYNTAX [16]
+     0   0.0      3   0.0   (FLET "THUNK" :IN SWANK::LOG-EVENT) [27]
+     2   0.0                   SB-FORMAT::%FORMAT [28]
+     1   0.0                   GET-OUTPUT-STREAM-STRING [20]
+------------------------------------------------------------------------
+     3   0.0                   SWANK::DISPATCH-EVENT [25]
+     0   0.0      3   0.0   SWANK::LOG-EVENT [26]
+     3   0.0                   SB-IMPL::%WITH-STANDARD-IO-SYNTAX [16]
+------------------------------------------------------------------------
+     3   0.0                   SWANK::DISPATCH-LOOP [12]
+     0   0.0      3   0.0   SWANK::DISPATCH-EVENT [25]
+     3   0.0                   SWANK::LOG-EVENT [26]
+------------------------------------------------------------------------
+     1   0.0                   (FLET "THUNK" :IN SWANK::LOG-EVENT) [27]
      1   0.0                   SB-INT:STRINGIFY-OBJECT [19]
      0   0.0      2   0.0   GET-OUTPUT-STREAM-STRING [20]
-     2   0.0                   ALLOC-TRAMP [2]
+     2   0.0                   ALLOC-TRAMP [1]
 ------------------------------------------------------------------------
      1   0.0                   (LABELS SB-IMPL::HANDLE-IT :IN SB-KERNEL:OUTPUT-OBJECT) [21]
      0   0.0      2   0.0   (LABELS SB-IMPL::DEFAULT-OUT :IN SB-IMPL::%INIT-STRING-OUTPUT-STREAM) [23]
      2   0.0                   SB-IMPL::STRING-OUTPUT-STREAM-NEW-BUFFER [24]
 ------------------------------------------------------------------------
-     2   0.0                   SB-IMPL::%WRITE-STRING [26]
-     0   0.0      2   0.0   SB-IMPL::STRING-SOUT [27]
-     2   0.0                   SB-IMPL::STRING-OUTPUT-STREAM-NEW-BUFFER [24]
-------------------------------------------------------------------------
-     2   0.0                   (SB-PCL::FAST-METHOD PRINT-OBJECT (VECTOR T)) [25]
-     0   0.0      2   0.0   SB-IMPL::%WRITE-STRING [26]
-     2   0.0                   SB-IMPL::STRING-SOUT [27]
-------------------------------------------------------------------------
+     2   0.0                   PRIN1-TO-STRING [18]
+     0   0.0      2   0.0   SB-INT:STRINGIFY-OBJECT [19]
      1   0.0                   (LABELS SB-IMPL::HANDLE-IT :IN SB-KERNEL:OUTPUT-OBJECT) [21]
-     0   0.0      2   0.0   (SB-PCL::FAST-METHOD PRINT-OBJECT (VECTOR T)) [25]
-     2   0.0                   SB-IMPL::%WRITE-STRING [26]
+     1   0.0                   GET-OUTPUT-STREAM-STRING [20]
 ------------------------------------------------------------------------
-     2   0.0                   SB-FORMAT::S-INTERPRETER [33]
-     0   0.0      2   0.0   PRIN1 [34]
+     2   0.0                   (FLET "THUNK" :IN SWANK/RPC::PRIN1-TO-STRING-FOR-EMACS) [17]
+     0   0.0      2   0.0   PRIN1-TO-STRING [18]
+     2   0.0                   SB-INT:STRINGIFY-OBJECT [19]
+------------------------------------------------------------------------
+     2   0.0                   SB-IMPL::%WITH-STANDARD-IO-SYNTAX [16]
+     0   0.0      2   0.0   (FLET "THUNK" :IN SWANK/RPC::PRIN1-TO-STRING-FOR-EMACS) [17]
+     2   0.0                   PRIN1-TO-STRING [18]
+------------------------------------------------------------------------
+     2   0.0                   SB-FORMAT::S-INTERPRETER [30]
+     0   0.0      2   0.0   PRIN1 [31]
      2   0.0                   (LABELS SB-IMPL::HANDLE-IT :IN SB-KERNEL:OUTPUT-OBJECT) [21]
 ------------------------------------------------------------------------
-     2   0.0                   SB-FORMAT::INTERPRET-DIRECTIVE-LIST [32]
-     0   0.0      2   0.0   SB-FORMAT::S-INTERPRETER [33]
-     2   0.0                   PRIN1 [34]
+     2   0.0                   SB-FORMAT::INTERPRET-DIRECTIVE-LIST [29]
+     0   0.0      2   0.0   SB-FORMAT::S-INTERPRETER [30]
+     2   0.0                   PRIN1 [31]
 ------------------------------------------------------------------------
-     2   0.0                   SB-FORMAT::%FORMAT [31]
-     0   0.0      2   0.0   SB-FORMAT::INTERPRET-DIRECTIVE-LIST [32]
-     2   0.0                   SB-FORMAT::S-INTERPRETER [33]
+     2   0.0                   SB-FORMAT::%FORMAT [28]
+     0   0.0      2   0.0   SB-FORMAT::INTERPRET-DIRECTIVE-LIST [29]
+     2   0.0                   SB-FORMAT::S-INTERPRETER [30]
 ------------------------------------------------------------------------
-     2   0.0                   (FLET "THUNK" :IN SWANK::LOG-EVENT) [30]
-     0   0.0      2   0.0   SB-FORMAT::%FORMAT [31]
-     2   0.0                   SB-FORMAT::INTERPRET-DIRECTIVE-LIST [32]
+     2   0.0                   (FLET "THUNK" :IN SWANK::LOG-EVENT) [27]
+     0   0.0      2   0.0   SB-FORMAT::%FORMAT [28]
+     2   0.0                   SB-FORMAT::INTERPRET-DIRECTIVE-LIST [29]
 ------------------------------------------------------------------------
-     2   0.0                   (LABELS SB-BROTHERTREE::INS :IN SB-BROTHERTREE:INSERT) [81]
-     2   0.0                   SB-BROTHERTREE:INSERT [80]
-     0   0.0      2   0.0   (LABELS SB-BROTHERTREE::INS :IN SB-BROTHERTREE:INSERT) [81]
-     1   0.0                   SB-BROTHERTREE::N3 [113]
-     1   0.0                   SB-BROTHERTREE::N2 [82]
-     2   0.0                   (LABELS SB-BROTHERTREE::INS :IN SB-BROTHERTREE:INSERT) [81]
+     2   0.0                   SWANK/RPC:WRITE-MESSAGE [14]
+     0   0.0      2   0.0   SWANK/RPC::PRIN1-TO-STRING-FOR-EMACS [15]
+     2   0.0                   SB-IMPL::%WITH-STANDARD-IO-SYNTAX [16]
 ------------------------------------------------------------------------
-     1   0.0                   (LAMBDA NIL :IN SB-WALKER::WALK-FORM-INTERNAL) [100]
-     1   0.0                   SB-WALKER::WALK-LET* [110]
-     0   0.0      2   0.0   SB-WALKER::WITH-AUGMENTED-ENVIRONMENT-INTERNAL [111]
-     1   0.0                   SB-C::MAKE-LAMBDA-VAR [115]
-     1   0.0                   COPY-TREE [112]
+     2   0.0                   SWANK::ENCODE-MESSAGE [13]
+     0   0.0      2   0.0   SWANK/RPC:WRITE-MESSAGE [14]
+     2   0.0                   SWANK/RPC::PRIN1-TO-STRING-FOR-EMACS [15]
 ------------------------------------------------------------------------
-     1   0.0                   SB-WALKER::WALK-MACROLET [114]
-     1   0.0                   SB-WALKER::WALK-DECLARATIONS [106]
-     0   0.0      2   0.0   SB-WALKER::WALK-REPEAT-EVAL [107]
-     2   0.0                   SB-WALKER::WALK-FORM-INTERNAL [101]
+     2   0.0                   SWANK::DISPATCH-LOOP [12]
+     0   0.0      2   0.0   SWANK::ENCODE-MESSAGE [13]
+     2   0.0                   SWANK/RPC:WRITE-MESSAGE [14]
 ------------------------------------------------------------------------
-     1   0.0                   SB-WALKER::WALK-DECLARATIONS [106]
-     2   0.0                   SB-WALKER::WALK-LET [105]
-     0   0.0      2   0.0   SB-WALKER::WALK-DECLARATIONS [106]
-     1   0.0                   SB-WALKER::WALK-DECLARATIONS [106]
-     1   0.0                   SB-WALKER::WALK-REPEAT-EVAL [107]
+     1   0.0                   SB-IMPL::%WRITE-STRING [33]
+     0   0.0      1   0.0   SB-IMPL::STRING-SOUT [34]
+     1   0.0                   SB-IMPL::STRING-OUTPUT-STREAM-NEW-BUFFER [24]
 ------------------------------------------------------------------------
-     1   0.0                   (LAMBDA NIL :IN SB-WALKER::WALK-FORM-INTERNAL) [100]
-     0   0.0      2   0.0   SB-WALKER::WALK-LET [105]
-     2   0.0                   SB-WALKER::WALK-DECLARATIONS [106]
+     1   0.0                   (SB-PCL::FAST-METHOD PRINT-OBJECT (VECTOR T)) [32]
+     0   0.0      1   0.0   SB-IMPL::%WRITE-STRING [33]
+     1   0.0                   SB-IMPL::STRING-SOUT [34]
 ------------------------------------------------------------------------
-     1   0.0                   SB-SPROF::UNAVAILABLE-FRAMES [99]
-     1   0.0                   SB-WALKER::WALK-TEMPLATE [103]
-     0   0.0      2   0.0   SB-WALKER::WALK-TEMPLATE-HANDLE-REPEAT-1 [104]
-     2   0.0                   SB-WALKER::WALK-FORM-INTERNAL [101]
+     1   0.0                   (LABELS SB-IMPL::HANDLE-IT :IN SB-KERNEL:OUTPUT-OBJECT) [21]
+     0   0.0      1   0.0   (SB-PCL::FAST-METHOD PRINT-OBJECT (VECTOR T)) [32]
+     1   0.0                   SB-IMPL::%WRITE-STRING [33]
 ------------------------------------------------------------------------
-     2   0.0                   SB-WALKER::WALK-TEMPLATE [103]
-     1   0.0                   (LAMBDA NIL :IN SB-WALKER::WALK-FORM-INTERNAL) [100]
-     0   0.0      2   0.0   SB-WALKER::WALK-TEMPLATE [103]
-     1   0.0                   SB-WALKER::WALK-TEMPLATE-HANDLE-REPEAT-1 [104]
-     2   0.0                   SB-WALKER::WALK-TEMPLATE [103]
-------------------------------------------------------------------------
-     2   0.0                   SB-WALKER::WALK-FORM-INTERNAL [101]
-     0   0.0      2   0.0   SB-C::CALL-WITH-CURRENT-SOURCE-FORM [102]
-     2   0.0                   (LAMBDA NIL :IN SB-WALKER::WALK-FORM-INTERNAL) [100]
-------------------------------------------------------------------------
-     1   0.0                   SB-WALKER::WALK-TAGBODY-1 [109]
-     2   0.0                   SB-WALKER::WALK-REPEAT-EVAL [107]
-     2   0.0                   SB-WALKER::WALK-TEMPLATE-HANDLE-REPEAT-1 [104]
-     1   0.0                   (LAMBDA NIL :IN SB-WALKER::WALK-FORM-INTERNAL) [100]
-     0   0.0      2   0.0   SB-WALKER::WALK-FORM-INTERNAL [101]
-     2   0.0                   SB-C::CALL-WITH-CURRENT-SOURCE-FORM [102]
-------------------------------------------------------------------------
-     2   0.0                   SB-C::CALL-WITH-CURRENT-SOURCE-FORM [102]
-     1   0.0                   SB-SPROF::UNAVAILABLE-FRAMES [99]
-     0   0.0      2   0.0   (LAMBDA NIL :IN SB-WALKER::WALK-FORM-INTERNAL) [100]
-     1   0.0                   SB-WALKER::WITH-AUGMENTED-ENVIRONMENT-INTERNAL [111]
-     1   0.0                   SB-WALKER::WALK-MACROLET [114]
-     1   0.0                   SB-WALKER::WALK-LET* [110]
-     1   0.0                   SB-WALKER::WALK-TAGBODY [108]
-     1   0.0                   SB-WALKER::WALK-LET [105]
-     1   0.0                   SB-WALKER::WALK-TEMPLATE [103]
-     1   0.0                   SB-WALKER::WALK-FORM-INTERNAL [101]
-------------------------------------------------------------------------
-     2   0.0                   LET [49]
-     0   0.0      2   0.0   SB-SPROF::UNAVAILABLE-FRAMES [99]
-     1   0.0                   SB-WALKER::WALK-TEMPLATE-HANDLE-REPEAT-1 [104]
-     1   0.0                   (LAMBDA NIL :IN SB-WALKER::WALK-FORM-INTERNAL) [100]
-------------------------------------------------------------------------
-     2   0.0                   (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-THREAD::CALL-WITH-RECURSIVE-LOCK) [125]
-     0   0.0      2   0.0   (LAMBDA NIL :IN SWANK/GRAY::%STREAM-FINISH-OUTPUT) [126]
-     1   0.0                   SB-KERNEL:VECTOR-SUBSEQ* [128]
-     1   0.0                   (LAMBDA (STRING) :IN SWANK-REPL::MAKE-OUTPUT-FUNCTION) [127]
-------------------------------------------------------------------------
-     2   0.0                   SB-THREAD::CALL-WITH-RECURSIVE-LOCK [124]
-     0   0.0      2   0.0   (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-THREAD::CALL-WITH-RECURSIVE-LOCK) [125]
-     2   0.0                   (LAMBDA NIL :IN SWANK/GRAY::%STREAM-FINISH-OUTPUT) [126]
-------------------------------------------------------------------------
-     2   0.0                   (FLET SWANK/BACKEND:CALL-WITH-LOCK-HELD :IN "/home/ellis/.emacs.d/elpa/slime-20241027.2104/swank/sbcl.lisp") [123]
-     0   0.0      2   0.0   SB-THREAD::CALL-WITH-RECURSIVE-LOCK [124]
-     2   0.0                   (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-THREAD::CALL-WITH-RECURSIVE-LOCK) [125]
-------------------------------------------------------------------------
-     2   0.0                   SWANK/GRAY::%STREAM-FINISH-OUTPUT [122]
-     0   0.0      2   0.0   (FLET SWANK/BACKEND:CALL-WITH-LOCK-HELD :IN "/home/ellis/.emacs.d/elpa/slime-20241027.2104/swank/sbcl.lisp") [123]
-     2   0.0                   SB-THREAD::CALL-WITH-RECURSIVE-LOCK [124]
-------------------------------------------------------------------------
-     2   0.0                   Unknown fn 32068 [121]
-     0   0.0      2   0.0   SWANK/GRAY::%STREAM-FINISH-OUTPUT [122]
-     2   0.0                   (FLET SWANK/BACKEND:CALL-WITH-LOCK-HELD :IN "/home/ellis/.emacs.d/elpa/slime-20241027.2104/swank/sbcl.lisp") [123]
+     1   0.0                   SWANK/BACKEND:AUTO-FLUSH-LOOP [114]
+     0   0.0      1   0.0   SWANK/GRAY::%STREAM-FINISH-OUTPUT [115]
+     1   0.0                   ALLOC-TRAMP [1]
 ------------------------------------------------------------------------
      1   0.0                   (FLET SB-UNIX::BODY :IN SB-THREAD::RUN) [11]
-     0   0.0      2   0.0   Unknown fn 32068 [121]
-     2   0.0                   SWANK/GRAY::%STREAM-FINISH-OUTPUT [122]
+     0   0.0      1   0.0   SWANK/BACKEND:AUTO-FLUSH-LOOP [114]
+     1   0.0                   SWANK/GRAY::%STREAM-FINISH-OUTPUT [115]
 ------------------------------------------------------------------------
-     1   0.0                   (SB-PCL::FAST-METHOD GET-VAL (RDB T)) [68]
-     0   0.0      1   0.0   ROCKSDB-READOPTIONS-CREATE [69]
-     1   0.0                   ALLOC-TRAMP [2]
+     1   0.0                   (FLET SB-UNIX::BODY :IN #:BLOCK2) [120]
+     0   0.0      1   0.0   SB-IMPL::STRING->UTF8 [122]
+     1   0.0                   ALLOC-TRAMP [1]
 ------------------------------------------------------------------------
-     1   0.0                   SB-INTERPRETER::LET/SPEC [45]
-     0   0.0      1   0.0   (SB-PCL::FAST-METHOD GET-VAL (RDB T)) [68]
-     1   0.0                   ROCKSDB-READOPTIONS-CREATE [69]
+     1   0.0                   (SB-PCL::FAST-METHOD GET-VAL (RDB T)) [123]
+     0   0.0      1   0.0   Unknown fn 106750 [124]
+     1   0.0                   SB-ALIEN-INTERNALS:%SAP-ALIEN [125]
 ------------------------------------------------------------------------
-     1   0.0                   SB-C::%MAKE-DEFINITION-SOURCE-LOCATION [97]
-     0   0.0      1   0.0   SB-C::%MAKE-BASIC-DEFINITION-SOURCE-LOCATION [98]
-     1   0.0                   ALLOC-TRAMP [2]
-------------------------------------------------------------------------
-     1   0.0                   SB-INTERPRETER::%MAKE-PROTO-FN [96]
-     0   0.0      1   0.0   SB-C::%MAKE-DEFINITION-SOURCE-LOCATION [97]
-     1   0.0                   SB-C::%MAKE-BASIC-DEFINITION-SOURCE-LOCATION [98]
-------------------------------------------------------------------------
-     1   0.0                   (:IMMEDIATE FUNCTION) [95]
-     0   0.0      1   0.0   SB-INTERPRETER::%MAKE-PROTO-FN [96]
-     1   0.0                   SB-C::%MAKE-DEFINITION-SOURCE-LOCATION [97]
-------------------------------------------------------------------------
-     1   0.0                   SB-INT:EVAL-IN-LEXENV [41]
-     0   0.0      1   0.0   (:IMMEDIATE FUNCTION) [95]
-     1   0.0                   SB-INTERPRETER::%MAKE-PROTO-FN [96]
-------------------------------------------------------------------------
-     1   0.0                   COPY-TREE [112]
-     1   0.0                   SB-WALKER::WITH-AUGMENTED-ENVIRONMENT-INTERNAL [111]
-     0   0.0      1   0.0   COPY-TREE [112]
-     1   0.0                   LIST-ALLOC-TRAMP [3]
-     1   0.0                   COPY-TREE [112]
-------------------------------------------------------------------------
-     1   0.0                   (LAMBDA NIL :IN SB-WALKER::WALK-FORM-INTERNAL) [100]
-     0   0.0      1   0.0   SB-WALKER::WALK-LET* [110]
-     1   0.0                   SB-WALKER::WITH-AUGMENTED-ENVIRONMENT-INTERNAL [111]
-------------------------------------------------------------------------
-     1   0.0                   SB-WALKER::WALK-TAGBODY-1 [109]
-     1   0.0                   SB-WALKER::WALK-TAGBODY [108]
-     0   0.0      1   0.0   SB-WALKER::WALK-TAGBODY-1 [109]
-     1   0.0                   SB-WALKER::WALK-FORM-INTERNAL [101]
-     1   0.0                   SB-WALKER::WALK-TAGBODY-1 [109]
-------------------------------------------------------------------------
-     1   0.0                   (LAMBDA NIL :IN SB-WALKER::WALK-FORM-INTERNAL) [100]
-     0   0.0      1   0.0   SB-WALKER::WALK-TAGBODY [108]
-     1   0.0                   SB-WALKER::WALK-TAGBODY-1 [109]
-------------------------------------------------------------------------
-     1   0.0                   (LABELS SB-BROTHERTREE::INS :IN SB-BROTHERTREE:INSERT) [81]
-     0   0.0      1   0.0   SB-BROTHERTREE::N3 [113]
-     1   0.0                   SYS-ALLOC-TRAMP [5]
-------------------------------------------------------------------------
-     1   0.0                   SB-WALKER::WITH-AUGMENTED-ENVIRONMENT-INTERNAL [111]
-     0   0.0      1   0.0   SB-C::MAKE-LAMBDA-VAR [115]
-     1   0.0                   ALLOC-TRAMP [2]
-------------------------------------------------------------------------
-     1   0.0                   (LAMBDA NIL :IN SB-WALKER::WALK-FORM-INTERNAL) [100]
-     0   0.0      1   0.0   SB-WALKER::WALK-MACROLET [114]
-     1   0.0                   SB-WALKER::WALK-REPEAT-EVAL [107]
-------------------------------------------------------------------------
-     1   0.0                   (FLET SB-INTERPRETER::MACROEXPAND-HOOK :IN SB-INTERPRETER::TRACING-MACROEXPAND-1) [119]
-     0   0.0      1   0.0   (MACRO-FUNCTION PROG1) [120]
-     1   0.0                   LIST-ALLOC-TRAMP [3]
-------------------------------------------------------------------------
-     1   0.0                   MACROEXPAND-1 [118]
-     0   0.0      1   0.0   (FLET SB-INTERPRETER::MACROEXPAND-HOOK :IN SB-INTERPRETER::TRACING-MACROEXPAND-1) [119]
-     1   0.0                   (MACRO-FUNCTION PROG1) [120]
-------------------------------------------------------------------------
-     1   0.0                   SB-INTERPRETER::TRACING-MACROEXPAND-1 [117]
-     0   0.0      1   0.0   MACROEXPAND-1 [118]
-     1   0.0                   (FLET SB-INTERPRETER::MACROEXPAND-HOOK :IN SB-INTERPRETER::TRACING-MACROEXPAND-1) [119]
-------------------------------------------------------------------------
-     1   0.0                   SB-INTERPRETER::DIGEST-FORM [116]
-     0   0.0      1   0.0   SB-INTERPRETER::TRACING-MACROEXPAND-1 [117]
-     1   0.0                   MACROEXPAND-1 [118]
-------------------------------------------------------------------------
-     1   0.0                   SB-INTERPRETER::LET/SPEC [45]
-     0   0.0      1   0.0   SB-INTERPRETER::DIGEST-FORM [116]
-     1   0.0                   SB-INTERPRETER::TRACING-MACROEXPAND-1 [117]
-------------------------------------------------------------------------
-     1   0.0                   SB-ALIEN-INTERNALS:NATURALIZE [70]
-     0   0.0      1   0.0   SB-ALIEN::COERCE-TO-INTERPRETED-FUNCTION [94]
-     1   0.0                   EVAL [40]
-------------------------------------------------------------------------
-     1   0.0                   (LAMBDA NIL :IN SWANK/GRAY::%STREAM-FINISH-OUTPUT) [126]
-     0   0.0      1   0.0   (LAMBDA (STRING) :IN SWANK-REPL::MAKE-OUTPUT-FUNCTION) [127]
-     1   0.0                   ALLOC-TRAMP [2]
-------------------------------------------------------------------------
-     1   0.0                   (LAMBDA NIL :IN SWANK/GRAY::%STREAM-FINISH-OUTPUT) [126]
-     0   0.0      1   0.0   SB-KERNEL:VECTOR-SUBSEQ* [128]
-     1   0.0                   ALLOC-TRAMP [2]
+     1   0.0                   (FLET SB-UNIX::BODY :IN #:BLOCK2) [120]
+     0   0.0      1   0.0   (SB-PCL::FAST-METHOD GET-VAL (RDB T)) [123]
+     1   0.0                   Unknown fn 106750 [124]
 ------------------------------------------------------------------------
 
 
            Self        Total        Cumul
   Nr  Count     %  Count     %  Count     %    Calls  Function
 ------------------------------------------------------------------------
-   1  27524  55.0  27524  55.0  27524  55.0        -  SYS-LIST-ALLOC-TRAMP
-   2  19088  38.2  19088  38.2  46612  93.2        -  ALLOC-TRAMP
-   3   2237   4.5   2237   4.5  48849  97.7        -  LIST-ALLOC-TRAMP
-   4   1146   2.3   1146   2.3  49995 100.0        -  foreign function listify_rest_arg
-   5      5   0.0      5   0.0  50000 100.0        -  SYS-ALLOC-TRAMP
-   6      0   0.0  50000 100.0  50000 100.0        -  (FLET SB-UNIX::BODY :IN SB-THREAD::RUN)
-   7      0   0.0  50000 100.0  50000 100.0        -  (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-THREAD::RUN)
-   8      0   0.0  50000 100.0  50000 100.0        -  SB-THREAD::RUN
-   9      0   0.0  50000 100.0  50000 100.0        -  foreign function call_into_lisp_
-  10      0   0.0  50000 100.0  50000 100.0        -  foreign function funcall1
-  11      0   0.0  50000 100.0  50000 100.0        -  foreign function new_thread_trampoline
-  12      0   0.0  49992 100.0  50000 100.0        -  UNWIND-PROTECT
-  13      0   0.0  49992 100.0  50000 100.0        -  MULTIPLE-VALUE-PROG1
-  14      0   0.0  49992 100.0  50000 100.0        -  PROGN
-  15      0   0.0  49992 100.0  50000 100.0        -  SB-INTERPRETER::LET/SPEC
-  16      0   0.0  49992 100.0  50000 100.0        -  (LAMBDA NIL :IN SWANK:EVAL-AND-GRAB-OUTPUT)
-  17      0   0.0  49992 100.0  50000 100.0        -  SWANK::CALL-WITH-RETRY-RESTART
-  18      0   0.0  49992 100.0  50000 100.0        -  SWANK::CALL-WITH-BUFFER-SYNTAX
-  19      0   0.0  49992 100.0  50000 100.0        -  SB-INT:EVAL-IN-LEXENV
-  20      0   0.0  49992 100.0  50000 100.0        -  EVAL
-  21      0   0.0  49992 100.0  50000 100.0        -  SWANK:EVAL-FOR-EMACS
-  22      0   0.0  49992 100.0  50000 100.0        -  SWANK/SBCL::CALL-WITH-BREAK-HOOK
-  23      0   0.0  49992 100.0  50000 100.0        -  (FLET SWANK/BACKEND:CALL-WITH-DEBUGGER-HOOK :IN "/home/ellis/.emacs.d/elpa/slime-20241027.2104/swank/sbcl.lisp")
-  24      0   0.0  49992 100.0  50000 100.0        -  SWANK::CALL-WITH-BINDINGS
-  25      0   0.0  49992 100.0  50000 100.0        -  (LAMBDA NIL :IN SWANK::SPAWN-WORKER-THREAD)
-  26      0   0.0  49991 100.0  50000 100.0        -  LET
-  27      0   0.0  49989 100.0  50000 100.0        -  BLOCK
-  28      0   0.0  49988 100.0  50000 100.0        -  SB-INTERPRETER::EVAL-TAGBODY
-  29      0   0.0  47555  95.1  50000 100.0        -  (LAMBDA (FUNCTION &REST SB-PROFILE::ARGS) :IN SB-PROFILE::PROFILE-ENCAPSULATION-LAMBDAS)
-  30      0   0.0  36384  72.8  50000 100.0        -  SETFA
-  31      0   0.0  36344  72.7  50000 100.0        -  PUT-KV-RAW
-  32      0   0.0  35571  71.1  50000 100.0        -  (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE)
-  33      0   0.0  14485  29.0  50000 100.0        -  SB-ALIEN-INTERNALS:COMPUTE-DEPOSIT-LAMBDA
-  34      0   0.0  11211  22.4  50000 100.0        -  Unknown fn 113173
-  35      0   0.0  11153  22.3  50000 100.0        -  CLONE-OCTETS-FROM-ALIEN
-  36      0   0.0  10820  21.6  50000 100.0        -  SB-ALIEN-INTERNALS:%ALIEN-VALUE
-  37      0   0.0   9344  18.7  50000 100.0        -  SB-ALIEN-INTERNALS:NATURALIZE
-  38      0   0.0   5989  12.0  50000 100.0        -  (SB-INTERPRETER::.APPLY. 2)
-  39      0   0.0   5967  11.9  50000 100.0        -  SB-ALIEN-INTERNALS:COMPUTE-NATURALIZE-LAMBDA
-  40      0   0.0   5804  11.6  50000 100.0        -  SB-ALIEN-INTERNALS:DEPORT
-  41      0   0.0   5007  10.0  50000 100.0        -  LET*
-  42      0   0.0   4509   9.0  50000 100.0        -  SB-ALIEN-INTERNALS:COMPUTE-EXTRACT-LAMBDA
-  43      0   0.0   4343   8.7  50000 100.0        -  SB-ALIEN::INTEGER-EXTRACT-GEN-METHOD
-  44      0   0.0   4034   8.1  50000 100.0        -  SB-ALIEN-INTERNALS:COMPUTE-DEPORT-LAMBDA
-  45      0   0.0   3957   7.9  50000 100.0        -  SB-ALIEN::ROOT-DEPOSIT-GEN-METHOD
-  46      0   0.0   2561   5.1  50000 100.0        -  (SB-INTERPRETER::.APPLY. 4)
-  47      0   0.0   2224   4.4  50000 100.0        -  (SB-INTERPRETER::.APPLY. 3)
-  48      0   0.0   1852   3.7  50000 100.0        -  SB-VM::INTEGER-NATURALIZE-GEN-METHOD
-  49      0   0.0   1221   2.4  50000 100.0        -  SB-ALIEN-INTERNALS:DEPORT-ALLOC
-  50      0   0.0   1146   2.3  50000 100.0        -  LISTIFY-&REST
-  51      0   0.0    819   1.6  50000 100.0        -  SB-ALIEN::INTEGER-LISP-REP-METHOD
-  52      0   0.0    813   1.6  50000 100.0        -  SB-ALIEN-INTERNALS:%SET-DEREF
-  53      0   0.0    378   0.8  50000 100.0        -  SB-ALIEN-INTERNALS:COMPUTE-DEPORT-ALLOC-LAMBDA
-  54      0   0.0    333   0.7  50000 100.0        -  DEREF
-  55      0   0.0      6   0.0  50000 100.0        -  SB-IMPL::%WITH-STANDARD-IO-SYNTAX
-  56      0   0.0      6   0.0  50000 100.0        -  Unknown fn 33089
-  57      0   0.0      5   0.0  50000 100.0        -  SB-BROTHERTREE:INSERT
-  58      0   0.0      5   0.0  50000 100.0        -  SB-VM::UPDATE-DYNAMIC-SPACE-CODE-TREE
-  59      0   0.0      5   0.0  50000 100.0        -  SB-VM::WRITE-FUNINSTANCE-PROLOGUE
-  60      0   0.0      5   0.0  50000 100.0        -  SB-INTERPRETER::%MAKE-INTERPRETED-FUNCTION
-  61      0   0.0      5   0.0  50000 100.0        -  SB-INTERPRETER::MAKE-FUNCTION
-  62      0   0.0      5   0.0  50000 100.0        -  FLET
-  63      0   0.0      4   0.0  50000 100.0        -  SB-IMPL::STRING-OUTPUT-STREAM-NEW-BUFFER
-  64      0   0.0      4   0.0  50000 100.0        -  (SB-PCL::FAST-METHOD PRINT-OBJECT (CONS T))
-  65      0   0.0      4   0.0  50000 100.0        -  (LABELS SB-IMPL::HANDLE-IT :IN SB-KERNEL:OUTPUT-OBJECT)
-  66      0   0.0      4   0.0  50000 100.0        -  SB-BROTHERTREE::N2
-  67      0   0.0      3   0.0  50000 100.0        -  SB-INT:STRINGIFY-OBJECT
-  68      0   0.0      3   0.0  50000 100.0        -  PRIN1-TO-STRING
-  69      0   0.0      3   0.0  50000 100.0        -  (FLET "THUNK" :IN SWANK/RPC::PRIN1-TO-STRING-FOR-EMACS)
-  70      0   0.0      3   0.0  50000 100.0        -  (FLET "THUNK" :IN SWANK::LOG-EVENT)
-  71      0   0.0      3   0.0  50000 100.0        -  SWANK/RPC::PRIN1-TO-STRING-FOR-EMACS
-  72      0   0.0      3   0.0  50000 100.0        -  SWANK/RPC:WRITE-MESSAGE
-  73      0   0.0      3   0.0  50000 100.0        -  SWANK::ENCODE-MESSAGE
-  74      0   0.0      3   0.0  50000 100.0        -  SWANK::LOG-EVENT
-  75      0   0.0      3   0.0  50000 100.0        -  SWANK::DISPATCH-EVENT
-  76      0   0.0      3   0.0  50000 100.0        -  SB-ALIEN-INTERNALS:%SAP-ALIEN
-  77      0   0.0      3   0.0  50000 100.0        -  (FLET "WITHOUT-GCING-BODY-" :IN SB-KERNEL:SUB-GC)
-  78      0   0.0      3   0.0  50000 100.0        -  (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-KERNEL:SUB-GC)
-  79      0   0.0      3   0.0  50000 100.0        -  SB-KERNEL:SUB-GC
-  80      0   0.0      3   0.0  50000 100.0        -  foreign function maybe_gc
-  81      0   0.0      3   0.0  50000 100.0        -  foreign function interrupt_handle_pending
-  82      0   0.0      2   0.0  50000 100.0        -  GET-OUTPUT-STREAM-STRING
-  83      0   0.0      2   0.0  50000 100.0        -  (LABELS SB-IMPL::DEFAULT-OUT :IN SB-IMPL::%INIT-STRING-OUTPUT-STREAM)
-  84      0   0.0      2   0.0  50000 100.0        -  SB-IMPL::STRING-SOUT
-  85      0   0.0      2   0.0  50000 100.0        -  SB-IMPL::%WRITE-STRING
-  86      0   0.0      2   0.0  50000 100.0        -  (SB-PCL::FAST-METHOD PRINT-OBJECT (VECTOR T))
-  87      0   0.0      2   0.0  50000 100.0        -  PRIN1
-  88      0   0.0      2   0.0  50000 100.0        -  SB-FORMAT::S-INTERPRETER
-  89      0   0.0      2   0.0  50000 100.0        -  SB-FORMAT::INTERPRET-DIRECTIVE-LIST
-  90      0   0.0      2   0.0  50000 100.0        -  SB-FORMAT::%FORMAT
-  91      0   0.0      2   0.0  50000 100.0        -  (LABELS SB-BROTHERTREE::INS :IN SB-BROTHERTREE:INSERT)
-  92      0   0.0      2   0.0  50000 100.0        -  SB-WALKER::WITH-AUGMENTED-ENVIRONMENT-INTERNAL
-  93      0   0.0      2   0.0  50000 100.0        -  SB-WALKER::WALK-REPEAT-EVAL
-  94      0   0.0      2   0.0  50000 100.0        -  SB-WALKER::WALK-DECLARATIONS
-  95      0   0.0      2   0.0  50000 100.0        -  SB-WALKER::WALK-LET
-  96      0   0.0      2   0.0  50000 100.0        -  SB-WALKER::WALK-TEMPLATE-HANDLE-REPEAT-1
-  97      0   0.0      2   0.0  50000 100.0        -  SB-WALKER::WALK-TEMPLATE
-  98      0   0.0      2   0.0  50000 100.0        -  SB-C::CALL-WITH-CURRENT-SOURCE-FORM
-  99      0   0.0      2   0.0  50000 100.0        -  SB-WALKER::WALK-FORM-INTERNAL
- 100      0   0.0      2   0.0  50000 100.0        -  (LAMBDA NIL :IN SB-WALKER::WALK-FORM-INTERNAL)
- 101      0   0.0      2   0.0  50000 100.0        -  SB-SPROF::UNAVAILABLE-FRAMES
- 102      0   0.0      2   0.0  50000 100.0        -  (LAMBDA NIL :IN SWANK/GRAY::%STREAM-FINISH-OUTPUT)
- 103      0   0.0      2   0.0  50000 100.0        -  (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-THREAD::CALL-WITH-RECURSIVE-LOCK)
- 104      0   0.0      2   0.0  50000 100.0        -  SB-THREAD::CALL-WITH-RECURSIVE-LOCK
- 105      0   0.0      2   0.0  50000 100.0        -  (FLET SWANK/BACKEND:CALL-WITH-LOCK-HELD :IN "/home/ellis/.emacs.d/elpa/slime-20241027.2104/swank/sbcl.lisp")
- 106      0   0.0      2   0.0  50000 100.0        -  SWANK/GRAY::%STREAM-FINISH-OUTPUT
- 107      0   0.0      2   0.0  50000 100.0        -  Unknown fn 32068
- 108      0   0.0      1   0.0  50000 100.0        -  ROCKSDB-READOPTIONS-CREATE
- 109      0   0.0      1   0.0  50000 100.0        -  (SB-PCL::FAST-METHOD GET-VAL (RDB T))
- 110      0   0.0      1   0.0  50000 100.0        -  SB-C::%MAKE-BASIC-DEFINITION-SOURCE-LOCATION
- 111      0   0.0      1   0.0  50000 100.0        -  SB-C::%MAKE-DEFINITION-SOURCE-LOCATION
- 112      0   0.0      1   0.0  50000 100.0        -  SB-INTERPRETER::%MAKE-PROTO-FN
- 113      0   0.0      1   0.0  50000 100.0        -  (:IMMEDIATE FUNCTION)
- 114      0   0.0      1   0.0  50000 100.0        -  COPY-TREE
- 115      0   0.0      1   0.0  50000 100.0        -  SB-WALKER::WALK-LET*
- 116      0   0.0      1   0.0  50000 100.0        -  SB-WALKER::WALK-TAGBODY-1
- 117      0   0.0      1   0.0  50000 100.0        -  SB-WALKER::WALK-TAGBODY
- 118      0   0.0      1   0.0  50000 100.0        -  SB-BROTHERTREE::N3
- 119      0   0.0      1   0.0  50000 100.0        -  SB-C::MAKE-LAMBDA-VAR
- 120      0   0.0      1   0.0  50000 100.0        -  SB-WALKER::WALK-MACROLET
- 121      0   0.0      1   0.0  50000 100.0        -  (MACRO-FUNCTION PROG1)
- 122      0   0.0      1   0.0  50000 100.0        -  (FLET SB-INTERPRETER::MACROEXPAND-HOOK :IN SB-INTERPRETER::TRACING-MACROEXPAND-1)
- 123      0   0.0      1   0.0  50000 100.0        -  MACROEXPAND-1
- 124      0   0.0      1   0.0  50000 100.0        -  SB-INTERPRETER::TRACING-MACROEXPAND-1
- 125      0   0.0      1   0.0  50000 100.0        -  SB-INTERPRETER::DIGEST-FORM
- 126      0   0.0      1   0.0  50000 100.0        -  SB-ALIEN::COERCE-TO-INTERPRETED-FUNCTION
- 127      0   0.0      1   0.0  50000 100.0        -  (LAMBDA (STRING) :IN SWANK-REPL::MAKE-OUTPUT-FUNCTION)
- 128      0   0.0      1   0.0  50000 100.0        -  SB-KERNEL:VECTOR-SUBSEQ*
+   1  47204  94.4  47204  94.4  47204  94.4        -  ALLOC-TRAMP
+   2  33851  67.7  33851  67.7  81055 162.1        -  LIST-ALLOC-TRAMP
+   3  14256  28.5  14256  28.5  95311 190.6        -  SYS-LIST-ALLOC-TRAMP
+   4   3099   6.2   3099   6.2  98410 196.8        -  foreign function listify_rest_arg
+   5   1590   3.2   1590   3.2 100000 200.0        -  SYS-ALLOC-TRAMP
+   6      0   0.0 100000 200.0 100000 200.0        -  (FLET SB-UNIX::BODY :IN SB-THREAD::RUN)
+   7      0   0.0 100000 200.0 100000 200.0        -  (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-THREAD::RUN)
+   8      0   0.0 100000 200.0 100000 200.0        -  SB-THREAD::RUN
+   9      0   0.0 100000 200.0 100000 200.0        -  foreign function call_into_lisp_
+  10      0   0.0 100000 200.0 100000 200.0        -  foreign function funcall1
+  11      0   0.0 100000 200.0 100000 200.0        -  foreign function new_thread_trampoline
+  12      0   0.0  99994 200.0 100000 200.0        -  SWANK::CALL-WITH-BUFFER-SYNTAX
+  13      0   0.0  99994 200.0 100000 200.0        -  SB-INT:SIMPLE-EVAL-IN-LEXENV
+  14      0   0.0  99994 200.0 100000 200.0        -  EVAL
+  15      0   0.0  99994 200.0 100000 200.0        -  SWANK:EVAL-FOR-EMACS
+  16      0   0.0  99994 200.0 100000 200.0        -  SWANK/SBCL::CALL-WITH-BREAK-HOOK
+  17      0   0.0  99994 200.0 100000 200.0        -  (FLET SWANK/BACKEND:CALL-WITH-DEBUGGER-HOOK :IN "/home/ellis/.stash/lisp/slime/swank/sbcl.lisp")
+  18      0   0.0  99994 200.0 100000 200.0        -  SWANK::CALL-WITH-BINDINGS
+  19      0   0.0  99994 200.0 100000 200.0        -  (LAMBDA NIL :IN SWANK::SPAWN-WORKER-THREAD)
+  20      0   0.0  78668 157.3 100000 200.0        -  SETFA
+  21      0   0.0  78443 156.9 100000 200.0        -  (SETF SB-ALIEN-INTERNALS:%ALIEN-VALUE)
+  22      0   0.0  75213 150.4 100000 200.0        -  Unknown fn 111311
+  23      0   0.0  58175 116.3 100000 200.0        -  SB-FASL::LOAD-FASL-GROUP
+  24      0   0.0  58175 116.3 100000 200.0        -  (LAMBDA NIL :IN SB-FASL::LOAD-AS-FASL)
+  25      0   0.0  58175 116.3 100000 200.0        -  SB-IMPL::CALL-WITH-LOADER-PACKAGE-NAMES
+  26      0   0.0  58175 116.3 100000 200.0        -  SB-FASL::LOAD-AS-FASL
+  27      0   0.0  58175 116.3 100000 200.0        -  (LABELS SB-FASL::LOAD-STREAM-1 :IN LOAD)
+  28      0   0.0  58175 116.3 100000 200.0        -  SB-FASL::CALL-WITH-LOAD-BINDINGS
+  29      0   0.0  58175 116.3 100000 200.0        -  LOAD
+  30      0   0.0  58175 116.3 100000 200.0        -  (FLET SWANK/BACKEND:CALL-WITH-COMPILATION-HOOKS :IN "/home/ellis/.stash/lisp/slime/swank/sbcl.lisp")
+  31      0   0.0  58175 116.3 100000 200.0        -  (FLET SWANK/BACKEND:SWANK-COMPILE-STRING :IN "/home/ellis/.stash/lisp/slime/swank/sbcl.lisp")
+  32      0   0.0  58175 116.3 100000 200.0        -  (LAMBDA NIL :IN SWANK:COMPILE-STRING-FOR-EMACS)
+  33      0   0.0  58175 116.3 100000 200.0        -  (LAMBDA NIL :IN SWANK::COLLECT-NOTES)
+  34      0   0.0  58175 116.3 100000 200.0        -  SWANK::MEASURE-TIME-INTERVAL
+  35      0   0.0  58175 116.3 100000 200.0        -  SWANK::COLLECT-NOTES
+  36      0   0.0  41819  83.6 100000 200.0        -  (LAMBDA NIL :IN SWANK:EVAL-AND-GRAB-OUTPUT)
+  37      0   0.0  41819  83.6 100000 200.0        -  SWANK::CALL-WITH-RETRY-RESTART
+  38      0   0.0  32898  65.8 100000 200.0        -  SB-EVAL::CALL-WITH-NEW-ENV
+  39      0   0.0  30115  60.2 100000 200.0        -  (FLET SB-UNIX::BODY :IN #:DROP-THRU-TAG-1)
+  40      0   0.0  30115  60.2 100000 200.0        -  (FLET "WITHOUT-INTERRUPTS-BODY-11" :IN #:DROP-THRU-TAG-1)
+  41      0   0.0  30115  60.2 100000 200.0        -  top level form
+  42      0   0.0  30090  60.2 100000 200.0        -  (FLET SB-UNIX::BODY :IN #:DROP-THRU-TAG-1)
+  43      0   0.0  30090  60.2 100000 200.0        -  (FLET "WITHOUT-INTERRUPTS-BODY-11" :IN #:DROP-THRU-TAG-1)
+  44      0   0.0  30090  60.2 100000 200.0        -  (LAMBDA ()) in #<code id=1BD7F [2] (LAMBDA ()) {100D8C940F..100D8CA0F0}>
+  45      0   0.0  28060  56.1 100000 200.0        -  (FLET SB-UNIX::BODY :IN #:BLOCK2)
+  46      0   0.0  28060  56.1 100000 200.0        -  (FLET "WITHOUT-INTERRUPTS-BODY-16" :IN #:BLOCK2)
+  47      0   0.0  28060  56.1 100000 200.0        -  top level form
+  48      0   0.0  25663  51.3 100000 200.0        -  SB-EVAL::MAKE-ENV
+  49      0   0.0  24773  49.5 100000 200.0        -  GET-KV-RAW
+  50      0   0.0  23479  47.0 100000 200.0        -  SB-EVAL::FABRICATE-NEW-NATIVE-ENVIRONMENT
+  51      0   0.0  23193  46.4 100000 200.0        -  SB-EVAL::EVAL-PROGN
+  52      0   0.0  21300  42.6 100000 200.0        -  CLONE-OCTETS-FROM-ALIEN
+  53      0   0.0  21291  42.6 100000 200.0        -  SB-ALIEN-INTERNALS:%ALIEN-VALUE
+  54      0   0.0  19407  38.8 100000 200.0        -  SB-EVAL::EVAL-LET
+  55      0   0.0  19055  38.1 100000 200.0        -  SB-EVAL::CALL-WITH-NEW-ENV-FULL-PARSING
+  56      0   0.0  18858  37.7 100000 200.0        -  SB-ALIEN-INTERNALS:NATURALIZE
+  57      0   0.0  17279  34.6 100000 200.0        -  SB-EVAL::MAKE-EVAL-LEXENV
+  58      0   0.0  16229  32.5 100000 200.0        -  SB-EVAL::PARSE-ARGUMENTS
+  59      0   0.0  14109  28.2 100000 200.0        -  SB-EVAL::%MAKE-ENV
+  60      0   0.0  12688  25.4 100000 200.0        -  SB-EVAL::%EVAL
+  61      0   0.0  11729  23.5 100000 200.0        -  (FLET SB-UNIX::BODY :IN #:BLOCK2)
+  62      0   0.0  11729  23.5 100000 200.0        -  (FLET "WITHOUT-INTERRUPTS-BODY-16" :IN #:BLOCK2)
+  63      0   0.0  11729  23.5 100000 200.0        -  (LAMBDA ()) in #<code id=1BE04 [5] (LAMBDA ()) {100971000F..10097111F0}>
+  64      0   0.0  10963  21.9 100000 200.0        -  SB-INT:PARSE-LAMBDA-LIST
+  65      0   0.0  10777  21.6 100000 200.0        -  SB-EVAL::EVAL-NEXT-LET*-BINDING
+  66      0   0.0   9045  18.1 100000 200.0        -  (MACRO-FUNCTION SETF)
+  67      0   0.0   8944  17.9 100000 200.0        -  SB-ALIEN-INTERNALS:DEPORT-ALLOC
+  68      0   0.0   8619  17.2 100000 200.0        -  SB-ALIEN-INTERNALS:DEPORT
+  69      0   0.0   7969  15.9 100000 200.0        -  SB-ALIEN-INTERNALS:COMPUTE-DEPOSIT-LAMBDA
+  70      0   0.0   5985  12.0 100000 200.0        -  GET-SETF-EXPANSION
+  71      0   0.0   3615   7.2 100000 200.0        -  SB-EVAL::EVAL-ARGS
+  72      0   0.0   3099   6.2 100000 200.0        -  LISTIFY-&REST
+  73      0   0.0   2898   5.8 100000 200.0        -  SB-IMPL::COLLECT-SETF-TEMPS
+  74      0   0.0   2865   5.7 100000 200.0        -  (LAMBDA (&REST SB-EVAL::ARGS) :IN SB-EVAL::MAKE-INTERPRETED-FUNCTION)
+  75      0   0.0   2831   5.7 100000 200.0        -  SB-EVAL::EVAL-LET*
+  76      0   0.0   2796   5.6 100000 200.0        -  SB-ALIEN-INTERNALS:COMPUTE-NATURALIZE-LAMBDA
+  77      0   0.0   2595   5.2 100000 200.0        -  SB-IMPL::APPEND2
+  78      0   0.0   2328   4.7 100000 200.0        -  SB-ALIEN-INTERNALS:COMPUTE-EXTRACT-LAMBDA
+  79      0   0.0   1731   3.5 100000 200.0        -  (LABELS SB-IMPL::GEN-LET* :IN "SYS:SRC;CODE;SETF.LISP")
+  80      0   0.0   1710   3.4 100000 200.0        -  SB-EVAL::INTERPRETED-APPLY
+  81      0   0.0   1633   3.3 100000 200.0        -  SB-ALIEN::INTEGER-EXTRACT-GEN-METHOD
+  82      0   0.0   1590   3.2 100000 200.0        -  SB-KERNEL:%MAKE-SYMBOL
+  83      0   0.0   1372   2.7 100000 200.0        -  (LABELS SB-IMPL::RECURSE :IN SB-IMPL::%SYMBOL-NAMEIFY)
+  84      0   0.0   1372   2.7 100000 200.0        -  GENSYM
+  85      0   0.0   1214   2.4 100000 200.0        -  SB-ALIEN-INTERNALS:COMPUTE-DEPORT-LAMBDA
+  86      0   0.0   1212   2.4 100000 200.0        -  SB-INT:MAKE-GENSYM-LIST
+  87      0   0.0   1136   2.3 100000 200.0        -  SB-ALIEN::ROOT-DEPOSIT-GEN-METHOD
+  88      0   0.0    837   1.7 100000 200.0        -  (LAMBDA (SB-EVAL::ENV) :IN SB-EVAL::CALL-WITH-NEW-ENV-FULL-PARSING)
+  89      0   0.0    829   1.7 100000 200.0        -  SB-VM::INTEGER-NATURALIZE-GEN-METHOD
+  90      0   0.0    741   1.5 100000 200.0        -  SB-ALIEN-INTERNALS:COMPUTE-DEPORT-ALLOC-LAMBDA
+  91      0   0.0    572   1.1 100000 200.0        -  CONS
+  92      0   0.0    225   0.4 100000 200.0        -  SB-ALIEN-INTERNALS:%SET-DEREF
+  93      0   0.0    194   0.4 100000 200.0        -  (LABELS SB-IMPL::GEN-MV-BIND :IN "SYS:SRC;CODE;SETF.LISP")
+  94      0   0.0     99   0.2 100000 200.0        -  SB-ALIEN::INTEGER-LISP-REP-METHOD
+  95      0   0.0     28   0.1 100000 200.0        -  (MACRO-FUNCTION SB-ALIEN-INTERNALS:MAYBE-WITH-PINNED-OBJECTS)
+  96      0   0.0      9   0.0 100000 200.0        -  (FLET "WITHOUT-GCING-BODY-" :IN SB-KERNEL:SUB-GC)
+  97      0   0.0      9   0.0 100000 200.0        -  (FLET "WITHOUT-INTERRUPTS-BODY-" :IN SB-KERNEL:SUB-GC)
+  98      0   0.0      9   0.0 100000 200.0        -  SB-KERNEL:SUB-GC
+  99      0   0.0      9   0.0 100000 200.0        -  SB-KERNEL:%MAKE-ARRAY
+ 100      0   0.0      9   0.0 100000 200.0        -  DEREF
+ 101      0   0.0      9   0.0 100000 200.0        -  foreign function maybe_gc
+ 102      0   0.0      9   0.0 100000 200.0        -  foreign function interrupt_handle_pending
+ 103      0   0.0      5   0.0 100000 200.0        -  SB-IMPL::%WITH-STANDARD-IO-SYNTAX
+ 104      0   0.0      5   0.0 100000 200.0        -  SWANK::DISPATCH-LOOP
+ 105      0   0.0      5   0.0 100000 200.0        -  SB-ALIEN-INTERNALS:%SAP-ALIEN
+ 106      0   0.0      3   0.0 100000 200.0        -  SB-IMPL::STRING-OUTPUT-STREAM-NEW-BUFFER
+ 107      0   0.0      3   0.0 100000 200.0        -  (SB-PCL::FAST-METHOD PRINT-OBJECT (CONS T))
+ 108      0   0.0      3   0.0 100000 200.0        -  (LABELS SB-IMPL::HANDLE-IT :IN SB-KERNEL:OUTPUT-OBJECT)
+ 109      0   0.0      3   0.0 100000 200.0        -  (FLET "THUNK" :IN SWANK::LOG-EVENT)
+ 110      0   0.0      3   0.0 100000 200.0        -  SWANK::LOG-EVENT
+ 111      0   0.0      3   0.0 100000 200.0        -  SWANK::DISPATCH-EVENT
+ 112      0   0.0      2   0.0 100000 200.0        -  GET-OUTPUT-STREAM-STRING
+ 113      0   0.0      2   0.0 100000 200.0        -  (LABELS SB-IMPL::DEFAULT-OUT :IN SB-IMPL::%INIT-STRING-OUTPUT-STREAM)
+ 114      0   0.0      2   0.0 100000 200.0        -  SB-INT:STRINGIFY-OBJECT
+ 115      0   0.0      2   0.0 100000 200.0        -  PRIN1-TO-STRING
+ 116      0   0.0      2   0.0 100000 200.0        -  (FLET "THUNK" :IN SWANK/RPC::PRIN1-TO-STRING-FOR-EMACS)
+ 117      0   0.0      2   0.0 100000 200.0        -  PRIN1
+ 118      0   0.0      2   0.0 100000 200.0        -  SB-FORMAT::S-INTERPRETER
+ 119      0   0.0      2   0.0 100000 200.0        -  SB-FORMAT::INTERPRET-DIRECTIVE-LIST
+ 120      0   0.0      2   0.0 100000 200.0        -  SB-FORMAT::%FORMAT
+ 121      0   0.0      2   0.0 100000 200.0        -  SWANK/RPC::PRIN1-TO-STRING-FOR-EMACS
+ 122      0   0.0      2   0.0 100000 200.0        -  SWANK/RPC:WRITE-MESSAGE
+ 123      0   0.0      2   0.0 100000 200.0        -  SWANK::ENCODE-MESSAGE
+ 124      0   0.0      1   0.0 100000 200.0        -  SB-IMPL::STRING-SOUT
+ 125      0   0.0      1   0.0 100000 200.0        -  SB-IMPL::%WRITE-STRING
+ 126      0   0.0      1   0.0 100000 200.0        -  (SB-PCL::FAST-METHOD PRINT-OBJECT (VECTOR T))
+ 127      0   0.0      1   0.0 100000 200.0        -  SWANK/GRAY::%STREAM-FINISH-OUTPUT
+ 128      0   0.0      1   0.0 100000 200.0        -  SWANK/BACKEND:AUTO-FLUSH-LOOP
+ 129      0   0.0      1   0.0 100000 200.0        -  SB-IMPL::STRING->UTF8
+ 130      0   0.0      1   0.0 100000 200.0        -  Unknown fn 106750
+ 131      0   0.0      1   0.0 100000 200.0        -  (SB-PCL::FAST-METHOD GET-VAL (RDB T))
 ------------------------------------------------------------------------
           0   0.0                                     elsewhere
 #+end_example

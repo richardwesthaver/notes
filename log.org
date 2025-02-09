@@ -106,27 +106,7 @@ rather than the bricks and mortar it sometimes appears to us as.
 :PROPERTIES:
 :ID:       ad2041de-3915-48f9-950c-03b01968952d
 :END:
-*** Factor                                                           :factor:
-:PROPERTIES:
-:ID:       edb7e4a8-d07d-4953-9b64-decdca1dd76f
-:END:
-- [2023-07-04 Tue]
-  Factor is a cool concatenative lang but unfortunately the C interface
-  (vm/master.h) no longer exists on the master branch.
-*** Joy                                                                 :joy:
-:PROPERTIES:
-:ID:       257365d1-1b2e-4abd-a2e3-5d1705e41bcf
-:END:
 
-**** https://hypercubed.github.io/joy/html/j02maf.html
-:PROPERTIES:
-:ID:       a685ec2b-fbdc-4724-ab22-12d8a4498f81
-:END:
-
-**** [[https://builds.openlogicproject.org/content/incompleteness/arithmetization-syntax/arithmetization-syntax.pdf][arithmetization of syntax]]
-:PROPERTIES:
-:ID:       895a803a-63d5-4dfb-8ceb-c20627d97b02
-:END:
 ** Lisp                                                                :lisp:
 :PROPERTIES:
 :ID:       8109c42f-ccbb-4a08-ab99-1dced8b22a9f
@@ -137,39 +117,6 @@ most places.
 - https://github.com/lispnik/iup/ - doesn't support MacOS yet, looks
   cool though
   - what we really need is wasm compiler.. TBD
-** Rust
-:PROPERTIES:
-:ID:       94a9a2b7-3559-476c-9edf-66b3b0c8cbb0
-:END:
-*** Serde
-:PROPERTIES:
-:ID:       ffb4e87c-e265-4549-91f9-093e714708c0
-:END:
-- [2023-07-05 Wed] \\
-  important part of the Rust ecosystem, another dtolnay
-  contribution. If you want to program a /data/ format in the Rust
-  ecosystem, this is how you do it.
-
-  The way it works is that you define some special structs, a
-  Serializer and a Deserializer which implement the Serialize and
-  Deserialize traits provided by serde, respectively.
-
-  You can use these structs to provide your public API. The
-  conventional choice is public top-level functions like from-str
-  and to-string. That's it, your serialization library can now read and
-  write your data format as Rust data types.
-
-  [[https://serde.rs/enum-representations.html][enum-representations]]
-  - the default behavior is an externally tagged representation (verbose)
-
-  The docs use strings as core IO when implementing a custom format,
-  but the convention is to implement for T where T is bound by std::io
-  Read or Write trait. Then you can provide a more robust public API
-  (from_bytes, from_writer, etc).
-* [2023-11-01 Wed]
-:PROPERTIES:
-:ID:       6d461ba3-f8cb-4a69-b172-038efcca923a
-:END:
 ** AWS usage
 :PROPERTIES:
 :ID:       a14a7916-6743-45e5-8711-ecded8092131
@@ -368,20 +315,6 @@ The level of interop we're after in this case is [[https://en.wikipedia.org/wiki
 Basically, calling Rust code from Lisp and vice-versa. There's an article about calling
 Rust from Common Lisp [[https://dev.to/veer66/calling-rust-from-common-lisp-45c5][here]] which shows the basics and serves as a great starting point
 for those interested.
-**** Rust != C
-:PROPERTIES:
-:ID:       bb68152d-1794-47d8-86c0-03eb7f9256d7
-:END:
-The complication(s) with Rust I mentioned early is really just that /it is not C/. =C=
-is old, i.e. well-supported with a stable ABI, making the process of creating bindings
-for a C library a breeze in many languages.
-
-For a Rust library we need to first appease the compiler, as explained in [[https://doc.rust-lang.org/nomicon/ffi.html#calling-rust-code-from-c][this section]]
-of the Rustonomicon. Among other things it involves changing the calling-convention of
-functions with a type signature and editing the Cargo.toml file to produce a
-C-compatible ABI binary. The Rust default ABI is unstable and can't reliably be used
-like the C ABI can.
-
 **** Overhead
 :PROPERTIES:
 :ID:       f74790d6-8fa9-4e76-8362-71f074058947
@@ -578,21 +511,6 @@ need a way of indexing, referring to, and annotating objects such as
 URLs, docs, articles, source files, etc.
 
 What is the best way to get this done?
-* [2023-12-09 Sat]
-:PROPERTIES:
-:ID:       e304a97e-49fe-4fde-a273-7d3f78231033
-:END:
-** doc best practices
-:PROPERTIES:
-:ID:       ea2f3f8e-1c8c-4c05-b16c-fb197d346409
-:END:
-https://rust-lang.github.io/api-guidelines/documentation.html
-
-also: https://lisp-lang.org/style-guide/
-* [2023-12-12 Tue]
-:PROPERTIES:
-:ID:       eff3b823-6ffd-4355-b289-bdcd7b31ee54
-:END:
 ** On Computers
 :PROPERTIES:
 :ID:       11bd7a7c-4d0c-4d7f-a487-dc59052da2b3
@@ -669,30 +587,6 @@ music itself.
 
 [fn:1] ... perform computations
 
-** On Infra
-:PROPERTIES:
-:ID:       332145f8-50b4-46d1-8368-ddaf097c875f
-:END:
-Something that is missing from many organizations big or large, is an
-effective way to store and access information, even about their own
-org.
-
-It can be difficult problem to solve - usually there's the official
-one, say Microsoft Sharepoint and then the list of unofficial sources
-which becomes tribal corporate hacker knowledge. Maybe the unofficial
-ones are more current, or are annotated nicely, but their very
-existence breaks the system. There's no longer a single source of
-truth.
-
-My priority in this department is writing services which process and
-store information from a variety of sources in a distributed knowledge
-graph. The graph can later be queried to access information on-demand.
-
-My idea of infrastructure is in fact to build my own Cloud. Needless
-to say I don't have an O365 subscription, and wherever possible I'll
-be relying on hardware I have physical access to. I'm not opposed to
-cloud services at large but based on principle I like to think we
-shouldn't be built on them.
 * [2023-12-23 Sat]
 :PROPERTIES:
 :ID:       67b51ca5-909b-495f-b263-5979efe36448
@@ -701,13 +595,6 @@ shouldn't be built on them.
 :PROPERTIES:
 :ID:       bcc178c2-6a96-4ad9-98db-4ddf045e6371
 :END:
-** public datasets
-:PROPERTIES:
-:ID:       59e3ba53-3f40-47db-929c-acc998f9092d
-:END:
-https://github.com/awesomedata/awesome-public-datasets
-https://docs.openml.org/Datasets/
-https://wiki.pathmind.com/open-datasets
 * [2023-12-28 Thu]
 :PROPERTIES:
 :ID:       db3d353b-8f1c-4645-a4ad-459d36392b22
@@ -725,16 +612,6 @@ https://wiki.pathmind.com/open-datasets
 :ID:       af88cd62-2610-4ba7-a5f4-d98c942c81dc
 :END:
 Vector-Optimized Library of Kernels (simd)
-** [[https://docs.kernel.org/fb/framebuffer.html][/dev/fb*]]
-:PROPERTIES:
-:ID:       b866d034-2d59-4e1e-934f-02903b3de8e7
-:END:
-framebuffers, used by fbgrab/fbcat program
-** [[https://docs.kernel.org/block/ublk.html][ublk]]
-:PROPERTIES:
-:ID:       d58cb494-ce43-49cc-859b-aa6a518ac314
-:END:
-https://github.com/ming1/ubdsrv
 * [2024-01-04 Thu]
 :PROPERTIES:
 :ID:       86fdf7a7-9d26-4ce5-95a2-484db1843fb3
@@ -910,84 +787,6 @@ piping we need a driver for streaming a file to /dev/trash
 :PROPERTIES:
 :ID:       908fd9e6-6307-402c-ba76-813e82839f53
 :END:
-** WL vs X
-:PROPERTIES:
-:ID:       9a398886-858a-450b-9029-2339cc551bc3
-:END:
-:LOGBOOK:
-- State "NOTE"       from              [2024-02-18 Sun 11:55]
-:END:
-In the past few months there has been drama regarding Wayland vs X. It
-seems to be on everyone's minds after Artem's freakout issue and the
-follow up YT vids/comments.
-
-I admit that it made me reconsider the fitness of WL as a whole -
-there was a github gist that made some scathing arguments against it.
-
-It's an odd debate though. I think there are many misunderstandings.
-
-So first off, if we look at the homepage
-https://wayland.freedesktop.org/, Wayland claims it is a replacement
-for X11. It now has /manifest destiny/, which in my opinion is a great
-shame.
-
-X-pros seem to agree that Wayland has /manifest destiny/ - like if you
-are building softwares that look remotely like a window system, it's a
-successor to X. That's the model of doing things and there's no way
-around it.
-
-The disagreement starts with how this destiny - of an X2 - should be
-fulfilled. X-pros want a fork of X, but it's too late for
-that. WL-pros want X to run on top of Wayland compositor:
-https://wayland.freedesktop.org/xserver.html.
-
-Xwayland is a problem for me. From the project description: 'if we're
-migrating away from X, it makes sense to have a good backwards
-compatibility story.' Full disclosure: I have never done significant
-work on Xwayland, so perhaps my opinion is unwarranted. But I have no
-intention of attempting to maintain a computer system that uses
-Wayland and X clients at the same time.
-
-To me, X is ol' reliable. Every distro has first-class X support, and
-it runs on most systems with very little user intervention. Where it
-doesn't, there is 20+ years of dev history and battle-tested
-workarounds for you to find your solution in.
-
-Wayland is the new kid on the block, born just in 2008. It's a fresh
-start to one of the most difficult challenges in software - window
-systems. A re-write would be pointless though, and so the real
-value-add is in design. Wayland is designed as a protocol and
-collection of libraries which are implemented in your own
-compositor. Coming from Lisp - with ANSI Common Lisp and SRFIs, this
-feels right even if the implementation is something very different
-(compositor vs compiler).
-
-With X, it is assumed to be much harder to write an equivalent
-'compositor'. Here's the thing though - with a significantly complex X
-client implementation, it is /impossible/ to replicate in WL. This is
-really the crux of Artemi's argument in his issue. He asked for a 1:1
-equivalent X/WL comparison when no such thing exists, and in my
-opinion it is a waste of time.
-
-The WL core team is fully aware of this dichotomy, but also that this
-is in no way a problem or weakness in either system. It means they're
-different systems, goddammit.
-
-If it was up to me, Xwayland wouldn't exist. I understand why it does,
-and that it does make things easier for developers who need to support
-both, and users who have multiple apps with multiple windowing
-requirements. It's a bandaid though, and one that is particularly
-dangerous because it re-enforces the idea that Wayland is just X2 and
-that they're fully compatible.
-
-What interests me in the Wayland world right now is the idea of a
-small, modular, full-stack Wayland compositor API. There are several
-'kiosk' based compositors for single applications (cage), but these
-aren't complete solutions. It is possible to get much closer to the
-metal, and that's where I want to be so that I can build my own APIs
-on top - I don't want to live on top of X, and I certainly don't want
-to live on top of X on top of WL. I want a /pure/ solution that hides
-as little as possible, exposing the interesting bits.
 * [2024-03-01 Fri]
 :PROPERTIES:
 :ID:       5d5159dd-5887-4823-81c6-1624f8cc4fd4
@@ -999,7 +798,7 @@ as little as possible, exposing the interesting bits.
 :LOGBOOK:
 - State "TODO"       from              [2024-03-01 Fri 15:27]
 :END:
-https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/
+
 weather - music - etc
 * [2024-03-02 Sat]
 :PROPERTIES:
@@ -1024,90 +823,6 @@ major, minor = category, device
 mknod - create special device files
 
 [[https://www.redhat.com/en/blog/linux-block-devices-hints-debugging-and-new-developments][redhat hints]]
-
-#+begin_src shell
-  dd if=/dev/zero of=myfile bs=1M count=32
-  losetup --show -f myfile
-  ls -al /dev/loop0
-  losetup -d /dev/loop0 #teardown
-#+end_src
-
-#+begin_src shell
-  echo "sup dude" > /dev/loop0
-  dd if=/dev/loop0 -bs=1
-  dd if=/dev/nvme0 of=/dev/null progress=true
-  #pacman -S hdparm
-  hdparm -T /dev/nvme0
-#+end_src
-
-#+begin_src shell
-modprobe scsi_debug add_host=5 max_luns=10 num_tgts=2 dev_size_mb=16
-#+end_src
-
-sparsefiles: create with C, dd, or truncate
-
-#+begin_src shell :results output
-truncate --help
-#+end_src
-
-#+RESULTS:
-#+begin_example
-Usage: truncate OPTION... FILE...
-Shrink or extend the size of each FILE to the specified size
-
-A FILE argument that does not exist is created.
-
-If a FILE is larger than the specified size, the extra data is lost.
-If a FILE is shorter, it is extended and the sparse extended part (hole)
-reads as zero bytes.
-
-Mandatory arguments to long options are mandatory for short options too.
-  -c, --no-create        do not create any files
-  -o, --io-blocks        treat SIZE as number of IO blocks instead of bytes
-  -r, --reference=RFILE  base size on RFILE
-  -s, --size=SIZE        set or adjust the file size by SIZE bytes
-      --help        display this help and exit
-      --version     output version information and exit
-
-The SIZE argument is an integer and optional unit (example: 10K is 10*1024).
-Units are K,M,G,T,P,E,Z,Y,R,Q (powers of 1024) or KB,MB,... (powers of 1000).
-Binary prefixes can be used, too: KiB=K, MiB=M, and so on.
-
-SIZE may also be prefixed by one of the following modifying characters:
-'+' extend by, '-' reduce by, '<' at most, '>' at least,
-'/' round down to multiple of, '%' round up to multiple of.
-
-GNU coreutils online help: <https://www.gnu.org/software/coreutils/>
-Full documentation <https://www.gnu.org/software/coreutils/truncate>
-or available locally via: info '(coreutils) truncate invocation'
-#+end_example
-
-test mkfs.btrfs on 10T dummy block device
-#+begin_src shell
-  dd if=/dev/zero of=/tmp/bb1 bs=1 count=1 seek=10T
-  du -sh /tmp/bb1
-  losetup --show -f /tmp/bb1
-  mkfs.btrfs /dev/loop0
-#+end_src
-
-diagnostics
-#+begin_src shell
-  iostat # pacman -S sysstat
-  blktrace # paru -S blktrace
-  iotop # pacman -S iotop
-#+end_src
-
-bcc/ trace: Who/which process is executing specific functions against
-block devices?
-
-bcc/biosnoop: Which process is accessing the block device, how many
-bytes are accessed, which latency for answering the requests?
-
-at the kernel level besides BPF we got kmods and DKMS,
-
-compression/de-duplication can be done via VDO kernel mod
-
-https://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support
 
 ** save-lisp-and-respawn
 :PROPERTIES:
@@ -1397,18 +1112,6 @@ of input/throughput.
 :PROPERTIES:
 :ID:       298b1333-c6f7-45d3-9829-c4c831e84707
 :END:
-** Intelligent Design in Software
-:PROPERTIES:
-:ID:       c2e682b3-d72a-41b3-b093-16614e7852ff
-:END:
-- starting from a space where there are no external influences - a biome
-- answer questions regarding the nature of the software and its capabilities
-- incrementally adjust inter-dependencies
-- optimize
-- protect the biome at all costs
-- focus on composition
-- build applications
-- aggresively incorporate lessons learned
 * [2024-08-16 Fri]
 :PROPERTIES:
 :ID:       2877ab07-156b-4b00-97fa-9b12952f0ac1
