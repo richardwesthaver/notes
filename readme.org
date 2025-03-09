@@ -2,11 +2,12 @@
 #+description: CC Notes
 #+author: Richard Westhaver
 #+email:richard.westhaver@gmail.com
+#+html_link_up: ../
 #+setupfile: ../clean.theme
 #+export_file_name: index
 #+options: num:nil prop:nil timestamp:nil toc:nil html-postamble:nil ^:nil
 #+property: header-args :eval no-export
-#+BEGIN: project-info :status nil :tasks nil
+#+BEGIN: project-info :status nil :tasks nil :html t
 #+CALL: project-details() :dir ~/comp/org/notes/
 
 #+RESULTS:
@@ -16,12 +17,27 @@
 | description | :description CC Org Files                           |
 | skel-id     | :id 1784914079056115652                             |
 | root        | ~/comp/org/notes/                                   |
-| vc          | :hg [[https://vc.compiler.company/notes][vc.compiler.company/notes]] :rev [[https://vc.compiler.company/notes/rev/542d814f5df8][542d814f5df8:24+]] |
+| vc          | :hg [[https://vc.compiler.company/notes][vc.compiler.company/notes]] :rev [[https://vc.compiler.company/notes/rev/7a50e972338d][7a50e972338d:25+]] |
 | tags        | :tags (org docs notes blog meta plan)               |
-| updated     | Sat Feb 15 17:55:17 2025 -0500                      |
+| updated     | Sat Feb 15 17:59:00 2025 -0500                      |
 | langs       | org                                                 |
-| lines       | 3035 :λ 2888 :# 0 :_ 147                            |
+| lines       | 3026 :λ 2883 :# 0 :_ 143                            |
 |-------------+-----------------------------------------------------|
+
+#+CALL: project-html-files() :dir ~/comp/org/notes/
+
+#+RESULTS:
+| file           | modified            |
+|----------------+---------------------|
+| [[https://compiler.company/notes/index.html][index]]          | 2025-03-09 14:41:22 |
+| [[https://compiler.company/notes/demo-notes.html][demo-notes]]     | 2025-01-17 19:21:04 |
+| [[https://compiler.company/notes/inbox-notes.html][inbox-notes]]    | 2024-08-11 14:37:05 |
+| [[https://compiler.company/notes/log.html][log]]            | 2025-02-06 19:17:42 |
+| [[https://compiler.company/notes/nas-t.html][nas-t]]          | 2025-02-15 16:32:16 |
+| [[https://compiler.company/notes/q-notes.html][q-notes]]        | 2024-09-17 22:24:56 |
+| [[https://compiler.company/notes/query-lang.html][query-lang]]     | 2025-01-16 22:36:39 |
+| [[https://compiler.company/notes/rdb-playground.html][rdb-playground]] | 2025-02-06 19:51:37 |
+| [[https://compiler.company/notes/skel-readme.html][skel-readme]]    | 2024-08-30 21:04:59 |
 
 #+CALL: hg-churn() :dir ~/comp/org/notes/
 
@@ -33,14 +49,14 @@
 : 2024-09   3510 *************************************************************
 : 2024-12    106 *
 : 2025-01   1028 *****************
-: 2025-02   3158 ******************************************************
+: 2025-02   3208 *******************************************************
 
 #+CALL: project-files() :dir ~/comp/org/notes/
 
 #+RESULTS:
 | file               | size | modified            |
 |--------------------+------+---------------------|
-| [[https://github.com/richardwesthaver/notes/blob/default/readme.org][readme.org]]         | 3.7k | 2025-02-15 17:57:35 |
+| [[https://github.com/richardwesthaver/notes/blob/default/readme.org][readme.org]]         | 3.6k | 2025-03-09 14:41:22 |
 | [[https://github.com/richardwesthaver/notes/blob/default/demo-notes.org][demo-notes.org]]     | 2.8k | 2025-01-17 19:21:04 |
 | [[https://github.com/richardwesthaver/notes/blob/default/inbox-notes.org][inbox-notes.org]]    | 2.3k | 2024-08-11 14:37:05 |
 | [[https://github.com/richardwesthaver/notes/blob/default/log.org][log.org]]            | 36k  | 2025-02-06 19:17:42 |
@@ -51,28 +67,3 @@
 | [[https://github.com/richardwesthaver/notes/blob/default/skel-readme.org][skel-readme.org]]    | 9.6k | 2024-08-30 21:04:59 |
 
 #+END:
-
-* [[file:log.org][log]]
-:PROPERTIES:
-:ID:       6a5c6879-c3cc-401d-a057-e7a5edab04b7
-:END:
-* [[file:demo-notes.org][demo-notes]]
-:PROPERTIES:
-:ID:       8ce33887-1d51-4d4a-bb69-c8cde3572a97
-:END:
-* [[file:inbox-notes.org][inbox-notes]]
-:PROPERTIES:
-:ID:       2a3dce1a-858d-4d02-b20a-cc6b8307cd6a
-:END:
-* [[file:nas-t.org][nas-t]]
-:PROPERTIES:
-:ID:       0c4ad35d-9b4d-4aa6-88a7-e0673b306dd6
-:END:
-* [[file:query-lang.org][query-lang]]
-:PROPERTIES:
-:ID:       026d2357-85e6-429d-ac85-616e04683270
-:END:
-* [[file:skel-readme.org][skel-readme]]
-:PROPERTIES:
-:ID:       ea5544ed-68c8-4100-84c0-dd6bb4bcd938
-:END:
