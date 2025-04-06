@@ -17,11 +17,11 @@
 | description | :description CC Org Files                          |
 | skel-id     | :id 1784914079056115652                            |
 | root        | ~/comp/org/notes/                                  |
-| vc          | :hg [[https://vc.compiler.company/notes][vc.compiler.company/notes]] :rev [[https://vc.compiler.company/notes/rev/95bf4443e099][95bf4443e099:27]] |
+| vc          | :hg [[https://vc.compiler.company/notes][vc.compiler.company/notes]] :rev [[https://vc.compiler.company/notes/rev/3f709275f3e6][3f709275f3e6:28]] |
 | tags        | :tags (org docs notes blog meta plan)              |
-| updated     | Fri Apr 04 16:22:19 2025 -0400                     |
+| updated     | Fri Apr 04 17:06:36 2025 -0400                     |
 | langs       | org                                                |
-| lines       | 3017 :λ 2873 :# 0 :_ 144                           |
+| lines       | 3020 :λ 2876 :# 0 :_ 144                           |
 |-------------+----------------------------------------------------|
 
 #+CALL: project-html-files() :dir ~/comp/org/notes/
@@ -36,7 +36,7 @@
 | [[https://compiler.company/notes/q-notes.html][q-notes]]        | 2024-09-17 22:24:56 |
 | [[https://compiler.company/notes/query-lang.html][query-lang]]     | 2025-01-16 22:36:39 |
 | [[https://compiler.company/notes/rdb-playground.html][rdb-playground]] | 2025-02-06 19:51:37 |
-| [[https://compiler.company/notes/index.html][index]]          | 2025-04-04 16:16:34 |
+| [[https://compiler.company/notes/index.html][index]]          | 2025-04-04 16:37:35 |
 | [[https://compiler.company/notes/skel-readme.html][skel-readme]]    | 2024-08-30 21:04:59 |
 
 #+CALL: hg-churn() :dir ~/comp/org/notes/
@@ -52,7 +52,7 @@
 2025-01   1028 *****************
 2025-02   3208 *******************************************************
 2025-03     53 
-2025-04     31 
+2025-04     80 *
 #+end_example
 
 #+CALL: project-files() :dir ~/comp/org/notes/
@@ -67,7 +67,7 @@
 | [[file:q-notes.org][q-notes]]        | 2024-09-17 22:24:56 |
 | [[file:query-lang.org][query-lang]]     | 2025-01-16 22:36:39 |
 | [[file:rdb-playground.org][rdb-playground]] | 2025-02-06 19:51:37 |
-| [[file:.][.]]              | 2025-04-04 16:16:34 |
+| [[file:.][.]]              | 2025-04-04 16:37:35 |
 | [[file:skel-readme.org][skel-readme]]    | 2024-08-30 21:04:59 |
 
 #+END:
