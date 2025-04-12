@@ -17,9 +17,9 @@
 | description | :description CC Org Files                           |
 | skel-id     | :id 1784914079056115652                             |
 | root        | ~/comp/org/notes/                                   |
-| vc          | :hg [[https://vc.compiler.company/notes][vc.compiler.company/notes]] :rev [[https://vc.compiler.company/notes/rev/b75f96bca18a][b75f96bca18a:29+]] |
+| vc          | :hg [[https://vc.compiler.company/notes][vc.compiler.company/notes]] :rev [[https://vc.compiler.company/notes/rev/2cfbb0cd4f73][2cfbb0cd4f73:30+]] |
 | tags        | :tags (org docs notes blog meta plan)               |
-| updated     | Sat Apr 05 20:36:09 2025 -0400                      |
+| updated     | Sun Apr 06 22:34:15 2025 -0400                      |
 | langs       | org                                                 |
 | lines       | 3020 :λ 2876 :# 0 :_ 144                            |
 |-------------+-----------------------------------------------------|
@@ -29,7 +29,7 @@
 #+RESULTS:
 | file           | modified            |
 |----------------+---------------------|
-| [[https://compiler.company/notes/index.html][index]]          | 2025-04-06 17:07:38 |
+| [[https://compiler.company/notes/index.html][index]]          | 2025-04-12 17:56:05 |
 | [[https://compiler.company/notes/demo-notes.html][demo-notes]]     | 2025-01-17 19:21:04 |
 | [[https://compiler.company/notes/inbox-notes.html][inbox-notes]]    | 2024-08-11 14:37:05 |
 | [[https://compiler.company/notes/log.html][log]]            | 2025-02-06 19:17:42 |
@@ -52,7 +52,7 @@
 2025-01   1028 *****************
 2025-02   3208 *******************************************************
 2025-03     53 
-2025-04     92 *
+2025-04    122 **
 #+end_example
 
 #+CALL: project-files() :dir ~/comp/org/notes/
@@ -60,7 +60,7 @@
 #+RESULTS:
 | file           | modified            |
 |----------------+---------------------|
-| [[file:.][.]]              | 2025-04-06 17:07:38 |
+| [[file:.][.]]              | 2025-04-12 17:56:05 |
 | [[file:demo-notes.org][demo-notes]]     | 2025-01-17 19:21:04 |
 | [[file:inbox-notes.org][inbox-notes]]    | 2024-08-11 14:37:05 |
 | [[file:log.org][log]]            | 2025-02-06 19:17:42 |
