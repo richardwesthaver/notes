@@ -11,25 +11,24 @@
 #+CALL: project-details() :dir ~/comp/org/notes/
 
 #+RESULTS:
-|-------------+-----------------------------------------------------|
-| name        | notes                                               |
-| version     | :version 0.1.0                                      |
-| description | :description CC Org Files                           |
-| skel-id     | :id 1784914079056115652                             |
-| root        | ~/comp/org/notes/                                   |
-| vc          | :hg [[https://vc.compiler.company/notes][vc.compiler.company/notes]] :rev [[https://vc.compiler.company/notes/rev/2cfbb0cd4f73][2cfbb0cd4f73:30+]] |
-| tags        | :tags (org docs notes blog meta plan)               |
-| updated     | Sun Apr 06 22:34:15 2025 -0400                      |
-| langs       | org                                                 |
-| lines       | 3020 :λ 2876 :# 0 :_ 144                            |
-|-------------+-----------------------------------------------------|
+|-------------+----------------------------------------------------|
+| name        | notes                                              |
+| version     | :version 0.1.0                                     |
+| description | :description CC Org Files                          |
+| skel-id     | :id 1784914079056115652                            |
+| root        | ~/comp/org/notes/                                  |
+| vc          | :hg [[https://vc.compiler.company/notes][vc.compiler.company/notes]] :rev [[https://vc.compiler.company/notes/rev/31b008a65a2a][31b008a65a2a:31]] |
+| tags        | :tags (org docs notes blog meta plan)              |
+| updated     | Sat Apr 12 18:42:58 2025 -0400                     |
+| langs       | org                                                |
+| lines       | 3020 :λ 2876 :# 0 :_ 144                           |
+|-------------+----------------------------------------------------|
 
 #+CALL: project-html-files() :dir ~/comp/org/notes/
 
 #+RESULTS:
 | file           | modified            |
 |----------------+---------------------|
-| [[https://compiler.company/notes/index.html][index]]          | 2025-04-12 17:56:05 |
 | [[https://compiler.company/notes/demo-notes.html][demo-notes]]     | 2025-01-17 19:21:04 |
 | [[https://compiler.company/notes/inbox-notes.html][inbox-notes]]    | 2024-08-11 14:37:05 |
 | [[https://compiler.company/notes/log.html][log]]            | 2025-02-06 19:17:42 |
@@ -37,6 +36,7 @@
 | [[https://compiler.company/notes/q-notes.html][q-notes]]        | 2024-09-17 22:24:56 |
 | [[https://compiler.company/notes/query-lang.html][query-lang]]     | 2025-01-16 22:36:39 |
 | [[https://compiler.company/notes/rdb-playground.html][rdb-playground]] | 2025-02-06 19:51:37 |
+| [[https://compiler.company/notes/index.html][index]]          | 2025-04-12 18:38:23 |
 | [[https://compiler.company/notes/skel-readme.html][skel-readme]]    | 2024-08-30 21:04:59 |
 
 #+CALL: hg-churn() :dir ~/comp/org/notes/
@@ -52,7 +52,7 @@
 2025-01   1028 *****************
 2025-02   3208 *******************************************************
 2025-03     53 
-2025-04    122 **
+2025-04    132 **
 #+end_example
 
 #+CALL: project-files() :dir ~/comp/org/notes/
@@ -60,7 +60,6 @@
 #+RESULTS:
 | file           | modified            |
 |----------------+---------------------|
-| [[file:.][.]]              | 2025-04-12 17:56:05 |
 | [[file:demo-notes.org][demo-notes]]     | 2025-01-17 19:21:04 |
 | [[file:inbox-notes.org][inbox-notes]]    | 2024-08-11 14:37:05 |
 | [[file:log.org][log]]            | 2025-02-06 19:17:42 |
@@ -68,6 +67,7 @@
 | [[file:q-notes.org][q-notes]]        | 2024-09-17 22:24:56 |
 | [[file:query-lang.org][query-lang]]     | 2025-01-16 22:36:39 |
 | [[file:rdb-playground.org][rdb-playground]] | 2025-02-06 19:51:37 |
+| [[file:.][.]]              | 2025-04-12 18:38:23 |
 | [[file:skel-readme.org][skel-readme]]    | 2024-08-30 21:04:59 |
 
 #+END:
