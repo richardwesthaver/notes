@@ -1,0 +1,66 @@
+#+title: SBCL Internals Playground
+#+setupfile: ../clean.theme
+
+* sb-cltl2
+#+call: load-user()
+
+#+begin_src lisp
+(use-package :sb-cltl2)
+#+end_src
+
+#+RESULTS:
+: T
+
+#+begin_src lisp
+  (augment-environment nil) ;; null-lexenv
+#+end_src
+
+#+RESULTS:
+: #<NULL-LEXENV>
+
+#+begin_src lisp
+  (ql:quickload :q)
+#+end_src
+
+#+RESULTS:
+| :Q |
+
+#+begin_src lisp
+  (use-package :dql)
+#+end_src
+
+#+RESULTS:
+: T
+
+#+begin_src lisp
+  (let ((e (find-class 'dql::dql-expr))
+        (env (find-class 'dql::dql-env)))
+    (finalize-inheritance e)
+    (finalize-inheritance env)
+    (list
+     :expr
+     (class-slots e)
+     :env
+     (class-slots env)))
+#+end_src
+
+#+RESULTS:
+: (:EXPR
+:  (#<STANDARD-EFFECTIVE-SLOT-DEFINITION OBJ/AST:EXPR>
+:   #<STANDARD-EFFECTIVE-SLOT-DEFINITION STD/META:NAME>)
+:  :ENV
+:  (#<STANDARD-EFFECTIVE-SLOT-DEFINITION OBJ/SCHEMA:FIELDS>
+:   #<STANDARD-EFFECTIVE-SLOT-DEFINITION STD/META:NAME>
+:   #<STANDARD-EFFECTIVE-SLOT-DEFINITION Q/DQL::ENV>))
+
+#+begin_src lisp
+  (define-declaration fast (spec env)
+    (declare (ignore env))
+    (values :declare (cons 'fast (or (cdr spec) t))))
+#+end_src
+
+#+RESULTS:
+: NIL
+
+#+begin_src lisp
+#+end_src
