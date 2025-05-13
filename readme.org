@@ -17,9 +17,9 @@
 | description | :description CC Org Files                           |
 | skel-id     | :id 1784914079056115652                             |
 | root        | ~/comp/org/notes/                                   |
-| vc          | :hg [[https://vc.compiler.company/notes][vc.compiler.company/notes]] :rev [[https://vc.compiler.company/notes/rev/c02d7f5c7bf8][c02d7f5c7bf8:39+]] |
+| vc          | :hg [[https://vc.compiler.company/notes][vc.compiler.company/notes]] :rev [[https://vc.compiler.company/notes/rev/da9e074aa14d][da9e074aa14d:40+]] |
 | tags        | :tags (org docs notes blog meta plan)               |
-| updated     | Thu May 08 20:30:25 2025 -0400                      |
+| updated     | Sun May 11 01:01:10 2025 -0400                      |
 | langs       | org                                                 |
 | lines       | 5125 :λ 4968 :# 0 :_ 157                            |
 |-------------+-----------------------------------------------------|
@@ -29,7 +29,7 @@
 #+RESULTS:
 | file           | modified            |
 |----------------+---------------------|
-| [[https://compiler.company/notes/index.html][index]]          | 2025-05-08 23:32:09 |
+| [[https://compiler.company/notes/index.html][index]]          | 2025-05-13 17:34:06 |
 | [[https://compiler.company/notes/demo-notes.html][demo-notes]]     | 2025-01-17 19:21:04 |
 | [[https://compiler.company/notes/inbox-notes.html][inbox-notes]]    | 2024-08-11 14:37:05 |
 | [[https://compiler.company/notes/log.html][log]]            | 2025-02-06 19:17:42 |
@@ -54,23 +54,23 @@
 2025-02   3208 ************************************************
 2025-03     53 
 2025-04   4038 *************************************************************
-2025-05    109 *
+2025-05    139 **
 #+end_example
 
-#+CALL: project-files() :dir ~/comp/org/notes/
+#+CALL: project-html-files() :dir ~/comp/org/notes/
 
 #+RESULTS:
 | file           | modified            |
 |----------------+---------------------|
-| [[file:.][.]]              | 2025-05-08 23:32:09 |
-| [[file:demo-notes.org][demo-notes]]     | 2025-01-17 19:21:04 |
-| [[file:inbox-notes.org][inbox-notes]]    | 2024-08-11 14:37:05 |
-| [[file:log.org][log]]            | 2025-02-06 19:17:42 |
-| [[file:nas-t.org][nas-t]]          | 2025-02-15 16:32:16 |
-| [[file:q-notes.org][q-notes]]        | 2024-09-17 22:24:56 |
-| [[file:query-lang.org][query-lang]]     | 2025-01-16 22:36:39 |
-| [[file:rdb-playground.org][rdb-playground]] | 2025-04-23 16:52:45 |
-| [[file:sbcl-pg.org][sbcl-pg]]        | 2025-04-23 21:28:47 |
-| [[file:skel-readme.org][skel-readme]]    | 2024-08-30 21:04:59 |
+| [[https://compiler.company/notes/index.html][index]]          | 2025-05-13 17:34:06 |
+| [[https://compiler.company/notes/demo-notes.html][demo-notes]]     | 2025-01-17 19:21:04 |
+| [[https://compiler.company/notes/inbox-notes.html][inbox-notes]]    | 2024-08-11 14:37:05 |
+| [[https://compiler.company/notes/log.html][log]]            | 2025-02-06 19:17:42 |
+| [[https://compiler.company/notes/nas-t.html][nas-t]]          | 2025-02-15 16:32:16 |
+| [[https://compiler.company/notes/q-notes.html][q-notes]]        | 2024-09-17 22:24:56 |
+| [[https://compiler.company/notes/query-lang.html][query-lang]]     | 2025-01-16 22:36:39 |
+| [[https://compiler.company/notes/rdb-playground.html][rdb-playground]] | 2025-04-23 16:52:45 |
+| [[https://compiler.company/notes/sbcl-pg.html][sbcl-pg]]        | 2025-04-23 21:28:47 |
+| [[https://compiler.company/notes/skel-readme.html][skel-readme]]    | 2024-08-30 21:04:59 |
 
 #+END:
