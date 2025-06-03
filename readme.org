@@ -17,11 +17,11 @@
 | description | :description CC Org Files                          |
 | skel-id     | :id 1784914079056115652                            |
 | root        | ~/comp/org/notes/                                  |
-| vc          | :hg [[https://vc.compiler.company/notes][vc.compiler.company/notes]] :rev [[https://vc.compiler.company/notes/rev/6ef10e396b1e][6ef10e396b1e:49]] |
+| vc          | :hg [[https://vc.compiler.company/notes][vc.compiler.company/notes]] :rev [[https://vc.compiler.company/notes/rev/a4aa0f211f07][a4aa0f211f07:50]] |
 | tags        | :tags (org docs notes blog meta plan)              |
-| updated     | Sun Jun 01 22:52:18 2025 -0400                     |
+| updated     | Mon Jun 02 21:13:25 2025 -0400                     |
 | langs       | org                                                |
-| lines       | 5131 :λ 4973 :# 0 :_ 158                           |
+| lines       | 5132 :λ 4974 :# 0 :_ 158                           |
 |-------------+----------------------------------------------------|
 
 #+CALL: project-html-files() :dir ~/comp/org/notes/
@@ -37,7 +37,7 @@
 | [[https://compiler.company/notes/q-notes.html][q-notes]]        | 2024-09-17 22:24:56 |
 | [[https://compiler.company/notes/query-lang.html][query-lang]]     | 2025-01-16 22:36:39 |
 | [[https://compiler.company/notes/rdb-playground.html][rdb-playground]] | 2025-05-23 22:51:50 |
-| [[https://compiler.company/notes/index.html][index]]          | 2025-06-01 01:14:49 |
+| [[https://compiler.company/notes/index.html][index]]          | 2025-06-01 22:59:06 |
 | [[https://compiler.company/notes/sbcl-pg.html][sbcl-pg]]        | 2025-04-23 21:28:47 |
 | [[https://compiler.company/notes/skel-readme.html][skel-readme]]    | 2024-08-30 21:04:59 |
 
@@ -56,7 +56,7 @@
 2025-03     53 
 2025-04   4038 *************************************************************
 2025-05    291 ****
-2025-06     10 
+2025-06     39 
 #+end_example
 
 #+CALL: project-html-files() :dir ~/comp/org/notes/
@@ -72,7 +72,7 @@
 | [[https://compiler.company/notes/q-notes.html][q-notes]]        | 2024-09-17 22:24:56 |
 | [[https://compiler.company/notes/query-lang.html][query-lang]]     | 2025-01-16 22:36:39 |
 | [[https://compiler.company/notes/rdb-playground.html][rdb-playground]] | 2025-05-23 22:51:50 |
-| [[https://compiler.company/notes/index.html][index]]          | 2025-06-01 01:14:49 |
+| [[https://compiler.company/notes/index.html][index]]          | 2025-06-01 22:59:06 |
 | [[https://compiler.company/notes/sbcl-pg.html][sbcl-pg]]        | 2025-04-23 21:28:47 |
 | [[https://compiler.company/notes/skel-readme.html][skel-readme]]    | 2024-08-30 21:04:59 |
 
