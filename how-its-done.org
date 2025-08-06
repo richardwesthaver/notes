@@ -1,0 +1,28 @@
+#+title: How It's Done
+#+author: Richard Westhaver
+#+description: How we do things around here
+
+The Compiler Company (aka 'CC') is the designation I've chosen for my
+current pet project. Whether or not it will be successful is yet to be
+determined, but for now I'm happy to spend my time hacking away
+indefinitely.
+
+The name inherits from my obsession with compilers in all of its
+forms - from tiny dubious embedded compilers to industry-standard
+optimizing compilers. Compilers are traditionally thought of as large
+non-trivial programs, but this interpretation is far too
+restrictive. On the opposite end of the spectrum is the idea that
+/every/ program is a compiler by nature of 'compiling' input into some
+output - this is not restrictive enough to be useful.
+
+What I do think is useful is to consider the metaphor of the compiler
+often when building complex systems - software or otherwise. There is
+much to learn from compilation techniques and paradigms, both new and
+old, many of which are relegated to the depths of LLVM or published
+and never implemented outside of academia. These are not the only
+places where they are useful though. There is opportunity everywhere
+and finding those opportunities is the primary mission of CC.
+
+To support this mission, there is much work to do. I have chosen the
+scenic route in my journey and there are several extra stops I've
+mapped out along the way.

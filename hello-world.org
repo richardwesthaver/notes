@@ -1,0 +1,102 @@
+#+title: (hello world)
+#+options: toc:t h:1
+#+setupfile: ../../clean.theme
+#+property: header-args :eval no-export
+* COMMENT Introduction
+:PROPERTIES:
+:ID:       c9766ba7-319d-49f3-868e-8e289dbf5b3b
+:END:
+Hello World,
+
+I've worked in and around software systems for many years. Throughout
+my journey I've worked with some incredibly capable programmers,
+leaders, sales professionals, and curious minds from all walks of
+life. I've been fortunate to witness some highly effective teams on
+complex projects deliver under impossible constraints. I've also seen
+the other side - where a team isn't effective for one reason or
+another, even on simple problems.
+
+My work as of late is stemmed from the simple premise that there
+exists an /environment/ in which a team can be highly effective. My
+goal is to find those local optimums in my areas of interest where
+such an environment can be built and /great work/ can be done.
+
+In my professional experience, it is becoming much more difficult to
+build an /environment/ where people can be effective. There are
+several contributing factors which muddy the waters but it all boils
+down to capabilities and politics.
+
+Your environment must be capable. It must provide everything your team
+needs now and /may/ need in the future. If the environment doesn't
+provide something, you need to provide all building materials for it -
+/even if you don't know what you're building yet/.
+
+To build a capable environment you need to discard politics from your
+decision-making process. In other words, drop the ego. This requires a
+high degree of introspection. It's hard enough for individuals, let
+alone an entire team or company. In the world of software we tend to
+have two camps - the pro-dev who prefers ergonomic but proprietary
+tools and the foss-dev who prefers clunky but open-source
+alternatives. You can't limit your environment based on the camp you
+align with.
+
+* COMMENT The Compiler Company
+:PROPERTIES:
+:ID:       ae6e6d60-e7c7-4efa-9136-26ad262a55b3
+:END:
+Without further ado, I'd like to announce /The Compiler Company,
+LLC/. The purpose of /The Compiler Company/ is to /compile/
+/companies/.
+
+More specifically, I'm writing a software suite which specializes in
+building environments.
+
+The software isn't for everyone - modules will be rewritten
+frequently, code may be terse in places, with specialized tools,
+custom compilers, and advanced hardware features. It's for a specific
+type of programmer - an /operator/ if you will, who may use it for
+rapid-development of their own programs (or companies). The barrier to
+entry is high.
+
+At this stage, I'm interested in *systems*, *processes*, and
+*protocols* - not *products* and *services*. /The Compiler Company/'s
+most valuable assett its ideas. A /demo/ system is being written which
+serves as a reference implementation but this is currently designed
+for internal benchmarking.
+
+** [[https://compiler.company/docs/core][core]]
+:PROPERTIES:
+:ID:       f64eb994-2a5e-4f7b-90c4-e6c29e321791
+:END:
+The =core= is a collection of applications and libraries built from
+the bottom-up with modularity in mind. It's primarily written in
+Common Lisp and Rust with minimal external dependencies.
+
+*Lisp* is a first-class citizen of our internal environment. We
+currently rely on the Steel Bank Common Lisp compiler but even if we
+switch to a different implementation there will always be Lisp. It's
+our dedicated high-level programming language (and much more, as we'll
+explain later).
+
+*Rust* is second-class. It meets an arbitrary criteria for what I
+would consider /good enough/ but there are many contenders including
+C, C++, and Zig. It helps fill the gaps in our Lisp environment which
+would be extremely difficult to implement from scratch like
+eliminating GC, compile-time type safety, cross-compilation features,
+and advanced networking protocols. The community support and my
+personal experience with the language are also contributing
+factors. The trade-off is that we need to support another language
+environment in parallel to Lisp.
+
+** [[https://compiler.company/docs/infra][infra]]
+:PROPERTIES:
+:ID:       3c6bd04c-1da6-43d0-8d5c-bb267ada3f7a
+:END:
+Unfortunately, ideas can't host themselves. We need a robust
+infrastructure to compensate for this. The project =infra= contains
+scripts for building and maintaing the entire corporate
+infrastructure.
+
+We typically host services on Arch Linux. Podman and QEMU are used for
+virtualization. Modules can be built and deployed separately to make
+host-migration easier as we expand.

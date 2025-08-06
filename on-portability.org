@@ -1,0 +1,37 @@
+#+title: On Portability
+
+*Portability* is a powerful term in the development underworld. It is
+difficult to pin down an accurate definition because it comes in
+different forms, each with their own trade-offs. It is generally
+understood to be an indicator of something being particularly
+effective in a *cross-platform* application or context, but may also
+refer to a more nebulous property of digital standards, protocols and
+patterns which are /well-understood/ by machines (and some humans).
+
+For example:
+- [[https://en.wikipedia.org/wiki/S-expression][S-expressions]] are portable because they are *simple*
+- [[https://www.w3.org/XML/][XML]] is portable because it is *standardized*
+- [[https://llvm.org/][LLVM]] is portable because it is able to *compile optimized code for
+  many different host CPUs*
+- [[https://www.electronjs.org/][Electron]] is portable because it allows developers to build
+  cross-platform apps from the same code, resulting in *less code
+  which is easier to maintain*
+
+All of these are tools which may be employed by developers and
+ultimately *increase exposure* of the things we build, and this
+exposure can translate into more users.
+
+*exposure* = *more users* = *???* = *profit*
+
+No one will care about your thing if they can't use it so baking in
+portability is often a good idea. In many markets it's difficult to
+even compete if you don't support all the platforms your competitors
+do. Naturally, we ought to leverage portability in order to increase
+exposure and capture users.
+
+* Trade-offs
+
+* COMMENT notes
+portability vs accessibility
+
+maximize accessibility by hedging portability
