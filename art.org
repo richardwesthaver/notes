@@ -1,0 +1,10 @@
+#+title: Art
+* Lee Hadwin
+:PROPERTIES:
+:ID:       0e842c7d-df72-4360-b11a-648bfb2dcaff
+:CREATED:  <2025-08-23 Sat 13:22>
+:END:
+:EDGES:
+[2025-08-23 Sat 13:22] -- [[https://www.leehadwin.com/][Lee Hadwin]]
+:END:
+- [[https://sleepopolis.com/news/lee-hadwin-sleepwalking-artist/][Lee Hadwin Sleepwalking Artist Interview: What It's Like to Draw in Your Sleep]]
