@@ -30,8 +30,14 @@ do. Naturally, we ought to leverage portability in order to increase
 exposure and capture users.
 
 * Trade-offs
+:PROPERTIES:
+:ID:       db6c4762-c177-4ace-8b5a-4e4e3a776b12
+:END:
 
 * COMMENT notes
+:PROPERTIES:
+:ID:       a037f58a-6177-477d-b5ac-8382d8f7d4f8
+:END:
 portability vs accessibility
 
 maximize accessibility by hedging portability

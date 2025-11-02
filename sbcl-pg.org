@@ -2,6 +2,9 @@
 #+setupfile: ../clean.theme
 
 * sb-cltl2
+:PROPERTIES:
+:ID:       49b61381-c4b2-426f-abd5-821e1e2c9cc9
+:END:
 #+call: load-user()
 
 #+begin_src lisp

@@ -17,10 +17,16 @@ only the ones that can be reasonably coerced to all supported frontends.
 Q will require an Intermediate Representation (IR) - the encoding will
 be based on S-expressions with a specialized reader.
 * sql
+:PROPERTIES:
+:ID:       30a212c3-9cfa-4143-ac15-fbb59d499a83
+:END:
 standard sql with a lispy sql dsl
 #+begin_src lisp
   (select * from foo)
   ;; #(df ...)
 #+end_src
 * dql
+:PROPERTIES:
+:ID:       99f4a167-dfe2-4dc4-ba33-4597d3288b02
+:END:
 prolog-based
