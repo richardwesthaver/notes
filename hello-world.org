@@ -1,6 +1,6 @@
 #+title: (hello world)
 #+options: toc:t h:1
-#+setupfile: ../../clean.theme
+#+setupfile: ../clean.theme
 #+property: header-args :eval no-export
 * COMMENT Introduction
 :PROPERTIES:
