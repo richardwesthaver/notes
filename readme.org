@@ -14,13 +14,13 @@
 |-------------+-----------------------------------------------------|
 | name        | notes                                               |
 | version     | 0.1.0                                               |
-| description | CC Org Files                                        |
+| description | NIL                                                 |
 | skel-id     | 1784914079056115652                                 |
 | root        | ~/comp/org/notes/                                   |
 | tags        | (org docs notes blog meta plan archive notes graph) |
-| updated     | Sun Nov 02 16:07:44 2025 -0500                      |
+| updated     | Tue Nov 04 17:12:03 2025 -0500                      |
 | langs       | org                                                 |
-| lines       | 5553 :λ 5335 :# 0 :_ 218                            |
+| lines       | 5554 :λ 5336 :# 0 :_ 218                            |
 |-------------+-----------------------------------------------------|
 
 #+CALL: hg-churn() :dir ~/comp/org/notes/
@@ -43,7 +43,7 @@
 2025-08    436 ******
 2025-09    733 ***********
 2025-10    229 ***
-2025-11     24 
+2025-11     39 
 #+end_example
 
 #+CALL: project-html-files() :dir ~/comp/org/notes/
@@ -54,7 +54,7 @@
 | [[https://otom8.dev/notes/art.html][art]]            | 2025-08-23 14:33:02 |
 | [[https://otom8.dev/notes/asm-playground.html][asm-playground]] | 2025-05-23 22:53:54 |
 | [[https://otom8.dev/notes/demo-notes.html][demo-notes]]     | 2025-01-17 19:21:04 |
-| [[https://otom8.dev/notes/hello-world.html][hello-world]]    | 2024-08-18 01:31:41 |
+| [[https://otom8.dev/notes/hello-world.html][hello-world]]    | 2025-11-04 14:37:03 |
 | [[https://otom8.dev/notes/how-its-done.html][how-its-done]]   | 2025-08-05 19:46:52 |
 | [[https://otom8.dev/notes/inbox-notes.html][inbox-notes]]    | 2024-08-11 14:37:05 |
 | [[https://otom8.dev/notes/log.html][log]]            | 2025-02-06 19:17:42 |
@@ -64,7 +64,7 @@
 | [[https://otom8.dev/notes/q-notes.html][q-notes]]        | 2024-09-17 22:24:56 |
 | [[https://otom8.dev/notes/query-lang.html][query-lang]]     | 2025-11-01 02:17:53 |
 | [[https://otom8.dev/notes/rdb-playground.html][rdb-playground]] | 2025-05-23 22:51:50 |
-| [[https://otom8.dev/notes/index.html][index]]          | 2025-11-01 00:56:13 |
+| [[https://otom8.dev/notes/index.html][index]]          | 2025-11-02 16:17:34 |
 | [[https://otom8.dev/notes/sbcl-pg.html][sbcl-pg]]        | 2025-11-01 02:17:55 |
 | [[https://otom8.dev/notes/scm1.html][scm1]]           | 2023-07-01 22:39:33 |
 | [[https://otom8.dev/notes/skel.html][skel]]           | 2025-08-29 20:08:32 |
