@@ -18,9 +18,9 @@
 | skel-id     | 1784914079056115652                               |
 | root        | ~/comp/org/notes/                                 |
 | tags        | ORG DOCS NOTES BLOG META PLAN ARCHIVE NOTES GRAPH |
-| updated     | Sun Jan 04 20:37:20 2026 -0500                    |
+| updated     | Mon Jan 05 20:06:38 2026 -0500                    |
 | langs       | org                                               |
-| lines       | 5555 :code 5337 :comment 0 :blank 218             |
+| lines       | 5556 :code 5338 :comment 0 :blank 218             |
 |-------------+---------------------------------------------------|
 
 #+CALL: hg-churn() :dir ~/comp/org/notes/
@@ -45,7 +45,7 @@
 2025-10    229 ***
 2025-11     97 *
 2025-12     13 
-2026-01     26 
+2026-01     51 
 #+end_example
 
 #+CALL: project-html-files() :dir ~/comp/org/notes/
@@ -66,7 +66,7 @@
 | [[https://otom8.dev/notes/q-notes.html][q-notes]]        | 2024-09-17 22:24:56 |
 | [[https://otom8.dev/notes/query-lang.html][query-lang]]     | 2025-11-01 02:17:53 |
 | [[https://otom8.dev/notes/rdb-playground.html][rdb-playground]] | 2025-05-23 22:51:50 |
-| [[https://otom8.dev/notes/index.html][index]]          | 2025-12-30 22:15:51 |
+| [[https://otom8.dev/notes/index.html][index]]          | 2026-01-04 20:48:25 |
 | [[https://otom8.dev/notes/sbcl-pg.html][sbcl-pg]]        | 2025-11-01 02:17:55 |
 | [[https://otom8.dev/notes/scm1.html][scm1]]           | 2023-07-01 22:39:33 |
 | [[https://otom8.dev/notes/skel.html][skel]]           | 2025-08-29 20:08:32 |
