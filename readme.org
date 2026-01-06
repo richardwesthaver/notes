@@ -11,17 +11,17 @@
 #+CALL: project-details(vc='nil) :dir ~/comp/org/notes/
 
 #+RESULTS:
-|-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| name        | notes                                                                                                                                                                                                |
-| version     | (("#:fatal" 0.062999 "") ("unknown" "argument:" "show") ("0.1.0" "" ""))                                                                                                                             |
-| description | (("#:fatal" 0.062999 "") ("unknown" "argument:" "show") ("CC" "Org" "Files"))                                                                                                                        |
-| skel-id     | (("#:fatal" 0.064 "") ("unknown" "argument:" "show") (1784914079056115652 "" ""))                                                                                                                    |
-| root        | ~/comp/org/notes/                                                                                                                                                                                    |
-| tags        | (("#:fatal" 0.061999 "") ("unknown" "argument:" "show") ("ORG" "" "") ("DOCS" "" "") ("NOTES" "" "") ("BLOG" "" "") ("META" "" "") ("PLAN" "" "") ("ARCHIVE" "" "") ("NOTES" "" "") ("GRAPH" "" "")) |
-| updated     | Tue Dec 30 21:00:06 2025 -0500                                                                                                                                                                       |
-| langs       | org                                                                                                                                                                                                  |
-| lines       | 5555 :λ 5337 :# 0 :_ 218                                                                                                                                                                        |
-|-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-------------+---------------------------------------------------|
+| name        | notes                                             |
+| version     | 0.1.0                                             |
+| description | CC Org Files                                      |
+| skel-id     | 1784914079056115652                               |
+| root        | ~/comp/org/notes/                                 |
+| tags        | ORG DOCS NOTES BLOG META PLAN ARCHIVE NOTES GRAPH |
+| updated     | Sun Jan 04 20:37:20 2026 -0500                    |
+| langs       | org                                               |
+| lines       | 5555 :code 5337 :comment 0 :blank 218             |
+|-------------+---------------------------------------------------|
 
 #+CALL: hg-churn() :dir ~/comp/org/notes/
 
@@ -45,6 +45,7 @@
 2025-10    229 ***
 2025-11     97 *
 2025-12     13 
+2026-01     26 
 #+end_example
 
 #+CALL: project-html-files() :dir ~/comp/org/notes/
@@ -52,7 +53,6 @@
 #+RESULTS:
 | file           | modified            |
 |----------------+---------------------|
-| [[https://otom8.dev/notes/index.html][index]]          | 2025-12-30 21:38:37 |
 | [[https://otom8.dev/notes/art.html][art]]            | 2025-08-23 14:33:02 |
 | [[https://otom8.dev/notes/asm-playground.html][asm-playground]] | 2025-05-23 22:53:54 |
 | [[https://otom8.dev/notes/demo-notes.html][demo-notes]]     | 2025-01-17 19:21:04 |
@@ -66,6 +66,7 @@
 | [[https://otom8.dev/notes/q-notes.html][q-notes]]        | 2024-09-17 22:24:56 |
 | [[https://otom8.dev/notes/query-lang.html][query-lang]]     | 2025-11-01 02:17:53 |
 | [[https://otom8.dev/notes/rdb-playground.html][rdb-playground]] | 2025-05-23 22:51:50 |
+| [[https://otom8.dev/notes/index.html][index]]          | 2025-12-30 22:15:51 |
 | [[https://otom8.dev/notes/sbcl-pg.html][sbcl-pg]]        | 2025-11-01 02:17:55 |
 | [[https://otom8.dev/notes/scm1.html][scm1]]           | 2023-07-01 22:39:33 |
 | [[https://otom8.dev/notes/skel.html][skel]]           | 2025-08-29 20:08:32 |
