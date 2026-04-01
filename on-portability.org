@@ -1,3 +1,5 @@
+#+html_link_up: ../
+#+setupfile: ../clean.theme
 #+title: On Portability
 
 *Portability* is a powerful term in the development underworld. It is

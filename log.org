@@ -1224,3 +1224,16 @@ the following command (~NOTE~ - takes a long time):
 The core contains a collection of Emacs Lisp libraries under =emacs=
 which may be installed for the current user using the corresponding
 Makefile.
+* [2026-03-27 Fri]
+("org.freedesktop.DBus" ":1.0" ":1.1" ":1.4" ":1.5" ":1.6" ":1.7" ":1.10"
+ ":1.13" ":1.17" ":1.18" ":1.19" ":1.21" ":1.22" ":1.23" ":1.40" ":1.44"
+ ":1.45" ":1.269" ":1.355" "org.a11y.Bus" "org.freedesktop.Notifications"
+ "org.freedesktop.ReserveDevice1.Audio0"
+ "org.freedesktop.ReserveDevice1.Audio1"
+ "org.freedesktop.impl.portal.PermissionStore" "org.freedesktop.portal.Desktop"
+ "org.freedesktop.portal.Documents" "org.freedesktop.secrets"
+ "org.freedesktop.systemd1" "org.gnome.keyring"
+ "org.mpris.MediaPlayer2.chromium.instance3863" "org.pipewire.Telephony"
+ "org.pulseaudio.Server") 
+[[https://www.freedesktop.org/wiki/Specifications/secret-storage-spec/secrets-api-0.1.html][secrets api]]
+[[https://www.freedesktop.org/software/systemd/man/latest/org.freedesktop.systemd1.html][org.freedesktop.systemd1]]

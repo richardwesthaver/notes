@@ -1,0 +1,84 @@
+#+title: Progress Report
+#+date: 2026-03-10
+#+html_link_up: ../
+#+setupfile: ../clean.theme
+It's been several years since I began my current project and high time
+I began explaining what in the hell it is I'm doing.
+
+First and foremost this is a passion project. I spend pretty much all
+my non-working hours on it. Through all the code (and parens) there is
+an idea which has been on my mind for over a decade and I feel more
+confident now than ever that I'm on the path to making it tangible.
+
+Like most passion projects mine is increasingly hard to explain. I
+wish it was just an application - =web browser=, =code editor=, =media
+player= - these are things that virtually everyone has used themselves
+and can relate their own experience to. My project is not an app,
+there are parts of it that benefit from that paradigm though. In the
+exact same sense, my project is not a library, it is often useful to
+think of it as such. In fact I would even consider my project a
+=company= - registered as The Compiler Company, LLC. - this is just
+another useful paradigm[fn:1].
+
+You can see what I mean about explainability I'm sure.. This is
+something I plan to work on with screenshots, gifs and better demos,
+but still is not a high priority. Right now, there's work to be done
+:).
+
+[fn:1] Although an =organization= may be more appropriate.. 
+
+* What is it?
+The simplest way to state what I'm doing is building a _Lisp-based
+Operating System_ /in reverse/. Instead of starting with a simple
+kernel program, or following the [[https://www.linuxfromscratch.org/][Linux from scratch]] path, my journey
+begins deeply nested in /userspace/ via the Lisp compiler =SBCL= and
+has been slowly growing /towards/ the kernel, which is of course
+Linux.
+
+Much of the code I've written has been in the form of libraries
+contained in the [[vc:core][core]] which are compiled into the =core= Lisp
+image. The core image is an executable program which itself contains a
+complete Lisp environment. The core can compile and save code into new
+images, such as our window manager ([[vc:shed/wm][wm]]), but the full system we have
+in mind does not depend on separate cores. Instead, we intend to run a
+single core as close to the kernel as possible. It is my intention to
+someday run our core as =pid1=, replacing systemd as init.
+
+* Why worse isn't always better
+I find myself thinking back to the famous [[https://web.stanford.edu/class/cs240/readings/worse_is_better.pdf][Worse is Better]] essay by
+Richard P. Gabriel. UNIX and C won as RPG predicted and the 2000's
+thus far have been characterized by the New Jersey philosophy. There
+was no way to predict the rise of Python for AI research but RPG was
+once again correct in being skeptical of Lisp's mass-adoption for this
+purpose.
+
+#+comment: combat simplicity
+#+comment: LLMs can only create a worse world
+#+comment: worse is not enough
+
+#+comment: the joy of solving a problem once - incremental XML parsing
+
+* Paradigms
+** Maximalism
+** The Operator
+** The Artist
+* Road to PID1
+The system I use daily is the same as described above - with a =wm=
+program and a =core= program which is called often and even symlinked
+to several names (=skel=, =homer=), similar to busybox. The window
+manager is a fork of the already excellent StumpWM, with many
+modifications, similar to several components of the core (ppcre,
+ironclad, slime) and in the [[vc:shed][shed]] (vec, xlib).
+
+The next logical step, which we have the capabilities for but have not
+tested, is a login shell which replaces =bash= and other
+POSIX-compliant shells. I have one dusty laptop that has been running
+=nushell= in the same manner so I have minimum viable experience on
+this front.. the transition will take time and many assumptions built
+into my system will need to endure a trial by fire.
+
+All that's left from there is handling =login=, and then we are in a
+position to square up with Systemd itself. The login implementation
+will be done in parallel to R&D on =systemd-logind= in hopes of a
+smooth transition into a 'fixture' integration intended to maintain
+compatibility while we tackle PID 1.
