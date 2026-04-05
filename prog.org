@@ -36,33 +36,15 @@ has been slowly growing /towards/ the kernel, which is of course
 Linux.
 
 Much of the code I've written has been in the form of libraries
-contained in the [[vc:core][core]] which are compiled into the =core= Lisp
-image. The core image is an executable program which itself contains a
-complete Lisp environment. The core can compile and save code into new
-images, such as our window manager ([[vc:shed/wm][wm]]), but the full system we have
-in mind does not depend on separate cores. Instead, we intend to run a
-single core as close to the kernel as possible. It is my intention to
-someday run our core as =pid1=, replacing systemd as init.
+contained in the [[vc:core][core]] which are compiled into a [[https://www.sbcl.org/manual/#Saving-a-Core-Image][core image]]. The core
+image is an executable program which itself contains a /complete/ Lisp
+environment. The core can compile and save code into new images, such
+as our window manager ([[vc:shed/wm][wm]]), but the full system we have in mind does
+not depend on separate cores. Instead, we intend to run a single core
+as close to the kernel as possible. It is my intention to someday run
+our core as =pid1=, replacing systemd as init.
 
-* Why worse isn't always better
-I find myself thinking back to the famous [[https://web.stanford.edu/class/cs240/readings/worse_is_better.pdf][Worse is Better]] essay by
-Richard P. Gabriel. UNIX and C won as RPG predicted and the 2000's
-thus far have been characterized by the New Jersey philosophy. There
-was no way to predict the rise of Python for AI research but RPG was
-once again correct in being skeptical of Lisp's mass-adoption for this
-purpose.
-
-#+comment: combat simplicity
-#+comment: LLMs can only create a worse world
-#+comment: worse is not enough
-
-#+comment: the joy of solving a problem once - incremental XML parsing
-
-* Paradigms
-** Maximalism
-** The Operator
-** The Artist
-* Road to PID1
+** Road to PID1
 The system I use daily is the same as described above - with a =wm=
 program and a =core= program which is called often and even symlinked
 to several names (=skel=, =homer=), similar to busybox. The window
@@ -82,3 +64,100 @@ position to square up with Systemd itself. The login implementation
 will be done in parallel to R&D on =systemd-logind= in hopes of a
 smooth transition into a 'fixture' integration intended to maintain
 compatibility while we tackle PID 1.
+
+* Why worse isn't always better
+I find myself thinking back to the famous [[https://web.stanford.edu/class/cs240/readings/worse_is_better.pdf][Worse is Better]] essay by
+Richard P. Gabriel. UNIX and C won as RPG predicted and the 2000's
+thus far have been characterized by the New Jersey philosophy. There
+was no way to predict the rise of Python for AI research but RPG was
+once again correct in being skeptical of Lisp's mass-adoption for this
+purpose.
+
+#+comment: combat simplicity
+#+comment: LLMs can only create a worse world
+#+comment: worse is not enough
+
+#+comment: the joy of solving a problem once - incremental XML parsing
+
+* Paradigms
+The best way to explain how I intend to use my project is through what
+I'm calling 'paradigms', which in this context describes a type of
+person doing a very specific type of work in a more-or-less steady
+state of production. The following sections should be treated like
+thought experiments, used to compare the current state of art to some
+unknown future state.
+
+** Maximalist
+The [[https://cal-coop.gitlab.io/utena/utena-specification/main.pdf][Utena Specification]] gives the most succinct explanation of what it
+is to be a Maximalist - someone who aims to ~achieve as much as
+possible with as little effort as possible~. The principle of
+/empowerment/ is the desired property of all computer systems in this
+context.
+
+#+begin_quote
+[...] empowering individual developers to have more leverage, and do
+more things with their system that otherwise would not be possible,
+allows them to empower other people to do the same [...]
+#+end_quote
+
+The maximalist's main critism of Unix Philosophy (the man from New
+Jersey) is that _less is not in fact more_. To create less, you must
+create just enough.
+
+In the case of Utena, the authors have chosen a more traditional
+top-down approach to their design - beginning with a machine
+specification, and likely the familiar bottom-up approach to the
+implementation. This is of course in direct contrast to our own
+development process, so it is worth explaining how we achieve
+/maximalism/ in our environment.
+
+Building a system in Linux user-space means that it is much easier to
+create /just enough/, and when you have it it's much easier to adapt
+to new technology - which is inevitable in the long-term. As we move
+closer to the kernel by upgrading our core image, causing it to cover
+more surface area, an interesting theme emerges - *subtraction*. Each
+step towards the kernel /minimizes/ the total volume of code required
+to operate the system. Much of the GNU software stack is eliminated
+through this process, as well as package managers, development
+utilities, apps and libraries. The most valuable result of this
+/subtractive synthesis/ is the reduction and elimination of
+interfaces. When you can rely on a language as powerful as Lisp you
+really don't need to compromise - the language /is/ the interface and
+the source of empowerment itself, so we go to conquest in its name,
+expanding our empire and making Lisp the natural language of the land.
+
+However this process of subtraction is somewhat misleading. A proper
+Lisp system is one that respects the law of [[https://en.wikipedia.org/wiki/Conservation_of_energy][conservation of energy]] -
+when we subtract some ad-hoc interface.. how can we conserve its
+'energy' (power, capabilities, utility)? Our focus is on building a
+system that transfers the power directly to you, the maximalist. When
+we conquer some interface, we uncover all its secrets and add them to
+our language. At all times while operating the system you have full
+access to every part of the language, and can recount any of the
+/spells/ we have learned along the way, or develop our own.
+
+** Operator
+An /operator/ is someone with a well-defined role and mission
+parameters who is tasked with the responsibility of a complex,
+possibly domain-specific system.
+
+** Artist
+An artist values expression, and the ability to express through the
+medium they choose. A good artist practices creativity often but
+particularly in the digital-media age is faced with [[https://en.wikipedia.org/wiki/Analysis_paralysis][analysis
+paralysis]]. There are far too many tools and services to choose from,
+most artists end up buying in to a platform such as Adobe to save
+themselves the trouble of building their own personalized system out
+of even more existing tools and services.
+
+The reality is that art is hard work. If you choose a digital medium,
+you better be willing to understand the digital parts. It is of course
+desirable and effective to simulate 'analog' mediums - widely popular
+in DAW products, but if you don't understand the difference you will
+be prone to finding consequences in the margins.
+
+The sort of artist we are optimizing for is by nature a computer
+specialist. To effectively produce art in our system you will need to
+be fluent in Lisp, because Lisp is the medium.
+
+* COMMENT Conclusion
