@@ -18,7 +18,7 @@
 | id          | 1784914079056115652                    |
 | root        | ~/comp/org/notes/                      |
 | tags        | ORG DOCS NOTES META PLAN ARCHIVE GRAPH |
-| updated     | Thu May 07 17:29:23 2026 -0400         |
+| updated     | Thu May 07 18:23:22 2026 -0400         |
 | langs       | org                                    |
 | lines       | 5739 :code 5497 :comment 0 :blank 242  |
 |-------------+----------------------------------------|
@@ -49,7 +49,7 @@
 2026-02     31 
 2026-03    158 **
 2026-04    189 **
-2026-05     19 
+2026-05     25 
 #+end_example
 
 #+CALL: project-html-files() :dir ~/comp/org/notes/
@@ -71,7 +71,7 @@
 | [[https://compiler.company/notes/q-notes.html][q-notes]]        | 2024-09-17 22:24:56 |
 | [[https://compiler.company/notes/query-lang.html][query-lang]]     | 2025-11-01 02:17:53 |
 | [[https://compiler.company/notes/rdb-playground.html][rdb-playground]] | 2025-05-23 22:51:50 |
-| [[https://compiler.company/notes/index.html][index]]          | 2026-05-06 19:46:16 |
+| [[https://compiler.company/notes/index.html][index]]          | 2026-05-07 17:39:20 |
 | [[https://compiler.company/notes/sbcl-pg.html][sbcl-pg]]        | 2025-11-01 02:17:55 |
 | [[https://compiler.company/notes/scm1.html][scm1]]           | 2023-07-01 22:39:33 |
 | [[https://compiler.company/notes/skel.html][skel]]           | 2025-08-29 20:08:32 |
