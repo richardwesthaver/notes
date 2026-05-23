@@ -1126,7 +1126,7 @@ of input/throughput.
 - public openpgp server
 - [[https://keys.compiler.company][keys.compiler.company]]
 - https://keys.openpgp.org/
-- [[vc:packy/hagrid/][packy/hagrid]]
+- hagrid
 
 * [2024-10-08 Tue]
 :PROPERTIES:
