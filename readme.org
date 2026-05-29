@@ -8,7 +8,7 @@
 #+options: num:nil prop:nil timestamp:nil toc:nil html-postamble:nil ^:nil
 #+property: header-args :eval no-export
 #+BEGIN: project-info :status nil :tasks nil :html t :vc nil
-#+CALL: project-details(vc='nil) :dir ~/comp/org/notes/
+#+CALL: project-details(vc='nil) :dir ~/src/org/notes/
 
 #+RESULTS:
 |-------------+----------------------------------------|
@@ -16,62 +16,62 @@
 | version     | 0.1.0                                  |
 | description | CC Org Files                           |
 | id          | 1784914079056115652                    |
-| root        | ~/comp/org/notes/                      |
+| root        | ~/src/org/notes/                       |
 | tags        | ORG DOCS NOTES META PLAN ARCHIVE GRAPH |
-| updated     | Thu May 07 19:53:19 2026 -0400         |
+| updated     | Sat May 23 00:06:30 2026 -0400         |
 | langs       | org                                    |
-| lines       | 5739 :code 5497 :comment 0 :blank 242  |
+| lines       | 4527 :code 4270 :comment 0 :blank 257  |
 |-------------+----------------------------------------|
 
-#+CALL: hg-churn() :dir ~/comp/org/notes/
+#+CALL: hg-churn() :dir ~/src/org/notes/
 
 #+RESULTS:
 #+begin_example
-2024-04   1196 ******************
-2024-06   1086 ****************
-2024-07     71 *
-2024-08    898 *************
-2024-09   3510 *****************************************************
+2024-04   1196 ***************
+2024-06   1086 **************
+2024-07     71 
+2024-08    898 ***********
+2024-09   3510 *********************************************
 2024-12    106 *
-2025-01   1028 ***************
-2025-02   3208 ************************************************
+2025-01   1028 *************
+2025-02   3208 *****************************************
 2025-03     53 
-2025-04   4038 *************************************************************
-2025-05    291 ****
+2025-04   4038 ****************************************************
+2025-05    291 ***
 2025-06    241 ***
-2025-07     69 *
-2025-08    436 ******
-2025-09    733 ***********
-2025-10    229 ***
+2025-07     69 
+2025-08    436 *****
+2025-09    733 *********
+2025-10    229 **
 2025-11     97 *
 2025-12     13 
 2026-01    105 *
 2026-02     31 
 2026-03    158 **
 2026-04    189 **
-2026-05     31 
+2026-05   4673 *************************************************************
 #+end_example
 
-#+CALL: project-html-files() :dir ~/comp/org/notes/
+#+CALL: project-html-files() :dir ~/src/org/notes/
 
 #+RESULTS:
 | file           | modified            |
 |----------------+---------------------|
-| [[https://compiler.company/notes/index.html][index]]          | 2026-05-07 20:03:09 |
+| [[https://compiler.company/notes/index.html][index]]          | 2026-05-27 21:51:00 |
 | [[https://compiler.company/notes/art.html][art]]            | 2025-08-23 14:33:02 |
 | [[https://compiler.company/notes/asm-playground.html][asm-playground]] | 2025-05-23 22:53:54 |
 | [[https://compiler.company/notes/demo-notes.html][demo-notes]]     | 2025-01-17 19:21:04 |
 | [[https://compiler.company/notes/hello-world.html][hello-world]]    | 2025-11-04 14:37:03 |
 | [[https://compiler.company/notes/how-its-done.html][how-its-done]]   | 2025-08-05 19:46:52 |
 | [[https://compiler.company/notes/inbox-notes.html][inbox-notes]]    | 2024-08-11 14:37:05 |
-| [[https://compiler.company/notes/log.html][log]]            | 2026-03-27 20:22:28 |
+| [[https://compiler.company/notes/log.html][log]]            | 2026-05-23 00:05:31 |
 | [[https://compiler.company/notes/nas-t.html][nas-t]]          | 2025-02-15 16:32:16 |
 | [[https://compiler.company/notes/on-portability.html][on-portability]] | 2026-03-10 19:36:38 |
 | [[https://compiler.company/notes/outlines.html][outlines]]       | 2025-08-05 19:46:17 |
 | [[https://compiler.company/notes/prog.html][prog]]           | 2026-04-03 23:57:16 |
 | [[https://compiler.company/notes/q-notes.html][q-notes]]        | 2024-09-17 22:24:56 |
 | [[https://compiler.company/notes/query-lang.html][query-lang]]     | 2025-11-01 02:17:53 |
-| [[https://compiler.company/notes/rdb-playground.html][rdb-playground]] | 2025-05-23 22:51:50 |
+| [[https://compiler.company/notes/rdb-playground.html][rdb-playground]] | 2026-05-27 21:49:26 |
 | [[https://compiler.company/notes/sbcl-pg.html][sbcl-pg]]        | 2025-11-01 02:17:55 |
 | [[https://compiler.company/notes/scm1.html][scm1]]           | 2023-07-01 22:39:33 |
 | [[https://compiler.company/notes/skel.html][skel]]           | 2025-08-29 20:08:32 |
