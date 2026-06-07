@@ -121,10 +121,10 @@ project-level support, that's all there is to it.
 :PROPERTIES:
 :ID:       c76e4c71-c77a-43b6-811c-0a83981a1dc5
 :END:
-You may also modify your config to enable =outline-minor-mode= for
-select major-modes at startup. Here's a quick example from my config:
+You may also modify your config to enable =outline-minor-mode= for select modes.
 
-#+begin_src emacs-lisp
+
+#+begin_src emacs-lisp :eval no
 ;;; Code:
 (require 'default)
 
@@ -141,17 +141,15 @@ select major-modes at startup. Here's a quick example from my config:
   `(mapc (lambda (x) (add-outline-hook (car x) (cadr x))) ',pairs))
 
 (outline-hooks (asm-mode ";;;+")
-	       (nasm-mode ";;;+")	       
-	       (rust-mode "\\(//!\\|////+\\)")
-	       (sh-mode "###+")
-	       (sh-script-mode "###+")
-	       (makefile-mode "###+"))
+               (rust-ts-mode "\\(//!\\|////+\\)")
+               (sh-mode "###+")
+               (sh-script-mode "###+")
+               (makefile-mode "###+"))
 #+end_src
 
 #+RESULTS:
 | asm-mode       | ;;;+   |         |
-| nasm-mode      | ;;;+   |         |
-| rust-mode      | \(//!\ | ////+\) |
+| rust-ts-mode   | \(//!\ | ////+\) |
 | sh-mode        | ###+   |         |
 | sh-script-mode | ###+   |         |
 | makefile-mode  | ###+   |         |

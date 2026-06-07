@@ -1,4 +1,4 @@
 #+title: ASM Playground
-#+begin_src nasm
+#+begin_src asm
 #+end_src
 
