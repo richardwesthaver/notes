@@ -1,6 +1,6 @@
 #+title: log
 #+author: Richard Westhaver
-#+email: richard.westhaver@gmail.com
+#+email: ellis@compiler.company
 #+setupfile: ../clean.theme
 * [2023-07-30 Sun]
 :PROPERTIES:
