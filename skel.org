@@ -49,7 +49,7 @@ sbcl --noinform  --non-interactive --eval '(ql:quickload :app/cli/skel)' --eval 
 #+end_src
 
 Run the binary without any args, which will print a skeleton of the
-current project directory (=*skel-project*=).
+current project directory (=*project*=).
 
 #+begin_src shell :results output replace :eval never
   skel -h
